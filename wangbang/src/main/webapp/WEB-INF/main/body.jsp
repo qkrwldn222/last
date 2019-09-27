@@ -11,7 +11,7 @@
                 	<div class="col-lg-9 col-md-9">
                             <div class="card">
                                 <div class="card-body">
-                                    <img src="../images/busan.png">
+                                    <img src="../images/busanimg.png">
                                 </div>
                             </div>
                             
