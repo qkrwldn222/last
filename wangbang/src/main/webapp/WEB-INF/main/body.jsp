@@ -10,9 +10,7 @@
                 <div class="row">
                 	<div class="col-lg-9 col-md-9">
                             <div class="card">
-                                <div class="card-body">
-                                    <img src="../images/busanimg.png">
-                                </div>
+                                    <img class="img-fluid" src="../images/busan.png" style="border-radius: 0.625rem;">
                             </div>
                             
                         </div> 
