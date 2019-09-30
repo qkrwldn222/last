@@ -11,4 +11,12 @@ public class MainController {
    {
 	   return "main";
    }
+   @RequestMapping("search/stay.do")
+   public String search_stay() {
+	   return "search/stay";
+   }
+   @RequestMapping("search/place.do")
+   public String search_place() {
+	   return "search/place";
+   }
 }

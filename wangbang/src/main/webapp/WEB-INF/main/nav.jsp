@@ -19,8 +19,8 @@
                             <i class="icon-star menu-icon"></i><span class="nav-text">검색</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./layout-blank.html">관광지</a></li>
-                            <li><a href="./layout-one-column.html">숙박</a></li>
+                            <li><a href="../search/place.do">관광지</a></li>
+                            <li><a href="../search/stay.do">숙박</a></li>
                             <li><a href="./layout-two-column.html">맛집</a></li>
                         </ul>
                     </li>
