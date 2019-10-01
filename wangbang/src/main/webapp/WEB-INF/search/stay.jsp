@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,6 +18,7 @@
 	              <h2 class="m-0 font-weight-bold text-primary text-center">
 						숙박정보
 	              </h2>
+	             
 	              	<div class="header-left">
 	                    <div class="input-group icons">
 	                        <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
@@ -29,9 +31,11 @@
 	                        </div>
 	                    </div>
 	                </div>
+	                
 			 </div>
          </div>
          <!-- for문 여기서부터 돌리기 -->
+          <c:forEach var="vo" items="${list }">
                    <div class="col-12 m-b-30">
                         <h4 class="d-inline">★★★☆☆별점</h4>
                      <!--    <p class="text-muted">This is 3 column contents</p> -->
@@ -40,9 +44,9 @@
                                 <div class="card">
                                     <img class="img-fluid" src="../images/big/img1.jpg" alt="">
                                     <div class="card-body">
-                                        <h5 class="card-title">쌍용펜션이름</h5>
+                                        <h5 class="card-title"></h5>
                                         <p class="card-text">15000금액</p>
-                                        <p class="card-text"><small class="text-muted">부산시해운대구어쩌구</small>
+                                        <p class="card-text"><small class="text-muted">${vo.dataTtitle }</small>
                                         </p>
                                     </div>
                                 </div>
@@ -50,6 +54,7 @@
                             <!-- End Col -->
                         </div>
                     </div>
+                    </c:forEach>
 </div>
 </body>
 </html>
