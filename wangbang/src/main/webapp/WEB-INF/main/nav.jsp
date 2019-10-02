@@ -16,14 +16,35 @@
                     <li class="nav-label">어서오이소</li>
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-star menu-icon"></i><span class="nav-text">검색</span>
+                            <i class="icon-star menu-icon"></i><span class="nav-text">관광지</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="../search/place.do">관광지</a></li>
-                            <li><a href="../search/stay.do">숙박</a></li>
-                            <li><a href="./layout-two-column.html">맛집</a></li>
+                            <li><a href="#">명품관광</a></li>
+                            <li><a href="#">관광명소</a></li>
+                            <li><a href="../search/experience.do">체험여행</a></li>
+                            <li><a href="#">도보여행</a></li>
+                            <li><a href="#">테마여행</a></li>
+                            <li><a href="#">추천여행코스</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-star menu-icon"></i><span class="nav-text">숙박&쇼핑</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="#">숙박정보</a></li>
+                            <li><a href="#">쇼핑명소</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-star menu-icon"></i><span class="nav-text">맛집&레저</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="../search/stay.do">맛집</a></li>
+                            <li><a href="#">스포츠&레저</a></li>
+                        </ul>
+                    </li> 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-grid menu-icon"></i> <span class="nav-text">여행가기 좋은날</span>

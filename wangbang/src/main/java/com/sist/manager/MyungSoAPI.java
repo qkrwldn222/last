@@ -29,7 +29,7 @@ public class MyungSoAPI {
 	public static void main(String[] args) {
 		MyungSoAPI api = new MyungSoAPI();
 			try {
-				api.RestaurantList();
+				api.RestaurantDetail(api.RestaurantList());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -124,6 +124,7 @@ public class MyungSoAPI {
 			            JSONObject jsonObject3 = (JSONObject)jsonObject2.get("body");
 			            JSONObject jsonObject4 = (JSONObject)jsonObject3.get("items");
 			            JSONObject jsonObject5 = (JSONObject)jsonObject4.get("item");
+			            jsonObject5.put("dataSid", no);
 			            arr.put(jsonObject5);
 				   }
 				   try {
@@ -139,7 +140,7 @@ public class MyungSoAPI {
 		List<String> list = new ArrayList<String>();
 		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/6260000/BusanTourInfoService/getRestaurantList"); 
 		urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8")+ "=%2Bcd%2BbGwLGvt2lmb1xThNt2jcw19ri%2Bpoy%2FCodf1Tt%2BCtJJ8EidfTuhWHGHpz7Ds55aTZFVHSInEXoonX1F%2FL0A%3D%3D");																																 
-		urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("468", "UTF-8")); 
+		urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("200", "UTF-8")); 
 		urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
 		URL url = new URL(urlBuilder.toString());
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -220,6 +221,7 @@ public class MyungSoAPI {
 			            JSONObject jsonObject3 = (JSONObject)jsonObject2.get("body");
 			            JSONObject jsonObject4 = (JSONObject)jsonObject3.get("items");
 			            JSONObject jsonObject5 = (JSONObject)jsonObject4.get("item");
+			            jsonObject5.put("dataSid",no);
 			            arr.put(jsonObject5);
 				   }
 				   try {
