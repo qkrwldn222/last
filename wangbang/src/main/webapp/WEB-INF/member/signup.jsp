@@ -38,7 +38,7 @@
                                             <label class="col-lg-4 col-form-label" for="val-password">CONFIRM PASSWORD <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="password" class="form-control" id="pwd2" name="val-password" placeholder="CONFORM PASSWORD">
+                                                <input type="password" class="form-control" id="pwd2" name="val-password" placeholder="CONFIRM PASSWORD">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-lg-8 ml-auto">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <button type="submit" class="btn btn-primary">회원가입</button>
                                             </div>
                                         </div>
                                     </form>
