@@ -42,7 +42,7 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="../search/stay.do">맛집</a></li>
-                            <li><a href="#">스포츠&레저</a></li>
+                            <li><a href="../search/leisure.do">스포츠&레저</a></li>
                         </ul>
                     </li> 
                     <li>

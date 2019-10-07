@@ -1,6 +1,7 @@
 package com.sist.dao;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import com.mongodb.BasicDBObject;
@@ -9,6 +10,8 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
 import com.sist.vo.ExperienceVO;
+import com.sist.vo.LeisureVO;
+/*import com.sist.vo.ExperienceVO;*/
 import com.sist.vo.RestaurantVO;
 
 public class MongoDAO {
@@ -60,6 +63,30 @@ public class MongoDAO {
 				//vo.setDataTtitle(obj.getString("dataContent"));
 				vo.setDataContent(obj.getString("dataContent"));
 				vo.setUsefree(obj.getString("usefree"));
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public List<LeisureVO> leisureListData(int page,String type){
+		List<LeisureVO> list = new ArrayList<LeisureVO>();
+		try {
+			int rowSize = 10;
+			int skip = (page*rowSize) - rowSize;
+			
+			dbc=db.getCollection(type);
+			DBCursor cursor = dbc.find().skip(skip).limit(rowSize);
+			while(cursor.hasNext()){
+				BasicDBObject obj = (BasicDBObject)cursor.next();
+				LeisureVO vo =new LeisureVO();
+				vo.setAddr(obj.getString("addr"));
+				vo.setMainimgthumb(obj.getString("mainimgthumb"));
+				vo.setTel(obj.getString("tel"));
+				vo.setInfo(obj.getString("info"));
+				vo.setDataTitle(obj.getString("dataTitle"));
 				list.add(vo);
 			}
 		} catch (Exception e) {
