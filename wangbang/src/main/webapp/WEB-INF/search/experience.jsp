@@ -34,26 +34,26 @@
 			 </div>
          </div>
          <!-- for문 여기서부터 돌리기 -->
-       	   <c:forEach var="vo" items="${list }">
                    <div class="col-12 m-b-30">
-                        <h4 class="d-inline">★★★☆☆별점</h4>
                      <!--    <p class="text-muted">This is 3 column contents</p> -->
                         <div class="row">
+                         <c:forEach var="vo" items="${list }">
                             <div class="col-md-6 col-lg-3">
                                 <div class="card">
-                                    <img class="img-fluid" src="../images/big/img1.jpg" alt="">
+                                    <img class="img-fluid" src="${vo.mainimgthumb }" alt="">
                                     <div class="card-body">
-                                        <h5 class="card-title"></h5>
-                                        <p class="card-text">${vo.usefree } </p>
-                                        <p class="card-text"><small class="text-muted">${vo.dataContent }</small>
+                                        <h5 class="card-title">${vo.dataTitle }</h5>
+                                        <p class="card-text">${vo.tel } </p>
+                                        <p class="card-text">${vo.addr } </p>
+                                        <p class="card-text"><small class="text-muted">${vo.info }</small>
                                         </p>
                                     </div>
                                 </div>
                             </div>
+                            </c:forEach>
                             <!-- End Col -->
                         </div>
-                    </div>
-                  </c:forEach>
+                    </div> 
 </div>
 </body>
 </html>

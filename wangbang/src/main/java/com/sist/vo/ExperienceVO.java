@@ -25,7 +25,7 @@ public class ExperienceVO {
    private String capacity;
    private String credit;
    private String dataContent;
-   private String dataTtitle;
+   private String dataTitle;
    private String detail;
    private String disest;
    private String entfree;
@@ -47,10 +47,10 @@ public class ExperienceVO {
    private String userHompage;
    private String xgsx;
    private String ygsx;
-   private String img1thmb;
-   private String img2thmb;
-   private String img3thmb;
-   private String mainImagethumb;
+   private String img1thumb;
+   private String img2thumb;
+   private String img3thumb;
+   private String mainimgthumb;
    /*
    parkest   varchar2(50),
    parkfree   varchar2(50),

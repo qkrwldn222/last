@@ -56,13 +56,15 @@ public class MongoDAO {
 			int skip = (page*rowSize) - rowSize;
 			
 			dbc=db.getCollection(type);
-			DBCursor cursor = dbc.find().skip(0).limit(1);
+			DBCursor cursor = dbc.find().skip(skip).limit(rowSize);
 			while(cursor.hasNext()){
 				BasicDBObject obj = (BasicDBObject)cursor.next();
 				ExperienceVO vo =new ExperienceVO();
-				//vo.setDataTtitle(obj.getString("dataContent"));
-				vo.setDataContent(obj.getString("dataContent"));
-				vo.setUsefree(obj.getString("usefree"));
+				vo.setMainimgthumb(obj.getString("mainimgthumb"));
+				vo.setDataTitle(obj.getString("dataTitle"));
+				vo.setTel(obj.getString("tel"));
+				vo.setAddr(obj.getString("addr"));
+				vo.setInfo(obj.getString("info"));
 				list.add(vo);
 			}
 		} catch (Exception e) {
