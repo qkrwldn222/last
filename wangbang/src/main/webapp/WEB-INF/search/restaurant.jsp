@@ -120,7 +120,7 @@
                   const html=this.state.data_json.map((m)=>
                      <div className="col-md-6 col-lg-3">
                                 <div className="card">
-                                    <a href="../search/restaurant.do?no="><img className="img-fluid" src={m.mainimgthumb} alt=""/></a>
+                                    <a href={"../search/restaurant_detail.do?dataSid="+m.dataSid}><img className="img-fluid" src={m.mainimgthumb} alt=""/></a>
                                     <div className="card-body">
                                         <h5 className="card-title">{m.dataTitle }</h5>
                                         <p className="card-text">{m.tel }</p>

@@ -17,4 +17,11 @@ public class RestauranController {
 		
 		return "search/restaurant";
 	}
+	@RequestMapping("search/restaurant_detail.do")
+	public String rest_detail(Model model,int dataSid){
+		
+		
+		
+		return "search/restaurant_detail";
+	}
 }

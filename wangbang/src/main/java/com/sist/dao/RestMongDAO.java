@@ -24,9 +24,16 @@ public class RestMongDAO {
 	      int total=0;
 	      //쿼리문없을때..일반쿼리
 	      Query query=new Query();
-	      int count=(int)mt.count(query, "news");
-	      total=(int)(Math.ceil(count/10.0)); //총페이지 구하는 방법
+	      int count=(int)mt.count(query, "Restaurant");
+	      total=(int)(Math.ceil(count/12.0)); //총페이지 구하는 방법
 	      return total;
 	   }
+	 
+	 public RestaurantVO rest_detail(int dataSid){
+		 RestaurantVO vo = new RestaurantVO();
+		 Query query=new Query();
+		 
+		 return vo;
+	 }
 
 }
