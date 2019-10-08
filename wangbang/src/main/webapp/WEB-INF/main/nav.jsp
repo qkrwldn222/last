@@ -41,7 +41,7 @@
                             <i class="icon-star menu-icon"></i><span class="nav-text">맛집&레저</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="../search/stay.do">맛집</a></li>
+                            <li><a href="../search/restaurant.do">맛집</a></li>
                             <li><a href="../search/leisure.do">스포츠&레저</a></li>
                         </ul>
                     </li> 
