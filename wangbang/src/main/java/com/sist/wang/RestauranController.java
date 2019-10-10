@@ -5,11 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sist.dao.MongoDAO;
 
 @Controller
 public class RestauranController {
-	private MongoDAO dao = new MongoDAO();
 	
 	@RequestMapping("search/restaurant.do")
 	public String res_list(Model model,String type,String page){
