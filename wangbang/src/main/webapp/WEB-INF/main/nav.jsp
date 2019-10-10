@@ -84,7 +84,7 @@
                             <i class="icon-note menu-icon"></i><span class="nav-text">게시판</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./form-basic.html">공지사항</a></li>
+                            <li><a href="../board/list.do">공지사항</a></li>
 <!--                             <li><a href="./form-validation.html">Form Validation</a></li>
                             <li><a href="./form-step.html">Step Form</a></li>
                             <li><a href="./form-editor.html">Editor</a></li>
