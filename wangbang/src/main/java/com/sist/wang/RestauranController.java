@@ -38,7 +38,7 @@ public class RestauranController {
 	}
 	@RequestMapping("search/themetour.do")
 	public String themeTour(Model model){
-		
+		//
 		
 		return "search/themetour";
 	}
