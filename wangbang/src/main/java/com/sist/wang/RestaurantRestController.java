@@ -3,6 +3,8 @@ package com.sist.wang;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.dao.RestMongDAO;
 import com.sist.manager.API;
+import com.sist.vo.ThemeTourVO;
 
 @RestController
 public class RestaurantRestController {
@@ -31,5 +34,28 @@ public class RestaurantRestController {
 		} catch (Exception e) {}
 		System.out.println("json:"+json);
 		return json;
+	}
+	@RequestMapping(value="search/themetour.do",produces = "application/json; charset=utf8")
+	public String themetour_data(int page){
+		String json="";
+		if(page < 1) page=1;
+		List<ThemeTourVO> list = dao.themeListData(page);
+		JSONArray arr = new JSONArray();
+		for(ThemeTourVO vo:list){
+			JSONObject obj = new JSONObject();
+			obj.put("addr", vo.getAddr());
+			obj.put("dataTitle", vo.getDataTitle());
+			obj.put("mainimgthumb", vo.getMainimgthumb());
+			obj.put("tel", vo.getTel());
+			obj.put("info", vo.getInfo());
+			arr.add(obj);
+		}
+		json = arr.toJSONString();
+		return json;
+	}
+	@RequestMapping(value="search/themetour_total.do",produces = "application/json; charset=utf8")
+	public int themetour_total(){
+		int total= dao.themeTotalpage();
+		return total;
 	}
 }

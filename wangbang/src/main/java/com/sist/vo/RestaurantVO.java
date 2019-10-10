@@ -45,4 +45,5 @@ public class RestaurantVO {
 	private String ygsx;
 	private String dataContent;
 	private String holiday;
+	private String userHomepage;
 }
