@@ -50,9 +50,9 @@ public class RestMongDAO {
 		 int rowSize=12;
 		 int skip = (page * rowSize) - rowSize;
 		 Query query = new Query();
-		 query.with(new Sort(Sort.Direction.ASC,"dataSid"));
 		 query.skip(skip).limit(rowSize);
 		 list = mt.find(query, ThemeTourVO.class,"ThemeTour");
+		 System.out.println("테마여행 크기"+list.size());
 		 return list;
 	 }
 	 public int themeTotalpage(){
