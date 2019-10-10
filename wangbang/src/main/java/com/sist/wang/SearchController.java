@@ -12,9 +12,9 @@ import java.util.*;
 public class SearchController {
 
 	   
-	   @RequestMapping("search/experience.do")
-	   public String search_place(Model model, String page) {
-		   if(page==null) page="1";
+//	   @RequestMapping("search/experience.do")
+//	   public String search_place(Model model, String page) {
+//		   if(page==null) page="1";
 //		   List<ExperienceVO> list = dao.ExAllData(Integer.parseInt(page), "Experience");
 //		  for(ExperienceVO vo:list) {
 //			  vo.getMainimgthumb();
@@ -26,8 +26,8 @@ public class SearchController {
 //			  System.out.println(vo.getInfo());
 //		  }
 //		  model.addAttribute("list", list);
-		  return "search/experience";
-	   }
+//		  return "search/experience";
+//	   }
 	   
 	   @RequestMapping("search/leisure.do")
 	   public String search_leisure(Model model, String page) {
