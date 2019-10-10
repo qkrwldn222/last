@@ -21,21 +21,19 @@
         <div class="row">
 	         <div class="card-header py-3">
 	              <h2 class="m-0 font-weight-bold text-primary text-center">
-						테마여행 목록
+						맛집 정보
 	              </h2>
 	              	<div class="header-left">
 	                    <div class="input-group icons">
 	                        <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
-	                         <a href="#"><button type="button" class="btn mb-1 btn-roundede btn-outline-primary" id="toastr-success-top-right">검색</button></a>
-	                        
+	                         <a href="#"><button type="button" class="btn mb-1 btn-roundede btn-outline-primary" id="toastr-success-top-right">검색</button></a>    
 	                        <div class="drop-down d-md-none" id="search">
-								
 	                        </div>
 	                    </div>
 	                </div>
 			 </div>
          </div>
-        
+         <!-- for문 여기서부터 돌리기 -->
                    <div class="col-12 m-b-30" id="root">                 
                      <script type="text/babel">
 		  class ThemeTour extends React.Component{
@@ -66,15 +64,13 @@
 		prevHandler(){
        		this.setState({page:this.state.page>1?this.state.page-1:this.state.page});
       		var _this=this;
-			
        			axios.get('http://localhost:8080/wang/search/themetour_data.do',{
          	  	 params:{
          	     	  page:_this.state.page-1
             		}
         		}).then(function (response) {
          	   	_this.setState({data_json:response.data});
-        		})
-			
+        		});
     	}
         
 		nextHandler(){
@@ -120,7 +116,7 @@
 				  
 			  }
 		  }
-         ReactDOM.render(<Restaurant />,document.getElementById('root'));
+         ReactDOM.render(<ThemeTour />,document.getElementById('root'));
 		</script>                
        </div>
 </div>

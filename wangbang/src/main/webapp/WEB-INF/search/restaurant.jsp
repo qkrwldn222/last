@@ -97,7 +97,7 @@
 			
        			axios.get('http://localhost:8080/wang/search/restaurant_data.do',{
          	  	 params:{
-         	     	  page:_this.state.page-1
+         	     	  page:_this.state.page
             		}
         		}).then(function (response) {
          	   	_this.setState({data_json:response.data});
@@ -110,7 +110,7 @@
         	var _this=this;
         	axios.get('http://localhost:8080/wang/search/restaurant_data.do',{
             	params:{
-                	page:_this.state.page+1
+                	page:_this.state.page
             	}
         	}).then(function (response) {
             _this.setState({data_json:response.data});
