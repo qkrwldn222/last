@@ -29,19 +29,18 @@ import lombok.Setter;
 @Setter
 public class RestaurantVO {
 	private String dataSid;
-	private String dataTtitle;
+	private String dataTitle;
 	private String detail;
 	private String parkest;
 	private String info;
 	private String tel;
-	private String trafIn;
-	private String traOut;
-	private String userHompage;
+	private String trafin;
+	private String trafout;
 	private String addr;
-	private String mainImagethumb;
-	private String img1thmb;
-	private String img2thmb;
-	private String img3thmb;
+	private String mainimgthumb;
+	private String img1thumb;
+	private String img2thumb;
+	private String img3thumb;
 	private String xgsx;
 	private String ygsx;
 	private String dataContent;
