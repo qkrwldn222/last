@@ -23,11 +23,15 @@
        class="org.mybatis.spring.SqlSessionFactoryBean"
        p:dataSource-ref="ds"
     />
-    
- 	<bean id="mapper" 
+    <bean id="testmapper" 
        class="org.mybatis.spring.mapper.MapperFactoryBean"
        p:sqlSessionFactory-ref="ssf"
-       p:mapperInterface="com.sist.test.BoardMapper"
+       p:mapperInterface="com.sist.test.BoardMapperT"
+    />
+ 	<bean id="Boardmapper" 
+       class="org.mybatis.spring.mapper.MapperFactoryBean"
+       p:sqlSessionFactory-ref="ssf"
+       p:mapperInterface="com.sist.mapper.BoardMapper"
     />
      <mongo:mongo-client
 		id="mc"
