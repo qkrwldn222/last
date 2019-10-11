@@ -25,6 +25,9 @@
 	              </h2>
 	              	<div class="header-left">
 	                    <div class="input-group icons">
+	                    <script type="text/babel">
+				
+						</script>
 	                        <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
 	                         <a href="#"><button type="button" class="btn mb-1 btn-roundede btn-outline-primary" id="toastr-success-top-right">검색</button></a>
 	                        

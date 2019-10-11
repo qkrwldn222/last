@@ -72,8 +72,7 @@ public class RestMongDAO {
 		 int skip = (page * rowSize) - rowSize;
 		 Query query = new Query();
 		 query.skip(skip).limit(rowSize);
-		 list = mt.find(query, TouristattrVO.class,"TouristattrVO");
-		 System.out.println("테마여행 크기"+list.size());
+		 list = mt.find(query, TouristattrVO.class,"TouristAttr");
 		 return list;
 	 }
 
