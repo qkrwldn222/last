@@ -33,6 +33,11 @@
        p:sqlSessionFactory-ref="ssf"
        p:mapperInterface="com.sist.mapper.BoardMapper"
     />
+    <bean id="MemberMapper" 
+       class="org.mybatis.spring.mapper.MapperFactoryBean"
+       p:sqlSessionFactory-ref="ssf"
+       p:mapperInterface="com.sist.mapper.MemberMapper"
+    />
      <mongo:mongo-client
 		id="mc"
 		host="127.0.0.1"
