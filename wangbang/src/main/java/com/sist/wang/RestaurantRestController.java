@@ -56,4 +56,23 @@ public class RestaurantRestController {
 		System.out.println(json);
 		return json;
 	}
+	@RequestMapping(value="search/touristattr_data.do",produces = "application/json; charset=utf8")
+	public String touristattr_data(int page){
+		String json="";
+		if(page< 1) page=1;
+		List<ThemeTourVO> list = dao.themeListData(page);
+		JSONArray arr = new JSONArray(); // []
+		for(ThemeTourVO vo:list){
+			JSONObject obj = new JSONObject();
+			obj.put("addr", vo.getAddr());
+			obj.put("dataTitle", vo.getDataTitle());
+			obj.put("mainimgthumb", vo.getMainimgthumb());
+			obj.put("tel", vo.getTel());
+			obj.put("info", vo.getInfo());
+			arr.add(obj); //{}
+		}
+		json = arr.toJSONString();
+		System.out.println(json);
+		return json;
+	}
 }

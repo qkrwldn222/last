@@ -20,7 +20,7 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="#">명품관광</a></li>
-                            <li><a href="#">관광명소</a></li>
+                            <li><a href="../search/touristattr.do">관광명소</a></li>
                             <li><a href="../search/experience.do">체험여행</a></li>
                             <li><a href="#">도보여행</a></li>
                             <li><a href="../search/themetour.do">테마여행</a></li>

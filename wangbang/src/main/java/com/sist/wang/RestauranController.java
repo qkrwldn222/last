@@ -42,4 +42,11 @@ public class RestauranController {
 		
 		return "search/themetour";
 	}
+	
+	@RequestMapping("search/touristattr.do")
+	public String touristattr(Model model){
+		//
+		
+		return "search/touristattr";
+	}
 }

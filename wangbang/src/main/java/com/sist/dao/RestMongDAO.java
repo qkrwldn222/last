@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import com.sist.vo.RestaurantVO;
 import com.sist.vo.ThemeTourVO;
+import com.sist.vo.TouristattrVO;
+
 import java.util.*;
 @Repository
 public class RestMongDAO {
@@ -64,5 +66,15 @@ public class RestMongDAO {
 	      return total;
 	 }
 	 
+	 public List<TouristattrVO> touristattr(int page){
+		 List<TouristattrVO> list = new ArrayList<TouristattrVO>();
+		 int rowSize=12;
+		 int skip = (page * rowSize) - rowSize;
+		 Query query = new Query();
+		 query.skip(skip).limit(rowSize);
+		 list = mt.find(query, TouristattrVO.class,"TouristattrVO");
+		 System.out.println("테마여행 크기"+list.size());
+		 return list;
+	 }
 
 }
