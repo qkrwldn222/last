@@ -23,7 +23,7 @@
 	              <h2 class="m-0 font-weight-bold text-primary text-center">
 						맛집 정보
 	              </h2>
-	              	<div class="header-left">
+	              	<d iv class="header-left">
 	                    <div class="input-group icons">
 	                    <script type="text/babel">
 				
