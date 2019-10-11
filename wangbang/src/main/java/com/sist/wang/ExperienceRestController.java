@@ -21,10 +21,10 @@ public class ExperienceRestController {
 	@Autowired
 	private ExperienceDAO dao;
 	@RequestMapping(value="search/ex_data.do",produces = "application/json; charset=utf8")
-	public String themetour_data(String page){
+	public String ex_data(String page){
 		String json="";
 		if(Integer.parseInt(page)< 1) page="1";
-		List<ExperienceVO> list = dao.experience_data(Integer.parseInt(page));
+		List<ExperienceVO> list = dao.ex_data(Integer.parseInt(page));
 		JSONArray arr = new JSONArray();
 		for(ExperienceVO vo:list){
 			JSONObject obj = new JSONObject();
@@ -32,16 +32,14 @@ public class ExperienceRestController {
 			obj.put("dataTitle", vo.getDataTitle());
 			obj.put("tel", vo.getTel());
 			obj.put("addr", vo.getAddr());
+			obj.put("useperiod", vo.getUseperiod());
+			obj.put("dataSid", vo.getDataSid());
 			arr.add(obj);
 		}
 		json = arr.toJSONString();
 		System.out.println(json);
 		return json;
 	}
-	@RequestMapping(value="search/experienct_total.do",produces = "application/json; charset=utf8")
-	public int themetour_total(){
-		int total= dao.experienceTotalPage();
-		return total;
-	}
+
 	
 }

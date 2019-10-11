@@ -21,7 +21,7 @@
         <div class="row">
 	         <div class="card-header py-3">
 	              <h2 class="m-0 font-weight-bold text-primary text-center">
-						테마여행 목록
+						체험여행
 	              </h2>
 	              	<div class="header-left">
 	                    <div class="input-group icons">
@@ -92,12 +92,12 @@
                   const html=this.state.data_json.map((m)=>
                      <div className="col-md-6 col-lg-3">
                                 <div className="card">
-                                    <a href="#"><img className="img-fluid" src={m.mainimgthumb} alt=""/></a>
+                                    <a href={"../search/experience_detail.do?dataSid="+m.dataSid}><img className="img-fluid" src={m.mainimgthumb} alt=""/></a>
                                     <div className="card-body">
                                         <h5 className="card-title">{m.dataTitle }</h5>
                                         <p className="card-text">{m.tel }</p>
                                         <p className="card-text">{m.addr }</p>
-                                        
+                                        <p className="card-text">{m.useperiod }</p>
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
                             {html}
 						<div className={"text-center"}>
                   			<input type={"button"} value={"이전"} className={"btn btn-lg btn-danger"} onClick={this.prevHandler}/>
-							{this.state.page} page / 16 pages                   			
+							{this.state.page} page / 5 pages                   			
 
 							<input type={"button"} value={"다음"} className={"btn btn-lg btn-primary"} onClick={this.nextHandler}/>
       					</div> 
