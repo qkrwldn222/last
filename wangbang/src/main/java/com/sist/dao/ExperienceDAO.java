@@ -1,13 +1,17 @@
 package com.sist.dao;
+import java.io.IOException;
 import java.util.*;
 
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
+import org.xml.sax.SAXException;
 
+import com.sist.manager.APIWeather;
 import com.sist.vo.ExperienceVO;
 import com.sist.vo.RestaurantVO;
 import com.sist.vo.ThemeTourVO;
@@ -16,7 +20,7 @@ import com.sist.vo.ThemeTourVO;
 public class ExperienceDAO {
 	@Autowired
 	private MongoTemplate mt;
-	
+
 	//총페이지 구하기
 	public int experienceTotalPage() {
 		int total=0;
@@ -40,6 +44,22 @@ public class ExperienceDAO {
 		 BasicQuery query = new BasicQuery("{dataSid:'"+dataSid+"'}"); //그냥 Query, 쿼리문 조건가져올때 BasicQuery
 		 vo=mt.findOne(query, ExperienceVO.class,"Ex");
 		 return vo;
+	 }
+	 public JSONArray weather() {
+		 JSONArray list = new JSONArray();
+		 try {
+			 	System.out.println("APIWeather");
+			APIWeather ap = new APIWeather(); 
+			list = ap.APIWeather();
+			System.out.println(list);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 return list;
 	 }
 	 
 }

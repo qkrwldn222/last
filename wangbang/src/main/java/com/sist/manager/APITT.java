@@ -25,11 +25,11 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class APITT {
-/*	public static void main(String[] args) throws IOException, SAXException {
+	public static void main(String[] args) throws IOException, SAXException {
 		APITT api = new APITT();
 		api.ExList();
 		api.ExDetail(ExList());
-	}*/
+	}
 	public static List<String> ExList() throws IOException, SAXException {
 		List<String> list = new ArrayList<String>();
 		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/6260000/BusanTourInfoService/getExperienceTourList"); 
