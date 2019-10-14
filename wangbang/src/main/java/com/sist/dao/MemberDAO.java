@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.MemberMapper;
+import com.sist.vo.MemberVO;
 
 @Repository
 public class MemberDAO {
@@ -25,5 +26,13 @@ public class MemberDAO {
 			}
 		}
 		return result;
+	}
+	
+	public int overButton(String id){
+		return mapper.memberIdCount(id);
+	}
+	
+	public void memberInsert(MemberVO vo){
+		mapper.memberInsert(vo);
 	}
 }

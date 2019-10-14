@@ -25,7 +25,7 @@
      />
      <bean id="viewResolver"
         class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-        p:prefix="/"
+        p:prefix="/WEB-INF/notiles/"
         p:suffix=".jsp"
         p:order="1"
       />
