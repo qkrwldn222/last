@@ -53,5 +53,6 @@ window.onload=function(){
                             								<button type="button" class="btn btn-info m-b-10 m-1-5" id="toastr-success-top-right">더보기</button>
                         </div>
                     </div>
+                    </div>
 </body>
 </html>
