@@ -49,6 +49,8 @@ public class APIWeather {
 		}
 		System.out.println("지금시간은"+realtime);
 		
+		
+		
         StringBuilder urlBuilder = new StringBuilder("http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData"); /*URL*/
         urlBuilder.append("?serviceKey=UZY3s0p%2FOXcwMPHgYmVUhch70jVj19wX5XiUNd10VR689ETQ9uwC6clThszEn%2FEVlUWD0FNU15gDoQiKRvySTw%3D%3D");
         // urlBuilder.append("&base_date=20191012&base_time=0500&nx=60&ny=127&_type=xml"); 

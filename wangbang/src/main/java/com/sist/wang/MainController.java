@@ -1,5 +1,8 @@
 package com.sist.wang;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.json.simple.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,6 +51,10 @@ public class MainController {
 	        		POP= fcstValue;
 	        	}
 	        } 
+		 SimpleDateFormat day = new SimpleDateFormat ( "yyyy년 MM월dd일");
+		 Date time = new Date();
+		 String time1 = day.format(time);
+		 model.addAttribute("time1", time1);
 		 System.out.println("리스트의값은 "+list);
 		 model.addAttribute("SKY", SKY);
 		 System.out.println("스카이의값은"+SKY);

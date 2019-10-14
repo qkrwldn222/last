@@ -51,7 +51,7 @@ public class ExperienceDAO {
 			 	System.out.println("APIWeather");
 			APIWeather ap = new APIWeather(); 
 			list = ap.APIWeather();
-			System.out.println(list);
+			System.out.println("DAO에서의 리스트는"+list);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
