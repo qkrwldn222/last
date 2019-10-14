@@ -12,6 +12,7 @@ public class BoardVO {
 	private String subject;
 	private String content;
 	private Date regdate;
+	private String dbday;
 	private int hit;
 	private String id;
 	

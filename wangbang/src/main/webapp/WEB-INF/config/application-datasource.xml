@@ -19,19 +19,25 @@
        p:password="${password}"
     />
     
-    <bean id="ssf"
+        <bean id="ssf"
        class="org.mybatis.spring.SqlSessionFactoryBean"
        p:dataSource-ref="ds"
     />
+    
+    <bean id="ssf2"
+       class="org.mybatis.spring.SqlSessionFactoryBean"
+       p:dataSource-ref="ds"
+       p:configLocation="/WEB-INF/config/Config.xml"
+    />
+    
+    <bean id="BoardDAO"
+			class="com.sist.dao.BoardDAO"
+			p:sqlSessionFactory-ref="ssf2"
+	/>
     <bean id="testmapper" 
        class="org.mybatis.spring.mapper.MapperFactoryBean"
        p:sqlSessionFactory-ref="ssf"
        p:mapperInterface="com.sist.test.BoardMapperT"
-    />
- 	<bean id="Boardmapper" 
-       class="org.mybatis.spring.mapper.MapperFactoryBean"
-       p:sqlSessionFactory-ref="ssf"
-       p:mapperInterface="com.sist.mapper.BoardMapper"
     />
     <bean id="MemberMapper" 
        class="org.mybatis.spring.mapper.MapperFactoryBean"
