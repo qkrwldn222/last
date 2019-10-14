@@ -2,13 +2,11 @@ package com.sist.wang;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.json.simple.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.sist.dao.ExperienceDAO;
-
 
 @Controller
 public class MainController {
@@ -23,17 +21,18 @@ public class MainController {
 	   JSONArray list = new JSONArray();
 	   ExperienceDAO edao = new ExperienceDAO();
 	   list = edao.weather();
-	   org.json.JSONArray temp =  (org.json.JSONArray) list.get(0);
-		 
+
+	   for(int x = 0; x < list.size(); x++){
+			org.json.JSONArray temp =  (org.json.JSONArray) list.get(x); // ★
+	   
        String SKY = "";
        String TEM = "";
        String POP = "";
+       
 		 for(int i = 0 ; i < temp.length(); i++ ){
-			    org.json.JSONObject temp_i = (org.json.JSONObject)temp.get(i);
-	        	
+			    org.json.JSONObject temp_i = (org.json.JSONObject)temp.get(i);        	
 	        	String category = (String) temp_i.get("category");
 	        	String fcstValue =   String.valueOf(temp_i.get("fcstValue"));
-	        	
 	        	if(category.equals("SKY")){
 	        		if(Integer.parseInt( fcstValue) >= 0 && Integer.parseInt( fcstValue) <= 5){
 	        			SKY = "맑음";
@@ -42,24 +41,25 @@ public class MainController {
 	        		} else {
 	        			SKY ="흐림";
 	        		}
-	        	}
-	        	
+	        	}       	
 	        	if(category.equals("T3H")){
 	        		TEM= fcstValue;
 	        	}
 	        	if(category.equals("POP")){
 	        		POP= fcstValue;
 	        	}
+	        	System.out.println("리스트의값은 "+temp.get(i));
 	        } 
 		 SimpleDateFormat day = new SimpleDateFormat ( "yyyy년 MM월dd일");
 		 Date time = new Date();
 		 String time1 = day.format(time);
+		 
+		 // System.out.println("스카이의값은"+SKY);
 		 model.addAttribute("time1", time1);
-		 System.out.println("리스트의값은 "+list);
-		 model.addAttribute("SKY", SKY);
-		 System.out.println("스카이의값은"+SKY);
-		 model.addAttribute("TEM", TEM);
-		 model.addAttribute("POP", POP);
-		 //model.addAttribute("list", list);
-   }
+		 model.addAttribute("SKY"+x, SKY);
+		 model.addAttribute("TEM"+x, TEM);
+		 model.addAttribute("POP"+x, POP);
+		 //model.addAttribute("list", list); 
+	   } // list
+   } // realData
 }

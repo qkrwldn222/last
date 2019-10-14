@@ -29,14 +29,16 @@ public class APIWeather {
 		SimpleDateFormat time = new SimpleDateFormat ( "HHmm");		
 		Date today = new Date();			
 		String dresult = day.format(today);
-		System.out.println(dresult);
+		// System.out.println(dresult);
 		
 		Date totime = new Date();
 		String tresult = time.format(totime);
-		System.out.println(tresult);
+		// System.out.println(tresult);
 		
 		String realtime ="";
-		if(Integer.parseInt(tresult)>=800 && Integer.parseInt(tresult)<1100) {
+		if(Integer.parseInt(tresult)>=500 && Integer.parseInt(tresult)<800) {
+			realtime="0500";
+		}else if(Integer.parseInt(tresult)>=800 && Integer.parseInt(tresult)<1100) {
 			realtime="0800";
 		} else if(Integer.parseInt(tresult)>=1100 && Integer.parseInt(tresult)<1400) {
 			realtime="1100";
@@ -44,22 +46,27 @@ public class APIWeather {
 			realtime="1400";
 		} else if(Integer.parseInt(tresult)>=1700 && Integer.parseInt(tresult)<2000) {
 			realtime="1700";
-		} else {
+		} else if(Integer.parseInt(tresult)>=2000 && Integer.parseInt(tresult)<2300) {
+			realtime="2000";
+		}else {
 			realtime="0200";
 		}
-		System.out.println("지금시간은"+realtime);
+		// System.out.println("지금시간은"+realtime);
+		String nx[]={"99","96","60"};
+		String ny[]={"75","76","127"};
+		try {
 		
-		
-		
+		for(int i=0; i<nx.length; i++) {
+
         StringBuilder urlBuilder = new StringBuilder("http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData"); /*URL*/
         urlBuilder.append("?serviceKey=UZY3s0p%2FOXcwMPHgYmVUhch70jVj19wX5XiUNd10VR689ETQ9uwC6clThszEn%2FEVlUWD0FNU15gDoQiKRvySTw%3D%3D");
         // urlBuilder.append("&base_date=20191012&base_time=0500&nx=60&ny=127&_type=xml"); 
-        urlBuilder.append("&base_date="+dresult); 
+        urlBuilder.append("&base_date="+dresult );
         urlBuilder.append("&base_time="+realtime); 
-        urlBuilder.append("&nx=98"); 
-        urlBuilder.append("&ny=76"); 
+	    urlBuilder.append("&nx="+nx[i]); 
+	    urlBuilder.append("&ny="+ny[i]); 
         urlBuilder.append("&_type=xml"); 
-       
+			
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
@@ -85,13 +92,12 @@ public class APIWeather {
         JSONObject xmljson = XML.toJSONObject(sb.toString());
         String jsonjsonjson = xmljson.toString(INDENT);
         //System.out.println(jsonjsonjson);
-        try {
         	
         JSONObject list=(JSONObject)xmljson.get("response");
         JSONObject body = (JSONObject)list.get("body");
         JSONObject items = (JSONObject)body.get("items");
         org.json.JSONArray temp =  (org.json.JSONArray) items.get("item");
-        for(int i = 0 ; i < temp.length(); i++ ){
+        for(int z = 0 ; z < temp.length(); z++ ){
         	JSONObject temp_i = (JSONObject)temp.get(i);
 /*        	System.out.println("baseDate : "+temp_i.get("baseDate"));
         	System.out.println("fcstTime : "+temp_i.get("fcstTime"));
@@ -103,11 +109,11 @@ public class APIWeather {
         	System.out.println("fcstDate : "+temp_i.get("fcstDate"));*/
         }
         arr.add(temp);
-		 
+        }	
+		System.out.println("!!!! " + arr.toString());
 		} catch (Exception ex) {
 			ex.printStackTrace();
-		}
-        
+		}     
         return arr;
     }
 }

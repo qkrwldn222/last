@@ -67,50 +67,58 @@ $(function(){
                                         <div class="carousel-inner">
                                             <div class="carousel-item active">
                                             <h6 class="card-title"></h6>
-                                                  <div style="float:left; width: 30%;">     
-						                               <c:if test="${SKY eq '맑음' }">
-						                                    <img src="../images/1.png" width="80%" height="80%">
+                                                  <div style="float:left; width: 20%;">     
+						                               <c:if test="${SKY0 eq '맑음' }">
+						                                    <img src="../images/1.png" width="100%" height="100%">
 						                                </c:if> 
-						                                 <c:if test="${SKY eq '구름많음' }">
-						                                   	<img src="../images/2.png">
+						                                 <c:if test="${SKY0 eq '구름많음' }">
+						                                   	<img src="../images/2.png" width="100%" height="100%">
 						                                </c:if> 
-						                                 <c:if test="${SKY eq '흐림' }">
-						                                    <img src="../images/3.png">
+						                                 <c:if test="${SKY0 eq '흐림' }">
+						                                    <img src="../images/3.png" width="100%" height="100%">
 						                                </c:if> 
 					                                </div>
-					                                <div style="float:left; width: 70%;"> 
-					                                	<b>부산날씨-${SKY }</b><br>
-					                                 	기온 : <font style="color:red">${TEM } ˚</font> 강수량 : <font style="color:blue">${POP }%</font>
+					                                <div style="float:left; width: 80%;"> 
+					                                	<b>부산날씨-${SKY0 }</b><br>
+					                                 	기온 : <font style="color:red">${TEM0 } ˚</font> 강수량 : <font style="color:blue">${POP0 }%</font>
                                						</div>
-<%--                                				<table>
-											 <tr>   
-											 	 <td colspan=2></td>   
-											 </tr>   
-											 <tr>   
-												  <td>	
-												  		<c:if test="${SKY eq '맑음' }">
-						                                    <img src="../images/1.png" width="25%" height="25%">
-						                                </c:if> 
-						                                 <c:if test="${SKY eq '구름많음' }">
-						                                   	<img src="../images/2.png">
-						                                </c:if> 
-						                                 <c:if test="${SKY eq '흐림' }">
-						                                    <img src="../images/3.png">
-						                                </c:if> 
-						                          </td>
-						                          <td>
-						                          	<b>부산날씨-${SKY }</b><br>
-						                          	기온 : <font style="color:red">${TEM } ˚</font> 강수량 : <font style="color:blue">${POP }%</font>
-						                          </td>   
-											 </tr>   			
-                               				</table> --%>
-                                          		  </div>
+                   							  </div>
                                             
                                             <div class="carousel-item">
-                                                 <img src="../images/2.png" width="25%" height="25%">
+                                            <h6 class="card-title"></h6>
+                                                  <div style="float:left; width: 20%;">     
+						                               <c:if test="${SKY1 eq '맑음' }">
+						                                    <img src="../images/1.png" width="100%" height="100%">
+						                                </c:if> 
+						                                 <c:if test="${SKY1 eq '구름많음' }">
+						                                   	<img src="../images/2.png" width="100%" height="100%">
+						                                </c:if> 
+						                                 <c:if test="${SKY1 eq '흐림' }">
+						                                    <img src="../images/3.png" width="100%" height="100%">
+						                                </c:if> 
+					                                </div>
+					                                <div style="float:left; width: 80%;"> 
+					                                	<b>부산어쩌구날씨-${SKY1 }</b><br>
+					                                 	기온 : <font style="color:red">${TEM1 } ˚</font> 강수량 : <font style="color:blue">${POP1 }%</font>
+                               						</div>
                                             </div>
                                             <div class="carousel-item">
-                                                 <img src="../images/3.png" width="25%" height="25%">
+                                            <h6 class="card-title"></h6>
+                                                  <div style="float:left; width: 20%;">     
+						                               <c:if test="${SKY2 eq '맑음' }">
+						                                    <img src="../images/1.png" width="100%" height="100%">
+						                                </c:if> 
+						                                 <c:if test="${SKY2 eq '구름많음' }">
+						                                   	<img src="../images/2.png" width="100%" height="100%">
+						                                </c:if> 
+						                                 <c:if test="${SKY2 eq '흐림' }">
+						                                    <img src="../images/3.png" width="100%" height="100%">
+						                                </c:if> 
+					                                </div>
+					                                <div style="float:left; width: 80%;"> 
+					                                	<b>서울날씨-${SKY2 }</b><br>
+					                                 	기온 : <font style="color:red">${TEM2 } ˚</font> 강수량 : <font style="color:blue">${POP2 }%</font>
+                               						</div>
                                             </div>
                                         </div><a class="carousel-control-prev" href="#carouselExampleControls" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span> </a><a class="carousel-control-next" href="#carouselExampleControls"
                                             data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
