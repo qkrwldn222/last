@@ -23,34 +23,27 @@
 	              <h2 class="m-0 font-weight-bold text-primary text-center">
 						맛집 정보
 	              </h2>
-	              	<d iv class="header-left">
-	                    <div class="input-group icons">
-	                    <script type="text/babel">
-				
-						</script>
-	                        <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
-	                         <a href="#"><button type="button" class="btn mb-1 btn-roundede btn-outline-primary" id="toastr-success-top-right">검색</button></a>
-	                        
-	                        <div class="drop-down d-md-none" id="search">
-	                        </div>
-	                    </div>
-	                </div>
-			 </div>
-         </div>
-                   <div class="col-12 m-b-30" id="root">                 
-                     <script type="text/babel">
-		  class TouristAttr extends React.Component{
+	              	<div class="header-left" id="root">
+	              	 <script type="text/babel">
+		class TouristAttr extends React.Component{
 			  // 데이터 저장하는 변수 설정  => props(속성:불변) / state(상태:데이터 변경) 
 			  constructor(props){
 				  super(props);
 				  // 변수 선언
 				  this.state={
 					data_json:[],
-					page : 1
+					page : 1,
+					fd:''
 				  }
 				this.prevHandler=this.prevHandler.bind(this);
 				this.nextHandler=this.nextHandler.bind(this);
+				this.handleUserInput=this.handleUserInput.bind(this);
 			  }
+
+			handleUserInput(ss){
+                  this.setState({fd:ss});
+             }
+
 			  //boxoffice_data.do?no=1
 			  componentWillMount(){
 				  var _this=this;
@@ -60,17 +53,15 @@
 					  }
 				  }).then((response)=>{
 					  _this.setState({data_json:response.data});
-					  console.log(response.data);
 				  });
 			  }
 		
 		prevHandler(){
        		this.setState({page:this.state.page>1?this.state.page-1:this.state.page});
       		var _this=this;
-			
        			axios.get('http://localhost:8080/wang/search/touristattr_data.do',{
          	  	 params:{
-         	     	  page:_this.state.page
+         	     	  page:_this.state.page-1
             		}
         		}).then(function (response) {
          	   	_this.setState({data_json:response.data});
@@ -83,47 +74,90 @@
         	var _this=this;
         	axios.get('http://localhost:8080/wang/search/touristattr_data.do',{
             	params:{
-                	page:_this.state.page
+                	page:_this.state.page+1
             	}
         	}).then(function (response) {
             _this.setState({data_json:response.data});
         	})
-    	}
-			  render(){
-                  const html=this.state.data_json.map((m)=>
-                     <div className="col-md-6 col-lg-3">
-                                <div className="card">
-                                    <a href={"../search/touristattr_data.do?dataSid="+m.dataSid}><img className="img-fluid" src={m.mainimgthumb} alt=""/></a>
+		}
+
+			render(){
+					
+                 const html=this.state.data_json.map((m)=>{
+                      if(m.dataTitle.indexOf(this.state.fd)==-1)
+                      {
+                          return;
+                      }
+					return (	 
+					<div className="col-md-6 col-lg-3">
+                    	<div className="card">
+                                    <a href={"../search/touristattr_data.do?dataSid=+m.dataSid"}><img className="img-fluid" src={m.mainimgthumb} alt=""/></a>
                                     <div className="card-body">
                                         <h5 className="card-title">{m.dataTitle }</h5>
                                         <p className="card-text">{m.tel }</p>
                                         <p className="card-text">{m.addr }</p>
                                         <p className="card-text"><small className="text-muted">{m.info }</small>
                                         </p>
-                                    </div>
-                                </div>
-                            </div>
-                  );
-				  return (
-                   <div className="row">
-                            {html}
-						<div className={"text-center"}>
+                              </div>
+                           </div>
+					</div>
+                 )
+				});
+               return (
+                 <div className="row">
+                   <SearchBar fd={this.state.fd} onUserInput={this.handleUserInput}/>
+                   {html}
+					<div className={"text-center"}>
                   			<input type={"button"} value={"이전"} className={"btn btn-lg btn-danger"} onClick={this.prevHandler}/>
 							{this.state.page} page / 300 pages                   			
-
 							<input type={"button"} value={"다음"} className={"btn btn-lg btn-primary"} onClick={this.nextHandler}/>
       					</div> 
-                    </div>
-				  )
-				  
-			  }
-			  componentDidMount(){
-				  
-			  }
-		  }
-         ReactDOM.render(<TouristAttr />,document.getElementById('root'));
-		</script>                
-       </div>
+                   </div>
+                )
+             }
+		}
+		class tourRow extends React.Component {
+             render(){
+               return (
+                  <div className="card">
+                                    <a href={"../search/touristattr_data.do?dataSid="+this.props.tourlist.dataSid}><img className="img-fluid" src={this.props.tourlist.mainimgthumb} alt=""/></a>
+                                    <div className="card-body">
+                                        <h5 className="card-title">{this.props.tourlist.dataTitle }</h5>
+                                        <p className="card-text">{this.props.tourlist.tel }</p>
+                                        <p className="card-text">{this.props.tourlist.addr }</p>
+                                        <p className="card-text"><small className="text-muted">{this.props.tourlist.info }</small>
+                                        </p>
+                                    </div>
+                            </div>
+               		)
+             }
+         }
+
+
+	      class SearchBar extends React.Component{
+            constructor(props){
+               super(props);
+               this.handleChange=this.handleChange.bind(this);
+            }
+            handleChange()
+            {
+                this.props.onUserInput(this.filterText.value);
+            }
+            render(){
+                return (
+                   <div className="input-group icons">
+	                   <input type="search" className="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard" value={this.props.fd}
+                            ref={(input)=>this.filterText=input} onChange={this.handleChange}/>
+	                    </div>
+                )
+            }
+         }        
+				ReactDOM.render(<TouristAttr />,document.getElementById('root'))
+						</script>
+						
+	                </div>
+			 </div>
+         </div>
 </div>
 </body>
 </html>
