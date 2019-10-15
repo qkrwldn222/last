@@ -8,14 +8,14 @@
 		    pStart IN NUMBER,
 		    pEnd IN NUMBER,
 		    pResult OUT SYS_REFCURSOR 
-		) 
+		)
    -->
   <resultMap type="BoardVO" id="boardMap">
     <result property="no" column="no"/>
-    <result property="name" column="name"/>
+    <result property="id" column="id"/>
     <result property="subject" column="subject"/>
     <result property="content" column="content"/>
-    <result property="regdate" column="regdate"/>
+    <result property="dbday" column="dbday"/>
     <result property="hit" column="hit"/>
   </resultMap>
   <parameterMap type="hashmap" id="boardListMap">
