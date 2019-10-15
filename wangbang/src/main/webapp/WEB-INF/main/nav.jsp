@@ -24,7 +24,7 @@
                             <li><a href="../search/experience.do">체험여행</a></li>
                             <li><a href="#">도보여행</a></li>
                             <li><a href="../search/themetour.do">테마여행</a></li>
-                            <li><a href="#">추천여행코스</a></li>
+                            <li><a href="../course/course_list.do">추천여행코스</a></li>
                         </ul>
                     </li>
                     <li>
@@ -65,7 +65,7 @@
                             <i class="icon-badge menu-icon"></i><span class="nav-text">코스추천</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./ui-accordion.html">당신을위한 추천</a></li>                  
+                            <li><a href="../course/course_list.do">당신을위한 추천</a></li>                  
                       </ul>  
                        <!--
                     </li>
