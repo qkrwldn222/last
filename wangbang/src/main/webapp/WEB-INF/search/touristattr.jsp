@@ -15,6 +15,20 @@
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Custom Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
+    <style type="text/css">
+    .form-control1{
+    	padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+    }
+    </style>
 </head>
 <body>
 <div class="card shadow mb-4">
@@ -91,7 +105,7 @@
 					return (	 
 					<div className="col-md-6 col-lg-3">
                     	<div className="card">
-                                    <a href={"../search/touristattr_data.do?dataSid=+m.dataSid"}><img src={m.mainimgthumb} alt="" width="370" height="300"/></a>
+                                    <a href={"../search/touristattr_detail.do?dataSid="+m.dataSid}><img src={m.mainimgthumb} alt="" width="360" height="300"/></a>
                                     <div className="card-body">
                                         <h5 className="card-title">{m.dataTitle }</h5>
                                         <p className="card-text">{m.tel }</p>
@@ -101,39 +115,29 @@
                               </div>
                            </div>
 					</div>
-                 )
+                 ) 
 				});
                return (
-                 <div className="row">
-                   <SearchBar fd={this.state.fd} onUserInput={this.handleUserInput}/>
-                   {html}
-					
-					<div className={"text-center"}>
+                 <div>
+				<SearchBar fd={this.state.fd} onUserInput={this.handleUserInput}/>
+				<div className="row">
+                            {html}
+						</div>
+                   <div className="text-center">
+						
+						<div style={{"padding-bottom":"30px"}}>
                   			<input type={"button"} value={"이전"} className={"btn btn-lg btn-danger"} onClick={this.prevHandler}/>
-								 {this.state.page} page / 300 pages                 			
+							{this.state.page} page / 300 pages                   			
+
 							<input type={"button"} value={"다음"} className={"btn btn-lg btn-primary"} onClick={this.nextHandler}/>
       					</div> 
-                   </div>
+                    </div>
+				</div>
 					
                 )
              }
 		}
-		class tourRow extends React.Component {
-             render(){
-               return (
-                  <div className="card">
-                                    <a href={"../search/touristattr_data.do?dataSid="+this.props.tourlist.dataSid}><img className="img-fluid" src={this.props.tourlist.mainimgthumb} alt=""/></a>
-                                    <div className="card-body">
-                                        <h5 className="card-title">{this.props.tourlist.dataTitle }</h5>
-                                        <p className="card-text">{this.props.tourlist.tel }</p>
-                                        <p className="card-text">{this.props.tourlist.addr }</p>
-                                        <p className="card-text"><small className="text-muted">{this.props.tourlist.info }</small>
-                                        </p>
-                                    </div>
-                            </div>
-               		)
-             }
-         }
+
 	      class SearchBar extends React.Component{
             constructor(props){
                super(props);
@@ -145,8 +149,8 @@
             }
             render(){
                 return (
-                   <div className="input-group icons">
-	                   <input type="search" className="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard" size="15" value={this.props.fd}
+                   <div className="input-group icons" style={{"padding-bottom" : "30px"}}>
+	                   <input type="search" style={{"width":"40%", "display": "initial"}} className="form-control1"placeholder="Search Dashboard" aria-label="Search Dashboard" value={this.props.fd}
                             ref={(input)=>this.filterText=input} onChange={this.handleChange}/>
 	                    </div>
                 )

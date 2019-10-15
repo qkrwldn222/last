@@ -50,6 +50,7 @@ public class RestaurantRestController {
 			obj.put("mainimgthumb", vo.getMainimgthumb());
 			obj.put("tel", vo.getTel());
 			obj.put("info", vo.getInfo());
+			obj.put("dataSid", vo.getDataSid());
 			arr.add(obj); //{}
 		}
 		json = arr.toJSONString();
@@ -69,6 +70,7 @@ public class RestaurantRestController {
 			obj.put("mainimgthumb", vo.getMainimgthumb());
 			obj.put("tel", vo.getTel());
 			obj.put("info", vo.getInfo());
+			obj.put("dataSid", vo.getDataSid());
 			arr.add(obj); //{}
 		}
 		json = arr.toJSONString();

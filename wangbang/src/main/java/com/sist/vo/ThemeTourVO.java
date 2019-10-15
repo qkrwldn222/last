@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ThemeTourVO {
+	private String dataSid;
 	private String wgsy;
 	private String dataContent;
 	private String wgsx;

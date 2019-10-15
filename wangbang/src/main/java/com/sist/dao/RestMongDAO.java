@@ -54,7 +54,7 @@ public class RestMongDAO {
 		 Query query = new Query();
 		 query.skip(skip).limit(rowSize);
 		 list = mt.find(query, ThemeTourVO.class,"ThemeTour");
-		 System.out.println("테마여행 크기"+list.size());
+		 
 		 return list;
 	 }
 	 public int themeTotalpage(){
@@ -74,6 +74,21 @@ public class RestMongDAO {
 		 query.skip(skip).limit(rowSize);
 		 list = mt.find(query, TouristattrVO.class,"TouristAttr");
 		 return list;
+	 }
+	 public ThemeTourVO themeDetail(String dataSid){
+		 ThemeTourVO vo = new ThemeTourVO();
+		 BasicQuery query = new BasicQuery("{dataSid:'"+dataSid+"'}");
+		 vo=mt.findOne(query, ThemeTourVO.class,"ThemeTour");
+		 
+		 return vo;
+	 }
+	 
+	 public TouristattrVO touristDetail(String dataSid){
+		 TouristattrVO vo = new TouristattrVO();
+		 BasicQuery query = new BasicQuery("{dataSid:'"+dataSid+"'}");
+		 vo=mt.findOne(query, TouristattrVO.class,"TouristAttr");
+		 
+		 return vo;
 	 }
 
 }

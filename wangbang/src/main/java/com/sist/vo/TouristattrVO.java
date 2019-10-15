@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TouristattrVO {
+	private String dataSid;
 	private String dataContent;
 	private String parkest;
 	private String mainimgthumb;
