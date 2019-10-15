@@ -82,6 +82,7 @@ $(function(){
 			return;
 		}
 		
+		alert("회원가입이 정상적으로 처리되었습니다.");
 		$('#join').submit();
 	});
 });

@@ -34,4 +34,16 @@ public class MemberController {
 		model.addAttribute("res", res);
 		return "over";
 	}
+	
+	@RequestMapping("member/member_insert.do")
+	public String member_insert(String id, String pwd, String name, Model model){
+		MemberVO vo = new MemberVO();
+		vo.setId(id);
+		vo.setPwd(pwd);
+		vo.setName(name);
+		
+		dao.memberInsert(vo);
+		return "redirect:../main/main.do";
+	}
+	
 }
