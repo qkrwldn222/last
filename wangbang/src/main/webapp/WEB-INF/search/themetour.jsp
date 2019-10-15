@@ -100,9 +100,9 @@
                             </div>
                   );
 				  return (
-                   <div className="row">
+                   <div className="text-center">
                             {html}
-						<div className={"text-center"}>
+						<div style={{"padding-bottom":"30px"}}>
                   			<input type={"button"} value={"이전"} className={"btn btn-lg btn-danger"} onClick={this.prevHandler}/>
 							{this.state.page} page / 300 pages                   			
 
