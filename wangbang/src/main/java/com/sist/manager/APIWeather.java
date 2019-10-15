@@ -51,9 +51,10 @@ public class APIWeather {
 		}else {
 			realtime="0200";
 		}
+		// 서울,대전,대구,부산,전북,전남,충북,충남,제주도
 		// System.out.println("지금시간은"+realtime);
-		String nx[]={"99","96","60"};
-		String ny[]={"75","76","127"};
+		String nx[]={"60","67","89","98","63","51","67","68","52"};
+		String ny[]={"127","100","90","76","89","67","107","100","38"};
 		try {
 		
 		for(int i=0; i<nx.length; i++) {

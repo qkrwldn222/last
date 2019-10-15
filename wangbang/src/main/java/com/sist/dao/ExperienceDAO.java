@@ -45,16 +45,12 @@ public class ExperienceDAO {
 		 vo=mt.findOne(query, ExperienceVO.class,"Ex");
 		 return vo;
 	 }
+	 
 	 public JSONArray weather() {
 		 JSONArray list = new JSONArray();
 		 try {
-			 // System.out.println("APIWeather");
 			APIWeather ap = new APIWeather(); 
-/*			String nx[]={"99","96","60"};
-			String ny[]={"75","76","127"};
-			for(int i=0; i<nx.length; i++) {
-				list = ap.APIWeather(nx[i],ny[i]); 
-			}*/
+
 			list = ap.APIWeather();
 			System.out.println("DAO에서의 리스트는"+list);
 		} catch (IOException e) {

@@ -1,7 +1,11 @@
 package com.sist.wang;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+
 import org.json.simple.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +24,7 @@ public class MainController {
    public static void realData(Model model) { //날씨정보 갖다쓸려고 static
 	   JSONArray list = new JSONArray();
 	   ExperienceDAO edao = new ExperienceDAO();
-	   list = edao.weather();
+	   list = (JSONArray) edao.weather();
 
 	   for(int x = 0; x < list.size(); x++){
 			org.json.JSONArray temp =  (org.json.JSONArray) list.get(x); // ★
@@ -28,7 +32,6 @@ public class MainController {
        String SKY = "";
        String TEM = "";
        String POP = "";
-       
 		 for(int i = 0 ; i < temp.length(); i++ ){
 			    org.json.JSONObject temp_i = (org.json.JSONObject)temp.get(i);        	
 	        	String category = (String) temp_i.get("category");
@@ -54,12 +57,11 @@ public class MainController {
 		 Date time = new Date();
 		 String time1 = day.format(time);
 		 
-		 // System.out.println("스카이의값은"+SKY);
 		 model.addAttribute("time1", time1);
 		 model.addAttribute("SKY"+x, SKY);
 		 model.addAttribute("TEM"+x, TEM);
 		 model.addAttribute("POP"+x, POP);
-		 //model.addAttribute("list", list); 
+
 	   } // list
    } // realData
 }
