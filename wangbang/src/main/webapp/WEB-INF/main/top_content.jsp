@@ -34,7 +34,7 @@ $(function(){
                     </div>
                     <!-- 실시간날씨 -->
                     <div class="col-lg-3 col-sm-6">
-                        <div class="card" style="background-color: #F0FFFF">
+                        <div class="card" style="background-color: #FFFFFF">
                             <div class="card-body">
 								<h4><b>${time1 }</b></h4>
                                 <div class="bootstrap-carousel">

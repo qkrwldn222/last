@@ -101,9 +101,7 @@
                                 </div>
                             <div class="card-body">
                                 <div class="text-center">
-                                    <img src="../images/users/8.jpg" class="rounded-circle" alt="">
-                                    <h5 class="mt-3 mb-1">Ana Liem</h5>
-                                    <p class="m-0">Senior Manager</p>
+									<embed src="http://youtube.com/embed/PJdgJMAGxjc" style="width:100%;height:100;">
                                     <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> -->
                                 </div>
                             </div>
@@ -116,9 +114,7 @@
                                 </div>
                             <div class="card-body">
                                 <div class="text-center">
-                                    <img src="../images/users/5.jpg" class="rounded-circle" alt="">
-                                    <h5 class="mt-3 mb-1">John Abraham</h5>
-                                    <p class="m-0">Store Manager</p>
+									<embed src="http://youtube.com/embed/2V9BTVIsGT0" style="width:100%;height:100;">
                                     <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> -->
                                 </div>
                             </div>
@@ -131,9 +127,7 @@
                                 </div>
                             <div class="card-body">
                                 <div class="text-center">
-                                    <img src="../images/users/7.jpg" class="rounded-circle" alt="">
-                                    <h5 class="mt-3 mb-1">John Doe</h5>
-                                    <p class="m-0">Sales Man</p>
+									<embed src="http://youtube.com/embed/Vc2Ks333Ajc" style="width:100%;height:100;">
                                     <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> -->
                                 </div>
                             </div>
@@ -146,15 +140,12 @@
                                 </div>
                             <div class="card-body">
                                 <div class="text-center">
-                                    <img src="../images/users/1.jpg" class="rounded-circle" alt="">
-                                    <h5 class="mt-3 mb-1">Mehedi Titas</h5>
-                                    <p class="m-0">Online Marketer</p>
+									<embed src="http://youtube.com/embed/y46TTJsjis4" style="width:100%;height:100;">
                                     <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> -->
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
 </body>
 </html>
