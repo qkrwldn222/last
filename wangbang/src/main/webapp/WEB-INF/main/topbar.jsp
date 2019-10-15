@@ -75,7 +75,7 @@ $(function(){
                     <b class="logo-abbr"><img src="../images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="../images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="../images/logo-text.png" alt="">
+                        <img src="../images/logo-text1.png" alt="">
                     </span>
                 </a>
             </div>
@@ -184,7 +184,7 @@ $(function(){
                             </div>
                         </li>
                         <li class="icons dropdown d-none d-md-flex">
-                            <a href="#"><button type="button" class="btn btn-info m-b-10 m-1-5" id="toastr-success-top-right">마이페이지</button></a>
+                            <a href="../member/mypage.do"><button type="button" class="btn btn-info m-b-10 m-1-5" id="toastr-success-top-right">마이페이지</button></a>
                             <a href="../member/logout_ok.do"><button type="button" class="btn btn-info m-b-10 m-1-5" id="toastr-success-top-right">로그아웃</button></a>
                         </li>
                     </ul>

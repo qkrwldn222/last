@@ -19,6 +19,8 @@ public class MemberRestController {
 		result = dao.isLogin(id, pwd);
 		if(result.equals(id)){
 			session.setAttribute("id", id);
+			String name = dao.memberGetName(id);
+			session.setAttribute("name", name);
 		}
 		return result;
 	}

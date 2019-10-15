@@ -13,10 +13,10 @@
         <div class="nk-sidebar">           
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li class="nav-label">어서오이소</li>
+                    <li class="nav-label">MENU</li>
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-star menu-icon"></i><span class="nav-text">관광지</span>
+                            <i class="icon-anchor menu-icon"></i><span class="nav-text">관광지</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="#">명품관광</a></li>
@@ -29,7 +29,7 @@
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-star menu-icon"></i><span class="nav-text">숙박&쇼핑</span>
+                            <i class="icon-basket menu-icon"></i><span class="nav-text">숙박 & 쇼핑</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="#">숙박정보</a></li>
@@ -38,16 +38,16 @@
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-star menu-icon"></i><span class="nav-text">맛집&레저</span>
+                            <i class="icon-cup menu-icon"></i><span class="nav-text">맛집 & 레저</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="../search/restaurant.do">맛집</a></li>
-                            <li><a href="../search/leisure.do">스포츠&레저</a></li>
+                            <li><a href="../search/leisure.do">스포츠 & 레저</a></li>
                         </ul>
                     </li> 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-grid menu-icon"></i> <span class="nav-text">여행가기 좋은날</span>
+                            <i class="icon-plane menu-icon"></i> <span class="nav-text">여행가기 좋은날</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="./email-inbox.html">날씨~</a></li>
@@ -61,8 +61,8 @@
 <!--                  <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-grid menu-icon"></i><span class="nav-text">코스추천</span>
                         </a> -->
-                       <a href="widgets.html" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">코스추천</span>
+                       <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-like menu-icon"></i><span class="nav-text">코스추천</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="../course/course_list.do">당신을위한 추천</a></li>                  
@@ -73,11 +73,11 @@
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-layers menu-icon"></i><span class="nav-text">Components</span>
                         </a>-->
-                        <ul aria-expanded="false"> 
+                        <!-- <ul aria-expanded="false"> 
             
                         </ul>
                     </li>
-                    <li>
+                    <li> -->
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">

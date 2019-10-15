@@ -14,4 +14,7 @@ public interface MemberMapper {
 	
 	@Insert("INSERT INTO s_member VALUES(#{id}, #{pwd}, #{name})")
 	public void memberInsert(MemberVO vo);
+	
+	@Select("SELECT name FROM s_member WHERE id = #{id}")
+	public String memberGetName(String id);
 }

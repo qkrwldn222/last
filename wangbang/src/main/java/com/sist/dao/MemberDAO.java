@@ -35,4 +35,9 @@ public class MemberDAO {
 	public void memberInsert(MemberVO vo){
 		mapper.memberInsert(vo);
 	}
+	
+	public String memberGetName(String id){
+		return mapper.memberGetName(id);
+	}
+	
 }

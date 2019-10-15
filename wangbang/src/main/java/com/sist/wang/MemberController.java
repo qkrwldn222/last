@@ -46,4 +46,8 @@ public class MemberController {
 		return "redirect:../main/main.do";
 	}
 	
+	@RequestMapping("member/mypage.do")
+	public String member_mypage(){
+		return "member/mypage";
+	}
 }
