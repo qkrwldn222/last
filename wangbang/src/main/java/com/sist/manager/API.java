@@ -205,13 +205,13 @@ public class API {
 			            arr.put(jsonObject5);
 				   }
 			json = arr.toString();
-//				   try {
-//			           FileWriter file = new FileWriter("c:\\test\\Restaurant.json");
-//			           file.write(arr.toString());
-//			           file.flush();
-//			           file.close();
-//			        } catch (IOException e) {
-//			           e.printStackTrace();}
+				   try {
+			           FileWriter file = new FileWriter("c:\\test\\Restaurant.json");
+			           file.write(arr.toString());
+			           file.flush();
+			           file.close();
+			        } catch (IOException e) {
+			           e.printStackTrace();}
 			return json;
 		}
 	public List<String> getTouristAttrList() throws IOException, SAXException {
@@ -300,6 +300,7 @@ public class API {
 			            JSONObject jsonObject3 = (JSONObject)jsonObject2.get("body");
 			            JSONObject jsonObject4 = (JSONObject)jsonObject3.get("items");
 			            JSONObject jsonObject5 = (JSONObject)jsonObject4.get("item");
+			            jsonObject5.put("dataSid",no);
 			            arr.put(jsonObject5);
 				   }
 				   try {

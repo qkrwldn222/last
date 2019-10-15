@@ -21,7 +21,7 @@
         <div class="row">
 	         <div class="card-header py-3">
 	              <h2 class="m-0 font-weight-bold text-primary text-center">
-						맛집 정보
+						관광 명소
 	              </h2>
 	              	<div class="header-left" id="root">
 	              	 <script type="text/babel">
@@ -91,7 +91,7 @@
 					return (	 
 					<div className="col-md-6 col-lg-3">
                     	<div className="card">
-                                    <a href={"../search/touristattr_data.do?dataSid=+m.dataSid"}><img className="img-fluid" src={m.mainimgthumb} alt=""/></a>
+                                    <a href={"../search/touristattr_data.do?dataSid=+m.dataSid"}><img src={m.mainimgthumb} alt="" width="370" height="300"/></a>
                                     <div className="card-body">
                                         <h5 className="card-title">{m.dataTitle }</h5>
                                         <p className="card-text">{m.tel }</p>
@@ -107,12 +107,14 @@
                  <div className="row">
                    <SearchBar fd={this.state.fd} onUserInput={this.handleUserInput}/>
                    {html}
+					
 					<div className={"text-center"}>
                   			<input type={"button"} value={"이전"} className={"btn btn-lg btn-danger"} onClick={this.prevHandler}/>
-							{this.state.page} page / 300 pages                   			
+								 {this.state.page} page / 300 pages                 			
 							<input type={"button"} value={"다음"} className={"btn btn-lg btn-primary"} onClick={this.nextHandler}/>
       					</div> 
                    </div>
+					
                 )
              }
 		}
@@ -144,7 +146,7 @@
             render(){
                 return (
                    <div className="input-group icons">
-	                   <input type="search" className="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard" value={this.props.fd}
+	                   <input type="search" className="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard" size="15" value={this.props.fd}
                             ref={(input)=>this.filterText=input} onChange={this.handleChange}/>
 	                    </div>
                 )
