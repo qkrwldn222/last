@@ -4,6 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -20,43 +25,72 @@
                         <div class="social-graph-wrapper widget-twitter">
                                     <span class="s-icon"><i class="fa fa-twitter"></i></span>
                                 </div>
-                            <div class="card-body">
-                                <h4 class="card-title">Twitter</h4>
-                                <div id="activity">
-                                    <div class="media border-bottom-1 pt-3 pb-3">
-                                        <img width="35" src="../images/avatar/1.jpg" class="mr-3 rounded-circle">
-                                        <div class="media-body">
-                                            <h5>Received New Order</h5>
-                                            <p class="mb-0">I shared this on my fb wall a few months back,</p>
-                                        </div><span class="text-muted ">April 24, 2018</span>
+                            <div class="card-body" id="card-body">
+                                <h4 class="card-title">실시간 부산 SNS</h4>                    
+                                 <div id="activity">                 
+                                   
+                 <script type="text/babel">
+		  class Twitter extends React.Component{
+			  // 데이터 저장하는 변수 설정  => props(속성:불변) / state(상태:데이터 변경) 
+			  constructor(props){
+				  super(props);
+				  // 변수 선언
+				  this.state={
+					data_json:[]
+				  }
+				this.refresh=this.refresh.bind(this);
+			  }
+			  componentWillMount(){
+				  var _this=this;
+				  axios.get('http://localhost:8080/wang/main/body_twitter.do').then((response)=>{
+					  _this.setState({data_json:response.data});
+					  
+				  });
+			  }
+			  refresh(){
+				
+				  var _this=this;
+				  axios.get('http://localhost:8080/wang/main/body_twitter.do').then((response)=>{
+					  _this.setState({data_json:response.data});
+					 
+				  });
+			  }
+				    
+			  render(){
+                  const html=this.state.data_json.map((m)=>
+                    <div className="media border-bottom-1 pt-3 pb-3">
+                                        <img width="35" src={m.img} className="mr-3 rounded-circle"></img>
+                                        <div className="media-body">
+                                            <h5>{m.id}</h5>
+                                            <p className="mb-0">{m.text}</p>
+                                        </div><span className="text-muted ">{m.time}</span>
                                     </div>
-                                    <div class="media border-bottom-1 pt-3 pb-3">
-                                        <img width="35" src="../images/avatar/2.jpg" class="mr-3 rounded-circle">
-                                        <div class="media-body">
-                                            <h5>iPhone develered</h5>
-                                            <p class="mb-0">I shared this on my fb wall a few months back,</p>
-                                        </div><span class="text-muted ">April 24, 2018</span>
-                                    </div>
-                                    <div class="media border-bottom-1 pt-3 pb-3">
-                                        <img width="35" src="../images/avatar/2.jpg" class="mr-3 rounded-circle">
-                                        <div class="media-body">
-                                            <h5>3 Order Pending</h5>
-                                            <p class="mb-0">I shared this on my fb wall a few months back,</p>
-                                        </div><span class="text-muted ">April 24, 2018</span>
-                                    </div>
-                                    <div class="media border-bottom-1 pt-3 pb-3">
-                                        <img width="35" src="../images/avatar/2.jpg" class="mr-3 rounded-circle">
-                                        <div class="media-body">
-                                            <h5>Join new Manager</h5>
-                                            <p class="mb-0">I shared this on my fb wall a few months back,</p>
-                                        </div><span class="text-muted ">April 24, 2018</span>
-                                    </div>
+                  );
+				  return (
+					 <div className="row" style={{"overflow": "auto", "height": "430px"}}>
+                            {html}
+					</div>
+				)
+				  
+			  }
+			  componentDidMount(){
+				   this.timerID = setInterval(
+                     () => this.refresh(),
+                       3000
+                       );
+			  }
+ 			componentWillUnmount() {
+   				 clearInterval(this.timerID);
+  			}
+		  }
+         ReactDOM.render(<Twitter />,document.getElementById('activity'));
+		</script>            
+                
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
                 
                 
                 <div class="row">
