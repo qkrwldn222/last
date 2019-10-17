@@ -14,6 +14,7 @@ import org.xml.sax.SAXException;
 import com.sist.manager.APIWeather;
 import com.sist.vo.ExperienceVO;
 import com.sist.vo.RestaurantVO;
+import com.sist.vo.StayVO;
 import com.sist.vo.ThemeTourVO;
 
 @Repository
@@ -62,5 +63,29 @@ public class ExperienceDAO {
 		}
 		 return list;
 	 }
-	 
+		//총페이지 구하기
+		public int stayTotalPage() {
+			int total=0;
+			Query query=new Query();
+			int count=(int)mt.count(query, "stay");
+			total=(int)(Math.ceil(count/12.0)); 
+			return total;
+		}
+		 public List<StayVO> stay_data(int page) {
+			 List<StayVO> list = new ArrayList<StayVO>();
+			 int rowSize=12;
+			 int skip = (page * rowSize) - rowSize;
+			 Query query = new Query();
+			 query.with(new Sort(Sort.Direction.ASC,"dataSid"));// dataSid를 정렬해서 가져오겠다.
+			 query.skip(skip).limit(rowSize);//skip 버리고 limit최대치
+			 list = mt.find(query, StayVO.class,"stay");// find = select , findOne = selectOne(하나만가져올때)
+			 System.out.println("DAO스테이리스트값은?"+list.toString());
+			 return list;
+		 }
+/*		 public StayVO stay_detail(String dataSid) {
+			 StayVO vo = new StayVO();
+			 BasicQuery query = new BasicQuery("{dataSid:'"+dataSid+"'}"); //그냥 Query, 쿼리문 조건가져올때 BasicQuery
+			 vo=mt.findOne(query, StayVO.class,"stay");
+			 return vo;
+		 }*/
 }

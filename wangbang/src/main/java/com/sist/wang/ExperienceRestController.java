@@ -13,6 +13,7 @@ import com.sist.dao.RestMongDAO;
 import com.sist.manager.API;
 import com.sist.manager.APITT;
 import com.sist.vo.ExperienceVO;
+import com.sist.vo.StayVO;
 import com.sist.vo.ThemeTourVO;
 
 @RestController
@@ -20,6 +21,7 @@ public class ExperienceRestController {
 	private APITT api = new APITT();
 	@Autowired
 	private ExperienceDAO dao;
+	
 	@RequestMapping(value="search/ex_data.do",produces = "application/json; charset=utf8")
 	public String ex_data(String page){
 		String json="";
@@ -37,9 +39,30 @@ public class ExperienceRestController {
 			arr.add(obj);
 		}
 		json = arr.toJSONString();
-		System.out.println(json);
+		//System.out.println("리액트ㅠ"+json);
 		return json;
 	}
-
 	
+	@RequestMapping(value="search/stay_data.do",produces = "application/json; charset=utf8")
+	public String stay_data(String page){
+		System.out.println("==============1");
+		String json="";
+		if(Integer.parseInt(page)< 1) page="1";
+		List<StayVO> list = dao.stay_data(Integer.parseInt(page));
+		JSONArray arr = new JSONArray();
+		System.out.println("==============2");
+		for(StayVO vo:list){
+			JSONObject obj = new JSONObject();
+			obj.put("mainimgthumb", vo.getMainimgthumb());
+			obj.put("dataTitle", vo.getDataTitle());
+			obj.put("tel", vo.getTel());
+			obj.put("addr", vo.getAddr());
+			obj.put("price", vo.getPrice());
+			obj.put("dataSid", vo.getDataSid());
+			arr.add(obj);
+		}
+		json = arr.toJSONString();
+		System.out.println("리액트ㅠ"+json);
+		return json;
+	}
 }

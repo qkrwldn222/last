@@ -51,7 +51,7 @@ public class MainController {
 	        	if(category.equals("POP")){
 	        		POP= fcstValue;
 	        	}
-	        	System.out.println("리스트의값은 "+temp.get(i));
+	        	//System.out.println("리스트의값은 "+temp.get(i));
 	        } 
 		 SimpleDateFormat day = new SimpleDateFormat ( "yyyy년 MM월dd일");
 		 Date time = new Date();

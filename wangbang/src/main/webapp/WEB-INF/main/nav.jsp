@@ -32,7 +32,7 @@
                             <i class="icon-basket menu-icon"></i><span class="nav-text">숙박 & 쇼핑</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">숙박정보</a></li>
+                            <li><a href="../search/stay.do">숙박정보</a></li>
                             <li><a href="#">쇼핑명소</a></li>
                         </ul>
                     </li>

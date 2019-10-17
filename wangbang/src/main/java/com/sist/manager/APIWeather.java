@@ -23,7 +23,7 @@ public class APIWeather {
 	public static int INDENT = 4;
 	public JSONArray APIWeather() throws  IOException, SAXException {
 		JSONArray arr = new JSONArray();
-		System.out.println("JSONArray APIWeather");
+		//System.out.println("JSONArray APIWeather");
     // public static void main(String[] args) throws IOException {
 		SimpleDateFormat day = new SimpleDateFormat ( "yyyyMMdd");		
 		SimpleDateFormat time = new SimpleDateFormat ( "HHmm");		

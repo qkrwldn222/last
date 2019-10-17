@@ -12,6 +12,7 @@ import com.sist.dao.RestMongDAO;
 import com.sist.manager.APIWeather;
 import com.sist.vo.ExperienceVO;
 import com.sist.vo.RestaurantVO;
+import com.sist.vo.StayVO;
 
 import java.util.*;
 
@@ -34,6 +35,7 @@ public class ExperienceController {
 					  vo.getAddr();
 					  vo.getUseperiod();
 					  vo.getDataSid();
+
 					  System.out.println("이미지값은?"+vo.getMainimgthumb());
 					  System.out.println(vo.getDataTitle());
 					  System.out.println(vo.getAddr());
@@ -51,50 +53,34 @@ public class ExperienceController {
 				main.realData(model);
 				return "search/experience_detail";
 			}
-/*			@RequestMapping("search/top_content.do")
-			public String weather(Model model) {
-				 JSONArray list = new JSONArray();
-				 list = dao.weather();
-				 org.json.JSONArray temp = (org.json.JSONArray) list.get(0);
-				 
-		        String SKY = "";
-				 for(int i = 0 ; i < temp.length(); i++ ){
-			        	JSONObject temp_i = (JSONObject)temp.get(i);
-			        	System.out.println("baseDate : "+temp_i.get("baseDate"));
-			        	System.out.println("fcstTime : "+temp_i.get("fcstTime"));
-			        	System.out.println("fcstValue : "+temp_i.get("fcstValue"));
-			        	System.out.println("nx : "+temp_i.get("nx"));
-			        	System.out.println("ny : "+temp_i.get("ny"));
-			        	System.out.println("category : "+temp_i.get("category"));
-			        	System.out.println("baseTime : "+temp_i.get("baseTime"));
-			        	System.out.println("fcstDate : "+temp_i.get("fcstDate"));
-			        	
-			        	String category = (String) temp_i.get("category");
-			        	//String fcstValue = Integer.toString((int) temp_i.get("fcstValue"));
-			        	int fcstValue = temp_i.getInt("fcstValue");
-			        	if(category.equals("SKY")){
-			        		if(fcstValue >= 0 && fcstValue <= 5){
-			        			SKY = "맑음";
-			        		} else if(fcstValue >=6 && fcstValue <= 8){
-			        			SKY ="구름많음";
-			        		} else {
-			        			SKY ="흐림";
-			        		}
-			        	}
-			        	if(category.equals("SKY")){
-			        		if(Integer.parseInt(fcstValue) >= 0 && Integer.parseInt(fcstValue) <= 5){
-			        			SKY = "맑음";
-			        		} else if(Integer.parseInt(fcstValue) >=6 && Integer.parseInt(fcstValue) <= 8){
-			        			SKY ="구름많음";
-			        		} else {
-			        			SKY ="흐림";
-			        		}
-			        	}
-			        } 
-				 System.out.println("oneki -- : " + list);
-				 model.addAttribute("SKY", SKY);
-				 System.out.println("스카이의값은"+SKY);
-				 model.addAttribute("list", list);
-				return "main";
+			
+			@RequestMapping("search/stay.do")
+			public String stay(Model model, String page) {
+				if(page==null) page="1";
+				List<StayVO> list = dao.stay_data(Integer.parseInt(page));
+				for(StayVO vo:list) {
+					vo.getMainimgthumb();
+					vo.getDataTitle();
+					vo.getPrice();
+					vo.getAddr();
+					vo.getDataSid();
+					vo.getDataContent();
+					//System.out.println("숙박이미지값은?"+vo.getMainimgthumb());
+					//System.out.println(vo.getDataTitle());
+					//System.out.println(vo.getPrice());
+					//System.out.println(vo.getAddr());
+					//System.out.println(vo.getDataSid());
+					//System.out.println(vo.getDataContent());
+				}
+				model.addAttribute("list", list);
+				main.realData(model);
+				return "search/stay";
+			}
+/*			@RequestMapping("search/stay_detail.do")
+			public String stay_detail(Model model, String dataSid) {
+				StayVO vo = dao.stay_detail(dataSid);
+				model.addAttribute("vo", vo);
+				main.realData(model);
+				return "search/stay_detail";
 			}*/
 }
