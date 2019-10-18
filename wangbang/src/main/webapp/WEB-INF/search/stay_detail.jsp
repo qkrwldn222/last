@@ -41,6 +41,42 @@
 		  </div>
 		</div>
 		</div>
+		             <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">사진 더보기</h4>
+                                <p class="text-muted"><code></code>
+                                </p>
+                                <div id="accordion-two" class="accordion">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1"><i class="fa" aria-hidden="true"></i>Photo One</h5>
+                                        </div>
+                                        <div id="collapseOne1" class="collapse show" data-parent="#accordion-two">
+                                            <div class="card-body"><img src="${vo.img1thumb}"></div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2"><i class="fa" aria-hidden="true"></i>Photo Two</h5>
+                                        </div>
+                                        <div id="collapseTwo2" class="collapse" data-parent="#accordion-two">
+                                            <div class="card-body"><img src="${vo.img2thumb}"></div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree3" aria-expanded="false" aria-controls="collapseThree3"><i class="fa" aria-hidden="true"></i>Photo Three</h5>
+                                        </div>
+                                        <div id="collapseThree3" class="collapse" data-parent="#accordion-two">
+                                            <div class="card-body"><img src="${vo.img3thumb}"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 		</div>
+
 </body>
 </html>

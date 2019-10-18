@@ -56,31 +56,32 @@ public class ExperienceController {
 			
 			@RequestMapping("search/stay.do")
 			public String stay(Model model, String page) {
-				if(page==null) page="1";
-				List<StayVO> list = dao.stay_data(Integer.parseInt(page));
-				for(StayVO vo:list) {
-					vo.getMainimgthumb();
-					vo.getDataTitle();
-					vo.getPrice();
-					vo.getAddr();
-					vo.getDataSid();
-					vo.getDataContent();
-					//System.out.println("숙박이미지값은?"+vo.getMainimgthumb());
-					//System.out.println(vo.getDataTitle());
-					//System.out.println(vo.getPrice());
-					//System.out.println(vo.getAddr());
-					//System.out.println(vo.getDataSid());
-					//System.out.println(vo.getDataContent());
+				   if(page==null) page="1";
+				   List<StayVO> list = dao.stay_data(Integer.parseInt(page));
+				   System.out.println("컨트롤러의 stay리스트의값은?"+list);
+				  for(StayVO vo:list) {
+					  vo.getMainimgthumb();
+					  vo.getDataTitle();
+					  vo.getAddr();
+					  vo.getPrice();
+					  vo.getDataSid();
+					  vo.getImg1thumb();
+					  vo.getImg2thumb();
+					  vo.getImg3thumb();
+					  System.out.println("이미지1"+vo.getImg1thumb());
+					  System.out.println("이미지2"+vo.getImg2thumb());
+					  System.out.println("이미지3"+vo.getImg3thumb());
+				  }
+				  model.addAttribute("list", list);
+				  main.realData(model);
+				  return "search/stay";
 				}
-				model.addAttribute("list", list);
-				main.realData(model);
-				return "search/stay";
-			}
-/*			@RequestMapping("search/stay_detail.do")
+			@RequestMapping("search/stay_detail.do")
 			public String stay_detail(Model model, String dataSid) {
 				StayVO vo = dao.stay_detail(dataSid);
 				model.addAttribute("vo", vo);
 				main.realData(model);
 				return "search/stay_detail";
-			}*/
+			}
+
 }

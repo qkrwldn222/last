@@ -43,14 +43,15 @@ public class ExperienceRestController {
 		return json;
 	}
 	
+	//search/stay_data.do
 	@RequestMapping(value="search/stay_data.do",produces = "application/json; charset=utf8")
 	public String stay_data(String page){
-		System.out.println("==============1");
+		System.out.println("==========================1");
 		String json="";
 		if(Integer.parseInt(page)< 1) page="1";
 		List<StayVO> list = dao.stay_data(Integer.parseInt(page));
 		JSONArray arr = new JSONArray();
-		System.out.println("==============2");
+		System.out.println("==========================2");
 		for(StayVO vo:list){
 			JSONObject obj = new JSONObject();
 			obj.put("mainimgthumb", vo.getMainimgthumb());
@@ -59,10 +60,14 @@ public class ExperienceRestController {
 			obj.put("addr", vo.getAddr());
 			obj.put("price", vo.getPrice());
 			obj.put("dataSid", vo.getDataSid());
+			obj.put("img1thumb", vo.getImg1thumb());
+			obj.put("img2thumb", vo.getImg2thumb());
+			obj.put("img3thumb", vo.getImg3thumb());
 			arr.add(obj);
 		}
 		json = arr.toJSONString();
-		System.out.println("리액트ㅠ"+json);
+		System.out.println("이게나와야 된것"+json);
+		//System.out.println("리액트ㅠ"+json);
 		return json;
 	}
 }
