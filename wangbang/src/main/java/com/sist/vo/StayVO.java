@@ -24,4 +24,9 @@ public class StayVO {
 	   private String img2thumb;
 	   private String img3thumb;
 	   private String mainimgthumb;
+	   private String wgsx;
+	   private String wgsy;
+		  
+	   
+	   
 }

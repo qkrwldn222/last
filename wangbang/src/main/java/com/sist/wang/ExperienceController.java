@@ -65,6 +65,9 @@ public class ExperienceController {
 					  vo.getAddr();
 					  vo.getPrice();
 					  vo.getDataSid();
+					  vo.getTrafln();
+					  vo.getTraOut();
+					  System.out.println("¹ö½º"+vo.getTraOut());
 					  vo.getImg1thumb();
 					  vo.getImg2thumb();
 					  vo.getImg3thumb();
@@ -79,6 +82,11 @@ public class ExperienceController {
 			@RequestMapping("search/stay_detail.do")
 			public String stay_detail(Model model, String dataSid) {
 				StayVO vo = dao.stay_detail(dataSid);
+				System.out.println("!! getXgsx : " + vo.getXgsx());
+				System.out.println("!! getYgsx : " + vo.getYgsx());
+				System.out.println("!! getWgsx : " + vo.getWgsx());
+				System.out.println("!! getYgsx : " + vo.getWgsy());
+				
 				model.addAttribute("vo", vo);
 				main.realData(model);
 				return "search/stay_detail";
