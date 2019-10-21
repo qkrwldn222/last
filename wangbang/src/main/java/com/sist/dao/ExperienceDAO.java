@@ -14,6 +14,7 @@ import org.xml.sax.SAXException;
 import com.sist.manager.APIWeather;
 import com.sist.vo.ExperienceVO;
 import com.sist.vo.RestaurantVO;
+import com.sist.vo.ShoppingVO;
 import com.sist.vo.StayVO;
 import com.sist.vo.ThemeTourVO;
 
@@ -85,6 +86,31 @@ public class ExperienceDAO {
 			 StayVO vo = new StayVO();
 			 BasicQuery query = new BasicQuery("{dataSid:'"+dataSid+"'}"); //그냥 Query, 쿼리문 조건가져올때 BasicQuery
 			 vo=mt.findOne(query, StayVO.class,"stay");
+			 return vo;
+		 }
+		 //--------------------------------------------------------------------------------
+		 //총페이지 구하기
+		 public int shoppingTotalPage() {
+			 int total=0;
+			 Query query=new Query();
+			 int count=(int)mt.count(query, "Shopping");
+			 total=(int)(Math.ceil(count/8.0)); 
+			 return total;
+		 }
+		 public List<ShoppingVO> shopping_data(int page) {
+			 List<ShoppingVO> list = new ArrayList<ShoppingVO>();
+			 int rowSize=8;
+			 int skip = (page * rowSize) - rowSize;
+			 Query query = new Query();
+			 query.with(new Sort(Sort.Direction.ASC,"dataSid"));// dataSid를 정렬해서 가져오겠다.
+			 query.skip(skip).limit(rowSize);//skip 버리고 limit최대치
+			 list = mt.find(query, ShoppingVO.class,"Shopping");// find = select , findOne = selectOne(하나만가져올때)
+			 return list;
+		 }
+		 public ShoppingVO shopping_detail(String dataSid) {
+			 ShoppingVO vo = new ShoppingVO();
+			 BasicQuery query = new BasicQuery("{dataSid:'"+dataSid+"'}"); //그냥 Query, 쿼리문 조건가져올때 BasicQuery
+			 vo=mt.findOne(query, ShoppingVO.class,"Shopping");
 			 return vo;
 		 }
 }

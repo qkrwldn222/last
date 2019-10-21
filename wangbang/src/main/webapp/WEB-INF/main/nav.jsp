@@ -33,7 +33,7 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="../search/stay.do">숙박정보</a></li>
-                            <li><a href="#">쇼핑명소</a></li>
+                            <li><a href="../search/shopping.do">쇼핑명소</a></li>
                         </ul>
                     </li>
                     <li>

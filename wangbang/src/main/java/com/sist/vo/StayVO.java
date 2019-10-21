@@ -26,7 +26,5 @@ public class StayVO {
 	   private String mainimgthumb;
 	   private String wgsx;
 	   private String wgsy;
-		  
-	   
-	   
+ 
 }

@@ -32,7 +32,7 @@ public class APITT {
 	}
 	public static List<String> ExList() throws IOException, SAXException {
 		List<String> list = new ArrayList<String>();
-		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/6260000/BusanTourInfoService/getExperienceTourList"); 
+		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/6260000/BusanTourInfoService/getShoppingAttrList"); 
 		urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8")+ "=%2Bcd%2BbGwLGvt2lmb1xThNt2jcw19ri%2Bpoy%2FCodf1Tt%2BCtJJ8EidfTuhWHGHpz7Ds55aTZFVHSInEXoonX1F%2FL0A%3D%3D");																																 
 		urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("350", "UTF-8")); 
 		urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
@@ -88,7 +88,7 @@ public void ExDetail(List<String> list) throws IOException, SAXException {
 	 JSONArray arr = new JSONArray();
 	JSONArray Array = new JSONArray();
 		for(String no:list) {
-		       StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/6260000/BusanTourInfoService/getExperienceTourDetail"); /*URL*/
+		       StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/6260000/BusanTourInfoService/getShoppingAttrDetail"); /*URL*/
 		           urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=%2Bcd%2BbGwLGvt2lmb1xThNt2jcw19ri%2Bpoy%2FCodf1Tt%2BCtJJ8EidfTuhWHGHpz7Ds55aTZFVHSInEXoonX1F%2FL0A%3D%3D"); /*Service Key*/ 
 		           urlBuilder.append("&" + URLEncoder.encode("data_sid","UTF-8") + "=" + URLEncoder.encode(no, "UTF-8")); 
 		           URL url = new URL(urlBuilder.toString());
@@ -119,7 +119,7 @@ public void ExDetail(List<String> list) throws IOException, SAXException {
 		            arr.put(jsonObject5);
 			   }
 			   try {
-		           FileWriter file = new FileWriter("c:\\data3\\Ex.json");
+		           FileWriter file = new FileWriter("c:\\data3\\Shopping.json");
 		           file.write(arr.toString());
 		           file.flush();
 		           file.close();

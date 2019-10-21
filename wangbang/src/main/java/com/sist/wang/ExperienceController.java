@@ -12,6 +12,7 @@ import com.sist.dao.RestMongDAO;
 import com.sist.manager.APIWeather;
 import com.sist.vo.ExperienceVO;
 import com.sist.vo.RestaurantVO;
+import com.sist.vo.ShoppingVO;
 import com.sist.vo.StayVO;
 
 import java.util.*;
@@ -23,7 +24,7 @@ public class ExperienceController {
 	
 	@Autowired
 	private MainController main;
-
+//Ã¼Çè
 			@RequestMapping("search/experience.do")
 			public String ex(Model model, String page) {
 				   if(page==null) page="1";
@@ -53,7 +54,7 @@ public class ExperienceController {
 				main.realData(model);
 				return "search/experience_detail";
 			}
-			
+//¼÷¹Ú
 			@RequestMapping("search/stay.do")
 			public String stay(Model model, String page) {
 				   if(page==null) page="1";
@@ -91,5 +92,33 @@ public class ExperienceController {
 				main.realData(model);
 				return "search/stay_detail";
 			}
-
+//¼îÇÎ
+			@RequestMapping("search/shopping.do")
+			public String shopping(Model model, String page) {
+				if(page==null) page="1";
+				List<ShoppingVO> list = dao.shopping_data(Integer.parseInt(page));
+				for(ShoppingVO vo:list) {
+					vo.getMainimgthumb();
+					vo.getDataTitle();
+					vo.getAddr();
+					vo.getPrice();
+					vo.getDataSid();
+					vo.getTime();
+					vo.getTrafln();
+					vo.getTraOut();
+					vo.getImg1thumb();
+					vo.getImg2thumb();
+					vo.getImg3thumb();
+				}
+				model.addAttribute("list", list);
+				main.realData(model);
+				return "search/shopping";
+			}
+			@RequestMapping("search/shopping_detail.do")
+			public String shopping_detail(Model model, String dataSid) {
+				ShoppingVO vo = dao.shopping_detail(dataSid);
+				model.addAttribute("vo", vo);
+				main.realData(model);
+				return "search/shopping_detail";
+			}
 }

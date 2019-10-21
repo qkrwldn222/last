@@ -103,7 +103,7 @@
                                 <h4 class="card-title"><i class="fa fa-map-marker" ></i>&nbsp;&nbsp;오시는 길&nbsp;&nbsp;&nbsp;</h4>
                             </ul>
                       	   <!-- 지도 -->
-				           <div id="map" style="width:700px;height:600px;"></div> 
+				           <div id="map" style="width:auto; height:600px;"></div>
 <!-- 				           <div style="height: 100%; width: 100%">
 				           	<div id="map"></div>
 				           </div> -->
