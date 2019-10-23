@@ -15,6 +15,6 @@ public class BoardVO {
 	private String dbday;
 	private int hit;
 	private String id;
-	
+	private int repl;
 	
 }

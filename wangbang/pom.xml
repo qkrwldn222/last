@@ -381,7 +381,7 @@
          <artifactId>kkma</artifactId>
          <version>1.0</version>
          <scope>system</scope>
-         <systemPath>C:\Users\sist195\Desktop\recommend\src\main\webapp\WEB-INF\lib\org.snu.ids.ha.jar</systemPath>
+         <systemPath>C:\last\wangbang\src\main\webapp\WEB-INF\lib\org.snu.ids.ha.jar</systemPath>
       </dependency> 
 		<!-- 
 		   jaxb-core
