@@ -87,8 +87,33 @@ public class RestMongDAO {
 		 TouristattrVO vo = new TouristattrVO();
 		 BasicQuery query = new BasicQuery("{dataSid:'"+dataSid+"'}");
 		 vo=mt.findOne(query, TouristattrVO.class,"TouristAttr");
-		 
 		 return vo;
 	 }
+	 public List<RestaurantVO> restSearchAll(String name){
+		 List<RestaurantVO> list = new ArrayList<RestaurantVO>();
+		 BasicQuery query = new BasicQuery("{$and : [{ info : {$regex:'.*"+name+"'}},{ dataTitle : {$regex:'.*"+name+"'}}]}");
+		 list = mt.find(query, RestaurantVO.class,"Restaurant");
+		 System.out.println("추천 정보갯수:"+list.size());
+		 return list;
+	 }
+	 public List<TouristattrVO> tourSearchAll(String name){
+		 
+		 List<TouristattrVO> list = new ArrayList<TouristattrVO>();
+		 try{
+		 BasicQuery query = new BasicQuery("{$and : [{ info : {$regex:'.*"+name+"'}},{ dataTitle : {$regex:'.*"+name+"'}}]}");
+		 list = mt.find(query, TouristattrVO.class,"Touristattr");
+		 System.out.println("추천 정보갯수:"+list.size());
+		 }catch(Exception ex){ex.printStackTrace();}
+		 return list;
+	 }
+	 public List<ThemeTourVO> spotSearchAll(String name){
+		 List<ThemeTourVO> list = new ArrayList<ThemeTourVO>();
+		 BasicQuery query = new BasicQuery("{$and : [{ info : {$regex:'.*"+name+"'}},{ dataTitle : {$regex:'.*"+name+"'}}]}");
+		 list = mt.find(query, ThemeTourVO.class,"ThemeTour");
+		 System.out.println("추천 정보갯수:"+list.size());
+		 return list;
+	 }
+	 
+	 
 
 }

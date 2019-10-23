@@ -8,14 +8,14 @@
 		    pStart IN NUMBER,
 		    pEnd IN NUMBER,
 		    pResult OUT SYS_REFCURSOR 
-		)
+		) 
    -->
   <resultMap type="BoardVO" id="boardMap">
     <result property="no" column="no"/>
-    <result property="id" column="id"/>
+    <result property="name" column="name"/>
     <result property="subject" column="subject"/>
     <result property="content" column="content"/>
-    <result property="dbday" column="dbday"/>
+    <result property="regdate" column="regdate"/>
     <result property="hit" column="hit"/>
   </resultMap>
   <parameterMap type="hashmap" id="boardListMap">
@@ -27,12 +27,27 @@
     {CALL s_board_list(?,?,?)}
   </select>
   <!-- 
-  
      CREATE OR REPLACE PROCEDURE board_total(
        pTotal OUT NUMBER
      )
-     
    -->
+   
+   <!-- breplyListData -->
+     <resultMap type="BreplyVO" id="breplyMap">
+	    <result property="rno" column="rno"/>
+	    <result property="bno" column="bno"/>
+	    <result property="content" column="content"/>
+	    <result property="regdate" column="regdate"/>
+	    <result property="rid" column="rid"/>
+	  </resultMap>
+	  <parameterMap type="hashmap" id="breplyListMap">
+	    <parameter property="pbno" mode="IN" javaType="java.lang.Integer"/>
+	    <parameter property="pResult" mode="OUT" jdbcType="CURSOR" resultMap="breplyMap"/>
+	  </parameterMap>
+	  <select id="breplyListData" parameterMap="breplyListMap" statementType="CALLABLE">
+	    {CALL s_breply_list(?,?)}
+	  </select>
+   
    <parameterMap type="hashmap" id="boardTotalMap">
      <parameter property="pTotal" mode="OUT" javaType="java.lang.Integer" jdbcType="INTEGER"/>
    </parameterMap>
@@ -40,13 +55,11 @@
      {CALL board_total(?)}
    </select>
    <!-- 
-   
       CREATE OR REPLACE PROCEDURE board_detail(
       pType board.no%TYPE,
       pNo board.no%TYPE,
       pResult OUT SYS_REFCURSOR
       )
-   
     -->
     <parameterMap type="hashmap" id="boardDetailMap">
       <parameter property="pType" mode="IN" javaType="java.lang.Integer"/>
@@ -66,13 +79,12 @@
        )
      -->
      <parameterMap type="hashmap" id="boardInsertMap">
-       <parameter property="pName" mode="IN" javaType="java.lang.String"/>
+       <parameter property="pid" mode="IN" javaType="java.lang.String"/>
        <parameter property="pSubject" mode="IN" javaType="java.lang.String"/>
        <parameter property="pContent" mode="IN" javaType="java.lang.String"/>
-       <parameter property="pPwd" mode="IN" javaType="java.lang.String"/>
      </parameterMap>
      <select id="boardInsert" parameterMap="boardInsertMap" statementType="CALLABLE">
-       {CALL board_insert(?,?,?,?)}
+       {CALL s_board_insert(?,?,?)}
      </select>
      <!-- 
         CREATE OR REPLACE PROCEDURE board_update(
@@ -104,11 +116,11 @@
        -->
        <parameterMap type="hashmap" id="boardDeleteMap">
         <parameter property="pNo" mode="IN" javaType="java.lang.Integer"/>
-        <parameter property="pPwd" mode="IN" javaType="java.lang.String"/>
+        <parameter property="pid" mode="IN" javaType="java.lang.String"/>
         <parameter property="pResult" mode="OUT" javaType="java.lang.String" jdbcType="VARCHAR"/>
       </parameterMap>
       <select id="boardDelete" parameterMap="boardDeleteMap" statementType="CALLABLE">
-        {CALL board_delete(?,?,?)}
+        {CALL s_board_delete(?,?,?)}
       </select>
        <!-- 
           CREATE OR REPLACE PROCEDURE board_find(
