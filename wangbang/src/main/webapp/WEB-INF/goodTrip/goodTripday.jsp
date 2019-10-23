@@ -17,6 +17,9 @@
 	padding: 10px;
 	font-size: 15px;
 }
+#weatherPrint .beforeDow {
+	background-color: #ebebeb;
+}
 #wdetail tr td {
 	border: 0px;
 }
@@ -24,6 +27,9 @@
 	padding: 3px;
 	font-size: 18px;
 	width: 14%;
+}
+#wdetail .beforeDow {
+	background-color: #ebebeb;
 }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js" ></script>
@@ -62,28 +68,25 @@ $(function(){
 		<h4 class="m-0 font-weight-bold text-secondary">이번 주 부산 날씨</h4><br/>
 		<table class="table" id="weatherPrint" >
 			<tr>
-				<c:forEach var="weather" items="${weathers }">
-					<td class="text-center" >
+				<c:forEach var="weather" items="${weathers }" varStatus="s" >
+					<td class="text-center ${s.index<dow-1?'beforeDow':'' }" >
 						${weather.date }
 					</td>
 				</c:forEach>
 			</tr>
 			<tr>
-				<c:forEach var="weather" items="${weathers }">
-					<td class="text-center" >
+				<c:forEach var="weather" items="${weathers }" varStatus="s" >
+					<td class="text-center ${s.index<dow-1?'beforeDow':'' }" >
 						<table class="table" id="wdetail" >
 							<tr>
-								<td class="text-center" >
+								<td class="text-center ${s.index<dow-1?'beforeDow':'' }" >
 									${weather.amTem }℃
 									&nbsp;&nbsp;/&nbsp;&nbsp;
 									${weather.pmTem }℃
 								</td>
 							</tr>
-							<%-- <tr>
-								<td class="text-center" >${weather.amRain }% / ${weather.pmRain }%</td>
-							</tr> --%>
 							<tr>
-								<td class="text-center" >
+								<td class="text-center ${s.index<dow-1?'beforeDow':'' }" >
 									<img src="${statueIcons[weather.amStatue] }" width="30px" height="30px" />
 									&nbsp;&nbsp;/&nbsp;&nbsp;
 									<img src="${statueIcons[weather.pmStatue] }" width="30px" height="30px" />
@@ -92,6 +95,30 @@ $(function(){
 						</table>
 					</td>
 				</c:forEach>
+			</tr>
+		</table>
+		<br> <hr/> <br>
+	</div>
+	<div class="container-fluid" >
+		<h4 class="m-0 font-weight-bold text-secondary">부산 최신소식</h4><br/>
+		<table class="table" >
+			<tr>
+				<th width="5%" class="text-center" >번호</th>
+				<th width="80%" class="text-center" >제목</th>
+				<th width="15%" class="text-center" >작성일</th>
+			</tr>
+			<c:forEach var="n" items="${nlist }" >
+				<tr>
+					<td class="text-center" >${n.no }</td>
+					<td class="text-left" ><a href="${n.link }" target="_blank" >${n.title }</a></td>
+					<td class="text-center" >${n.date }</td>
+				</tr>
+			</c:forEach>
+			<tr>
+				<td colspan="3" class="text-right">
+					<font color="darkgray" >기사 클릭 시 부산IN신문 홈페이지의 해당 기사로 연결됩니다.</font>
+					<a href="http://www.busaninnews.co.kr/news/articleList.html?page=1&total=343&sc_section_code=S1N3&sc_sub_section_code=S2N15&sc_serial_code=&sc_area=&sc_level=&sc_article_type=&sc_view_level=&sc_sdate=&sc_edate=&sc_serial_number=&sc_word=&sc_word2=&sc_andor=&sc_order_by=E&view_type=tm" target="_blank" >(기사 더보기)</a>
+				</td>
 			</tr>
 		</table>
 		<br> <hr/> <br>

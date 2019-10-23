@@ -25,6 +25,9 @@ public class GoodTripDAO {
 	@Autowired
 	private MongoTemplate mt;
 	
+	@Autowired
+	private GoodTripNewsManager news;
+	
 	public List<GTWeatherVO> findWeatherData() {
 		List<GTWeatherVO> list = new ArrayList<GTWeatherVO>();
 		
@@ -206,6 +209,24 @@ public class GoodTripDAO {
 	public CultureDetailVO getCultureDetail(String cate, String id) {
 		CultureDetailVO vo = mng.getDetail(cate, id);
 		return vo;
+	}
+	
+	public List<NewsVO> getNewsList() {
+		List<NewsVO> tmp = news.newsListData();
+		List<NewsVO> list = new ArrayList<NewsVO>();
+		for(int i = 0; i < 5; i++) {
+			list.add(tmp.get(i));
+		}		
+		return list;
+	}
+	
+	public int getDayOfWeekNum() {
+		int dow = 0;
+		Date today = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(today);
+		dow = cal.get(Calendar.DAY_OF_WEEK);
+		return dow;
 	}
 }
 

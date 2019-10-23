@@ -21,9 +21,14 @@ public class GoodTripController {
 		model.addAttribute("weathers", weathers);
 		Map<String, String> statueIcons = dao.statueFileName();
 		model.addAttribute("statueIcons", statueIcons);
+		int dow = dao.getDayOfWeekNum();
+		model.addAttribute("dow", dow);
 		
 		List<CultureVO> clist = dao.getCulturelist();
 		model.addAttribute("clist", clist);
+		
+		List<NewsVO> nlist = dao.getNewsList();
+		model.addAttribute("nlist", nlist);
 		
 		return "goodTrip/goodTripday";
 	}
