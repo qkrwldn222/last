@@ -119,6 +119,7 @@ public class GoodTripWeatherManager {
 		List<GTWeatherVO> list = new ArrayList<GTWeatherVO>();
 		Set<String> dateSet = new HashSet<String>();
 		
+		JSONArray wlist = new JSONArray();
 		JSONObject weather;
 		for(int i = 0; i < itemsArr.size(); i++) {
 			weather = (JSONObject)itemsArr.get(i);
@@ -127,64 +128,71 @@ public class GoodTripWeatherManager {
 			String date = fcstDate.toString();
 			Object fcstTime = weather.get("fcstTime");
 			String time = fcstTime.toString();
-			String str = date + "," + time;
 			
-			if((time.equals("0600") || time.equals("1500")) && !dateSet.contains(str))
-				dateSet.add(str);
+			if(!dateSet.contains(date))
+				dateSet.add(date);
+			
+			if(time.equals("0600") || time.equals("1500"))
+				wlist.add(weather);
 		}
 		
 		Iterator<String> it = dateSet.iterator();
 		while(it.hasNext()) {
 			GTWeatherVO vo = new GTWeatherVO();
-			StringTokenizer st = new StringTokenizer(it.next(), ",");
-			String date = st.nextToken();
-			String time = st.nextToken();
+			String date = it.next();
 			vo.setDate(date);
-			vo.setTime(time);
-			
 			list.add(vo);
 		}
 		
 		for(int i = 0; i < list.size(); i++) {
 			GTWeatherVO vo = list.get(i);
 			String iDate = vo.getDate();
-			String iTime = vo.getTime();
 			
-			String temperature = "";
-			String rain = "";
-			String statue = "";
+			String amTem = "";
+			String pmTem = "";
+			String amRain = "";
+			String pmRain = "";
+			String amStatue = "";
+			String pmStatue = "";
 			
 			JSONObject weather2;
-			for(int j = 0; j < itemsArr.size(); j++) {
-				weather2 = (JSONObject)itemsArr.get(j);
+			for(int j = 0; j < wlist.size(); j++) {
+				weather2 = (JSONObject)wlist.get(j);
 				String jDate = weather2.get("fcstDate").toString();
 				String jTime = weather2.get("fcstTime").toString();
 				String cate = weather2.get("category").toString();
 				
-				if(jDate.equals(iDate) && jTime.equals(iTime) && cateSet.contains(cate)) {
+				if(jDate.equals(iDate) && jTime.equals("0600") && cateSet.contains(cate)) {
 					if(cate.equals("TMN") || cate.equals("TMX"))
-						temperature = weather2.get("fcstValue").toString();
+						amTem = weather2.get("fcstValue").toString();
 					if(cate.equals("PTY"))
-						statue += weather2.get("fcstValue").toString();
+						amStatue += weather2.get("fcstValue").toString();
 					if(cate.equals("SKY"))
-						statue += "," + weather2.get("fcstValue").toString();
+						amStatue += "," + weather2.get("fcstValue").toString();
 					if(cate.equals("POP"))
-						rain = weather2.get("fcstValue").toString();
+						amRain = weather2.get("fcstValue").toString();
+				} else if (jDate.equals(iDate) && jTime.equals("1500") && cateSet.contains(cate)) {
+					if(cate.equals("TMN") || cate.equals("TMX"))
+						pmTem = weather2.get("fcstValue").toString();
+					if(cate.equals("PTY"))
+						pmStatue += weather2.get("fcstValue").toString();
+					if(cate.equals("SKY"))
+						pmStatue += "," + weather2.get("fcstValue").toString();
+					if(cate.equals("POP"))
+						pmRain = weather2.get("fcstValue").toString();
 				}
 			}
 			
-			vo.setTemperature(temperature);
-			vo.setRain(rain);
-			vo.setStatue(statue);
-			if(iTime.equals("0600"))
-				vo.setTime("AM");
-			else
-				vo.setTime("PM");
+			vo.setAmTem(amTem);
+			vo.setAmStatue(amStatue);
+			vo.setAmRain(amRain);
+			vo.setPmTem(pmTem);
+			vo.setPmStatue(pmStatue);
+			vo.setPmRain(pmRain);
 		}
 		
 		return list;
 	}
-	
 	
 	public List<GTWeatherVO> MiddleWeather() {
 		List<GTWeatherVO> list = new ArrayList<GTWeatherVO>();
@@ -196,40 +204,39 @@ public class GoodTripWeatherManager {
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
 		
+		String amTem = "";
+		String pmTem = "";
+		String amRain = "";
+		String pmRain = "";
+		String amStatue = "";
+		String pmStatue = "";
+		
 		for(int i = 3; i <= 7; i++) {
-			GTWeatherVO voAm = new GTWeatherVO();
-			GTWeatherVO voPm = new GTWeatherVO();
+			GTWeatherVO vo = new GTWeatherVO();
 			
 			cal.setTime(date);
 			cal.add(Calendar.DATE, i);
 			String dateStr = cal.get(Calendar.YEAR) + "" + (cal.get(Calendar.MONTH)+1) + "" + cal.get(Calendar.DATE);
-			voAm.setDate(dateStr);
-			voAm.setTime("AM");
-			voPm.setDate(dateStr);
-			voPm.setTime("PM");
+			vo.setDate(dateStr);
 			
 			// 기온
-			Object tamin = item2.get("taMin" + i);
-			Object tamax = item2.get("taMax" + i);
+			amTem = item2.get("taMin" + i).toString();
+			pmTem = item2.get("taMax" + i).toString();
 			// 강수확률
-			Object rnStAm  = item3.get("rnSt"+i+"Am");
-			Object rnStPm  = item3.get("rnSt"+i+"Pm");
+			amRain  = item3.get("rnSt"+i+"Am").toString();
+			pmRain  = item3.get("rnSt"+i+"Pm").toString();
 			//날씨예보
-			Object wfAm = item3.get("wf"+i+"Am");
-			Object wfPm = item3.get("wf"+i+"Pm");
+			amStatue = item3.get("wf"+i+"Am").toString();
+			pmStatue = item3.get("wf"+i+"Pm").toString();
 			
-			voAm.setTemperature(tamin.toString()+".0");
-			voAm.setRain(rnStAm.toString());
-			String wfa = wfMap.get(wfAm.toString());
-			voAm.setStatue(wfa);
+			vo.setAmTem(amTem);
+			vo.setAmStatue(wfMap.get(amStatue));
+			vo.setAmRain(amRain);
+			vo.setPmTem(pmTem);
+			vo.setPmStatue(wfMap.get(pmStatue));
+			vo.setPmRain(pmRain);
 			
-			voPm.setTemperature(tamax.toString()+".0");
-			voPm.setRain(rnStPm.toString());
-			String wfp = wfMap.get(wfPm.toString());
-			voPm.setStatue(wfp);
-			
-			list.add(voAm);
-			list.add(voPm);
+			list.add(vo);
 		}
 		
 		return list;

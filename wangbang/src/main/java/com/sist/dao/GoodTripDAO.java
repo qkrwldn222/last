@@ -1,14 +1,9 @@
 package com.sist.dao;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.MongoCursorNotFoundException;
+import com.mongodb.*;
 import com.sist.manager.*;
 import com.sist.vo.*;
 
-import java.text.SimpleDateFormat;
+import java.text.*;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -23,6 +18,10 @@ import org.springframework.stereotype.Repository;
 public class GoodTripDAO {
 	@Autowired
 	GoodTripWeatherManager mgr;
+	
+	@Autowired
+	GoodTripCultureMng mng;
+	
 	@Autowired
 	private MongoTemplate mt;
 	
@@ -35,7 +34,7 @@ public class GoodTripDAO {
 		cal.setTime(today);
 		String[] week = new String[7];
 		for(int i = 0; i < 6; i++) {
-			cal.add(Calendar.DATE, -i);
+			cal.add(Calendar.DATE, -1);
 			if(cal.get(Calendar.DAY_OF_WEEK)==1) 
 				break;
 		}
@@ -54,12 +53,52 @@ public class GoodTripDAO {
 			Criteria cri = new Criteria("date");
 			cri.is(w);
 			Query query = new Query(cri);
-			Sort sort = new Sort(Sort.Direction.ASC, "date", "time");
+			Sort sort = new Sort(Sort.Direction.ASC, "date");
 			query.with(sort);
 			
-			List<GTWeatherVO> tmp = mt.find(query, GTWeatherVO.class, "gtWeather");
-			list.add(tmp.get(0));
-			list.add(tmp.get(1));
+			GTWeatherVO tmp = mt.findOne(query, GTWeatherVO.class, "gtWeather");
+			list.add(tmp);
+		}
+		
+		for(int i = 0; i < list.size(); i++) {
+			GTWeatherVO vo = list.get(i);
+			
+			String monDate = vo.getDate();
+			StringBuilder sb = new StringBuilder("");
+			String sMon = monDate.substring(4, 6);
+			sb.append(sMon); sb.append("월 ");
+			String sDay = monDate.substring(6);
+			sb.append(sDay); sb.append("일 ");
+			switch (i) {
+				case 0:
+					sb.append("(일)"); break;
+				case 1:
+					sb.append("(월)"); break;
+				case 2:
+					sb.append("(화)"); break;
+				case 3:
+					sb.append("(수)"); break;
+				case 4:
+					sb.append("(목)"); break;
+				case 5:
+					sb.append("(금)"); break;
+				case 6:
+					sb.append("(토)"); break;
+			}
+			String lDate = sb.toString();
+			vo.setDate(lDate);
+			
+			String amTem = vo.getAmTem();
+			String pmTem = vo.getPmTem();
+			
+			if(amTem.contains(".")) {
+				amTem = amTem.substring(0, amTem.lastIndexOf("."));
+				vo.setAmTem(amTem);
+			}
+			if(pmTem.contains(".")) {
+				pmTem = pmTem.substring(0, pmTem.lastIndexOf("."));
+				vo.setPmTem(pmTem);
+			}
 		}
 		return list;
 	}
@@ -69,52 +108,70 @@ public class GoodTripDAO {
 		List<GTWeatherVO> mlist = mgr.MiddleWeather();
 		List<GTWeatherVO> flist = mgr.forecastSpace();
 		
-		for(GTWeatherVO vo : mlist) {
+		for(GTWeatherVO vo : flist) {
 			String date = vo.getDate();
-			String time = vo.getTime();
-			String temperature = vo.getTemperature();
-			String rain = vo.getRain();
-			String statue = vo.getStatue();
+			String amTem = vo.getAmTem();
+			String pmTem = vo.getPmTem();
+			String amRain = vo.getAmRain();
+			String pmRain = vo.getPmRain();
+			String amStatue = vo.getAmStatue();
+			String pmStatue = vo.getPmStatue();
 			
 			BasicDBObject searchQuery = new BasicDBObject();
 			searchQuery.put("date", date);
-			searchQuery.put("time", time);
 			
 			DBCursor cursor = collection.find(searchQuery);
 			
 			if(cursor.hasNext()) {
 				BasicDBObject oldQuery = (BasicDBObject)cursor.next();
 				BasicDBObject newQuery = new BasicDBObject();
-				newQuery.put("temperature", temperature);
-				newQuery.put("rain", rain);
-				newQuery.put("statue", statue);
-				BasicDBObject updateQuery = new BasicDBObject();
-				updateQuery.put("$set", newQuery);
-				collection.update(oldQuery, updateQuery);
+				boolean amCheck = false;
+				boolean pmCheck = false;
+				if(!amTem.equals("") && amTem!=null) {
+					amCheck = true;
+					newQuery.put("amTem", amTem);
+					newQuery.put("amRain", amRain);
+					newQuery.put("amStatue", amStatue);
+				}
+				if(!pmTem.equals("") && pmTem!=null) {
+					pmCheck = true;
+					newQuery.put("pmTem", pmTem);
+					newQuery.put("pmRain", pmRain);
+					newQuery.put("pmStatue", pmStatue);
+				}
+				if(amCheck || pmCheck) {
+					BasicDBObject updateQuery = new BasicDBObject();
+					updateQuery.put("$set", newQuery);
+					collection.update(oldQuery, updateQuery);
+				}
 			} else {
 				mt.insert(vo, "gtWeather");
 			}
 		}
 		
-		for(GTWeatherVO vo : flist) {
+		for(GTWeatherVO vo : mlist) {
 			String date = vo.getDate();
-			String time = vo.getTime();
-			String temperature = vo.getTemperature();
-			String rain = vo.getRain();
-			String statue = vo.getStatue();
+			String amTem = vo.getAmTem();
+			String pmTem = vo.getPmTem();
+			String amRain = vo.getAmRain();
+			String pmRain = vo.getPmRain();
+			String amStatue = vo.getAmStatue();
+			String pmStatue = vo.getPmStatue();
 			
 			BasicDBObject searchQuery = new BasicDBObject();
 			searchQuery.put("date", date);
-			searchQuery.put("time", time);
 			
 			DBCursor cursor = collection.find(searchQuery);
 			
 			if(cursor.hasNext()) {
 				BasicDBObject oldQuery = (BasicDBObject)cursor.next();
 				BasicDBObject newQuery = new BasicDBObject();
-				newQuery.put("temperature", temperature);
-				newQuery.put("rain", rain);
-				newQuery.put("statue", statue);
+				newQuery.put("amTem", amTem);
+				newQuery.put("pmTem", pmTem);
+				newQuery.put("amRain", amRain);
+				newQuery.put("pmRain", pmRain);
+				newQuery.put("amStatue", amStatue);
+				newQuery.put("pmStatue", pmStatue);
 				BasicDBObject updateQuery = new BasicDBObject();
 				updateQuery.put("$set", newQuery);
 				collection.update(oldQuery, updateQuery);
@@ -139,6 +196,16 @@ public class GoodTripDAO {
 		map.put("4,3", "../icons/weather-png/Umbrella.png"); // 소나기
 		map.put("4,4", "../icons/weather-png/Umbrella.png"); // 소나기
 		return map;
+	}
+		
+	public List<CultureVO> getCulturelist() {
+		List<CultureVO> list = mng.getList();
+		return list;
+	}
+	
+	public CultureDetailVO getCultureDetail(String cate, String id) {
+		CultureDetailVO vo = mng.getDetail(cate, id);
+		return vo;
 	}
 }
 

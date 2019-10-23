@@ -7,8 +7,10 @@ import lombok.Setter;
 @Setter
 public class GTWeatherVO {
 	private String date;
-	private String time;
-	private String temperature;
-	private String rain;
-	private String statue;
+	private String amTem;
+	private String pmTem;
+	private String amRain;
+	private String pmRain;
+	private String amStatue;
+	private String pmStatue;
 }

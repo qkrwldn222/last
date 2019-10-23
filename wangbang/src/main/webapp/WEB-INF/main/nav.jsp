@@ -47,10 +47,10 @@
                     </li> 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-plane menu-icon"></i> <span class="nav-text">이번 주는 어디?</span>
+                            <i class="icon-plane menu-icon"></i> <span class="nav-text">지금 부산은?</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="../goodTrip/goodTripday.do">이번 주는 어디?</a></li>
+                            <li><a href="../goodTrip/goodTripday.do">지금 부산은?</a></li>
                             <%-- <li><a href="./email-read.html">그래프~</a></li>
                             <li><a href="./email-compose.html">기타~</a></li> --%>
                         </ul>
