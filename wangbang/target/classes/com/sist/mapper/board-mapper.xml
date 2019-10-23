@@ -27,9 +27,11 @@
     {CALL s_board_list(?,?,?)}
   </select>
   <!-- 
+  
      CREATE OR REPLACE PROCEDURE board_total(
        pTotal OUT NUMBER
      )
+     
    -->
    <parameterMap type="hashmap" id="boardTotalMap">
      <parameter property="pTotal" mode="OUT" javaType="java.lang.Integer" jdbcType="INTEGER"/>
@@ -38,11 +40,13 @@
      {CALL board_total(?)}
    </select>
    <!-- 
+   
       CREATE OR REPLACE PROCEDURE board_detail(
       pType board.no%TYPE,
       pNo board.no%TYPE,
       pResult OUT SYS_REFCURSOR
       )
+   
     -->
     <parameterMap type="hashmap" id="boardDetailMap">
       <parameter property="pType" mode="IN" javaType="java.lang.Integer"/>

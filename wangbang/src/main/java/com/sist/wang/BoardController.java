@@ -2,6 +2,8 @@ package com.sist.wang;
 
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,4 +48,27 @@ public class BoardController {
 		model.addAttribute("page", page);
 		return "board/list";
 	}
+	
+	@RequestMapping("board/insert.do")
+	public String board_insert(){
+		return "board/insert";//forward => request
+	}
+	
+	@RequestMapping("board/insert_ok.do")
+	public String board_insert_ok(BoardVO vo,HttpSession session){
+		 
+		 String id=(String)session.getAttribute("id");
+		 dao.board_insert(vo,id);
+		 return "redirect:list.do";// sendRedirect
+		 // return "board/list";
+    }
+	
+/*	@RequestMapping("board/delete.do")
+	public String board_delete(int no,HttpSession session){
+		 
+		 String id=(String)session.getAttribute("id");
+		 boolean res=dao.board_delete(no,id);
+		 return "redirect:list.do";// sendRedirect
+		 // return "board/list";
+    }*/
 }

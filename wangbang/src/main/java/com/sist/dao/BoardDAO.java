@@ -4,26 +4,52 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.sist.vo.BoardVO;
+import com.sist.vo.BreplyVO;
 
 import java.util.*;
 
 public class BoardDAO extends SqlSessionDaoSupport{
-   public List<BoardVO> board_list(Map map)
-   {
+   
+	public List<BoardVO> board_list(Map map){
 	   List<BoardVO> list=new ArrayList<BoardVO>();
-	   /*int rowSize=10;
-	   int start=(page*rowSize)-(rowSize-1);
-	   int end=page*rowSize;
-	   Map map=new HashMap();
-	   map.put("pStart", start);
-	   map.put("pEnd", end);*/
-	   
+	   	   
 	   getSqlSession().update("boardListData",map);
 	   list=(List<BoardVO>)map.get("pResult");
 	   
 	   return list;
    }
+	
+	public List<BreplyVO> breply_list(Map map){
+		List<BreplyVO> list=new ArrayList<BreplyVO>();
+		
+		getSqlSession().update("breplyListData",map);
+		list=(List<BreplyVO>)map.get("pResult");
+		
+		return list;
+	}
    
+   public void board_insert(BoardVO vo,String id){
+	   Map map=new HashMap();
+	   map.put("pid", id);
+	   map.put("pSubject", vo.getSubject());
+	   map.put("pContent", vo.getContent());
+	   
+	   
+	   getSqlSession().update("boardInsert",map);
+   }
+   
+   //boardDelete
+   public boolean board_delete(int no,String id){
+	   boolean bCheck=false;
+	   Map map=new HashMap();
+	   map.put("pNo", no);
+	   map.put("pid", id);
+	   
+	   getSqlSession().update("boardDelete",map);
+	   String result=(String)map.get("pResult");
+	   bCheck=Boolean.parseBoolean(result);
+	   return bCheck;
+   }
    /*public int board_total()
    {
 	   Map map=new HashMap();

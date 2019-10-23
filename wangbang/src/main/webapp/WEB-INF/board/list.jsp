@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,6 +11,27 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.').click(function(){
+		if($('#select1').text()=='' || $('#select2').text()==''){
+			alert("위에서부터 순서대로 지정해주세요");
+		}else{
+			var area=$('#select2_').attr("title");
+			$.ajax({
+				type:'post',
+				url:'../reserve/cheif.do',
+				data:{area:area},
+				success:function(response){
+					$('#print').html(response);
+				}
+			});
+		}
+	});
+});
+
+</script>
 </head>
 <body>
 
@@ -34,6 +56,7 @@
 							console.log(response.data);
 						}
 					)
+					
 				}
 				handleClickNew(){
 					this.setState({statetype:'new'});
@@ -51,18 +74,22 @@
 							<td style={{"height":"41px"}}>{m.subject }</td>
 							<td style={{"height":"41px"}}>{m.dbday }</td>
 							<td style={{"height":"41px"}}>{m.id }</td>
-							<td style={{"height":"41px"}}>{m.no!=0?m.hit:"" }</td>
+							<td style={{"height":"41px"}}>{m.repl!=-1?m.repl:""}</td>
 						</tr>					
 					)	
 					
 					if(this.state.statetype=='0'){
 						var cls=<BoardDefault />;
+						
 					}else if(this.state.statetype=='new'){
 						var cls=<Boardnew />;
+						
 					}else{
 						var cls=<BoardDetail data_detail={this.state.data_detail} />;
+						
 					}
 					console.log(this.state.statetype);
+
 					return(	
 	<div className="row">
 		<div className="col-6" >
@@ -84,7 +111,7 @@
 									<th width="400px">제목</th>
 									<th>날짜</th>
 									<th>id</th>
-									<th>조회수</th>
+									<th>댓글수</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -101,7 +128,11 @@
 				</div>
 			</div>
 		</div>
+		
+		
 	</div>
+	
+
 					)
 				}
 				componentDidMount(){	//
@@ -112,12 +143,12 @@
 			render(){
 				return(
 <div className="container">
-     <h3 className="text-center">content</h3>
+     <h4>content</h4>
      <div className="row">
        <table className="table">
         <tr>
          <th width="20%" className="text-center bg-secondary text-white">번호</th>
-         <td width="30%" className="text-center">{this.props.data_detail.no}</td>
+         <td width="30%" className="text-center no">{this.props.data_detail.no}</td>
          <th width="20%" className="text-center bg-secondary text-white">작성일</th>
          <td width="30%" className="text-center">{this.props.data_detail.dbday}</td>
         </tr>
@@ -129,18 +160,24 @@
         </tr>
         <tr>
          <th width="20%" className="text-center bg-secondary text-white">제목</th>
-         <td colspan="3" className="text-left">{this.props.data_detail.subject}</td>
+         <td colSpan="3" className="text-left">{this.props.data_detail.subject}</td>
         </tr>
         <tr>
-          <td colspan="4" valign="top" height="200" className="text-left">
+          <td colSpan="4" valign="top" height="200" className="text-left">
            <pre style={{"background-color":"white","white-space":"pre-wrap"}}>{this.props.data_detail.content}</pre>
           </td>
         </tr>
         <tr>
-          <td colSpan="4" className="text-center">
-           <a href="#" className="btn btn-xs btn-success">수정</a>
-           <a href="#" className="btn btn-xs btn-info">삭제</a>
-           <a href="#" className="btn btn-xs btn-warning">처음으로</a>
+          <td colSpan="4" className="text-right">
+           <form method="post" action="../board/delete.do">
+				<input type="submit" value="삭제" className="btn btn-xs btn-danger"/>
+				<input type="hidden" name="no" value={this.props.data_detail.no}/>
+			</form>
+            <form method="post" action="../board/update.do">
+				<input type="submit" value="수정" className="btn btn-xs btn-success"/>
+				<input type="hidden" name="no" value={this.props.data_detail.no}/>
+			</form>
+			
           </td>
         </tr>
        </table>
@@ -163,11 +200,40 @@
 		class Boardnew extends React.Component{
 			render(){
 				return(
-					<div>new</div>
+			
+  <div className="container">
+   <h4>new content</h4>
+   <div className="row">
+     <form method="post" action="insert_ok.do">
+     <table className="table">
+      <tr>
+       <th width="15%" className="text-right bg-secondary">제목</th>
+       <td width="85%" className="text-left">
+         <input type="text" name="subject" size="100"/>
+       </td>
+      </tr>
+	  <br/>
+      <tr>
+       <th width="15%" className="text-right bg-secondary">내용</th>
+       <td width="85%" className="text-left">
+         <textarea rows="20" cols="100" name="content"></textarea>
+       </td>
+      </tr>
+      <tr>
+        <td colSpan="2" className="text-center">
+         <input type="submit" value="글쓰기" className="btn btn-xs btn-danger"/>
+         <input type="button" value="취소" className="btn btn-xs btn-primary"
+          onclick="javascript:history.back()"/>
+        </td>
+      </tr>
+     </table>
+     </form>
+   </div>
+  </div>
 				)
 			}
 		}
-
+			
 		ReactDOM.render(<BoardList />,document.getElementById('root'));
 		</script>
 
