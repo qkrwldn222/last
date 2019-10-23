@@ -12,7 +12,7 @@
    -->
   <resultMap type="BoardVO" id="boardMap">
     <result property="no" column="no"/>
-    <result property="name" column="name"/>
+    <result property="id" column="id"/>
     <result property="subject" column="subject"/>
     <result property="content" column="content"/>
     <result property="regdate" column="regdate"/>
@@ -32,7 +32,7 @@
      )
    -->
    
-   <!-- breplyListData -->
+   <!--  breplyListData
      <resultMap type="BreplyVO" id="breplyMap">
 	    <result property="rno" column="rno"/>
 	    <result property="bno" column="bno"/>
@@ -46,7 +46,7 @@
 	  </parameterMap>
 	  <select id="breplyListData" parameterMap="breplyListMap" statementType="CALLABLE">
 	    {CALL s_breply_list(?,?)}
-	  </select>
+	  </select> -->
    
    <parameterMap type="hashmap" id="boardTotalMap">
      <parameter property="pTotal" mode="OUT" javaType="java.lang.Integer" jdbcType="INTEGER"/>

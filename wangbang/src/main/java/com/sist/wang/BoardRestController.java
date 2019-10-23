@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.dao.BoardDAO;
 import com.sist.vo.BoardVO;
-import com.sist.vo.BreplyVO;
+
 
 @RestController
 public class BoardRestController {
@@ -72,7 +72,7 @@ public class BoardRestController {
 		   System.out.println(result);
 		   return result;
 	}
-	
+/*	
 	@RequestMapping(value="board/rlist_json.do", produces = "application/json; charset=utf8")
 	public String board_rlist_json(String bno){//
 		String result="";
@@ -96,7 +96,7 @@ public class BoardRestController {
 		result=arr.toJSONString();
 		System.out.println(result);
 		return result;
-	}
+	}*/
 	
 	@RequestMapping("board/delete.do")
 	public String board_delete_ok(int no,HttpSession session){

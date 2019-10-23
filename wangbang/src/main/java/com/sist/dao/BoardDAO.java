@@ -1,10 +1,11 @@
 package com.sist.dao;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
+
 import org.springframework.stereotype.Repository;
 
 import com.sist.vo.BoardVO;
-import com.sist.vo.BreplyVO;
+
 
 import java.util.*;
 
@@ -19,14 +20,7 @@ public class BoardDAO extends SqlSessionDaoSupport{
 	   return list;
    }
 	
-	public List<BreplyVO> breply_list(Map map){
-		List<BreplyVO> list=new ArrayList<BreplyVO>();
-		
-		getSqlSession().update("breplyListData",map);
-		list=(List<BreplyVO>)map.get("pResult");
-		
-		return list;
-	}
+
    
    public void board_insert(BoardVO vo,String id){
 	   Map map=new HashMap();
