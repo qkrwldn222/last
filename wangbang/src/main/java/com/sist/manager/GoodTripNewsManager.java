@@ -17,7 +17,7 @@ public class GoodTripNewsManager {
 	public List<NewsVO> newsListData() {
 		List<NewsVO> list=new ArrayList<NewsVO>();
 		try {
-			// ì—°ê²° 
+			// ¿¬°á 
 			int k=1;
 			for(int i = 1; i <= 5; i++) {
 				try {

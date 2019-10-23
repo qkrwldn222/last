@@ -27,31 +27,31 @@ public class GoodTripCultureMng {
 	Map<String, String> cateStr = new HashMap<String, String>();
 	
 	public GoodTripCultureMng() {
-		urlMap.put(1, "http://apis.data.go.kr/6260000/CultureInfoService/getFestivalList"); // ì¶•ì œ ëª©ë¡
-		urlMap.put(2, "http://apis.data.go.kr/6260000/CultureInfoService/getMusicalList"); // ì—°ê·¹/ë®¤ì§€ì»¬ ëª©ë¡
-		urlMap.put(3, "http://apis.data.go.kr/6260000/CultureInfoService/getMusicDanceList"); // ìŒì•…/ë¬´ìš© ëª©ë¡
-		urlMap.put(4, "http://apis.data.go.kr/6260000/CultureInfoService/getExhibitList"); // ì „ì‹œ/í–‰ì‚¬ ëª©ë¡
+		urlMap.put(1, "http://apis.data.go.kr/6260000/CultureInfoService/getFestivalList"); // ÃàÁ¦ ¸ñ·Ï
+		urlMap.put(2, "http://apis.data.go.kr/6260000/CultureInfoService/getMusicalList"); // ¿¬±Ø/¹ÂÁöÄÃ ¸ñ·Ï
+		urlMap.put(3, "http://apis.data.go.kr/6260000/CultureInfoService/getMusicDanceList"); // À½¾Ç/¹«¿ë ¸ñ·Ï
+		urlMap.put(4, "http://apis.data.go.kr/6260000/CultureInfoService/getExhibitList"); // Àü½Ã/Çà»ç ¸ñ·Ï
 		
-		urlMap.put(5, "http://apis.data.go.kr/6260000/CultureInfoService/getFestivalDetail"); // ì¶•ì œ ìƒì„¸ë³´ê¸°
-		urlMap.put(6, "http://apis.data.go.kr/6260000/CultureInfoService/getMusicalDetail"); // ì—°ê·¹/ë®¤ì§€ì»¬ ìƒì„¸ë³´ê¸°
-		urlMap.put(7, "http://apis.data.go.kr/6260000/CultureInfoService/getMusicDanceDetail"); // ìŒì•…/ë¬´ìš© ìƒì„¸ë³´ê¸°
-		urlMap.put(8, "http://apis.data.go.kr/6260000/CultureInfoService/getExhibitDetail"); // ì „ì‹œ/í–‰ì‚¬ ìƒì„¸ë³´ê¸°
+		urlMap.put(5, "http://apis.data.go.kr/6260000/CultureInfoService/getFestivalDetail"); // ÃàÁ¦ »ó¼¼º¸±â
+		urlMap.put(6, "http://apis.data.go.kr/6260000/CultureInfoService/getMusicalDetail"); // ¿¬±Ø/¹ÂÁöÄÃ »ó¼¼º¸±â
+		urlMap.put(7, "http://apis.data.go.kr/6260000/CultureInfoService/getMusicDanceDetail"); // À½¾Ç/¹«¿ë »ó¼¼º¸±â
+		urlMap.put(8, "http://apis.data.go.kr/6260000/CultureInfoService/getExhibitDetail"); // Àü½Ã/Çà»ç »ó¼¼º¸±â
 		
 		cateMap.put("kpu0403", 5);
 		cateMap.put("kpu0402_1", 6);
 		cateMap.put("kpu0402_3", 7);
 		cateMap.put("kpu0402_2", 8);
 		
-		cateStr.put("kpu0403", "ì¶•ì œ");
-		cateStr.put("kpu0402_1", "ì—°ê·¹/ë®¤ì§€ì»¬");
-		cateStr.put("kpu0402_3", "ìŒì•…/ë¬´ìš©");
-		cateStr.put("kpu0402_2", "ì „ì‹œ/í–‰ì‚¬");
+		cateStr.put("kpu0403", "ÃàÁ¦");
+		cateStr.put("kpu0402_1", "¿¬±Ø/¹ÂÁöÄÃ");
+		cateStr.put("kpu0402_3", "À½¾Ç/¹«¿ë");
+		cateStr.put("kpu0402_2", "Àü½Ã/Çà»ç");
 	}
 	
 	public JSONObject returnDetail(String categoryCode1, String dataSid) {
 		JSONObject obj = null;
 		
-		// ê°’ ì´ˆê¸°í™”
+		// °ª ÃÊ±âÈ­
 		String servicekey = "pfpbjJdxpHOqhhSt2onlislGkQtMAlEPhRhheTbQVEU%2BxzS81uv15IKOONJlarc07hn291SEM0vs%2BOf1bQpBZQ%3D%3D";
 		String data_sid = dataSid;
 		int iUrl = cateMap.get(categoryCode1);
@@ -62,7 +62,7 @@ public class GoodTripCultureMng {
 		urlBuild.append("&data_sid=" + data_sid);
 		urlBuild.append("&_type=" + type);
 		
-		// JSON íŒŒì‹±
+		// JSON ÆÄ½Ì
 		try {
 			URL url = new URL(urlBuild.toString());
 			StringBuffer sb = new StringBuffer();
@@ -91,7 +91,7 @@ public class GoodTripCultureMng {
 	
 	public JSONArray returnArr(int key) {
 		JSONArray arr = new JSONArray();
-		// ê°’ ì´ˆê¸°í™”
+		// °ª ÃÊ±âÈ­
 		String date_yyyymm = new SimpleDateFormat("yyyyMM").format(new Date());
 		String servicekey = "pfpbjJdxpHOqhhSt2onlislGkQtMAlEPhRhheTbQVEU%2BxzS81uv15IKOONJlarc07hn291SEM0vs%2BOf1bQpBZQ%3D%3D";
 		String numOfRows = "250";
@@ -103,7 +103,7 @@ public class GoodTripCultureMng {
 		urlBuild.append("&numOfRows=" + numOfRows);
 		urlBuild.append("&_type=" + type);
 		
-		// JSON íŒŒì‹±
+		// JSON ÆÄ½Ì
 		try {
 			URL url = new URL(urlBuild.toString());
 			StringBuffer sb = new StringBuffer();
@@ -189,7 +189,7 @@ public class GoodTripCultureMng {
 				if(obj.get("dataContent")!=null)
 					dataContent = obj.get("dataContent").toString();
 				else
-					dataContent = "(ìƒì„¸ì„¤ëª… ì—†ìŒ)";
+					dataContent = "(»ó¼¼¼³¸í ¾øÀ½)";
 				startDate = obj.get("startDate").toString();
 				endDate = obj.get("endDate").toString();
 				categoryCode1 = obj.get("categoryCode1").toString();

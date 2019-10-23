@@ -31,7 +31,7 @@ public class GoodTripDAO {
 	public List<GTWeatherVO> findWeatherData() {
 		List<GTWeatherVO> list = new ArrayList<GTWeatherVO>();
 		
-		// ì¼ì£¼ì¼ ë²”ìœ„ ì°¾ì•„ì˜¤ê¸°
+		// ÀÏÁÖÀÏ ¹üÀ§ Ã£¾Æ¿À±â
 		Date today = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(today);
@@ -51,7 +51,7 @@ public class GoodTripDAO {
 			cal.add(Calendar.DATE, 1);
 		}
 		
-		// ì¼ì£¼ì¼ì¹˜ ë°ì´í„° ê°€ì ¸ì˜¤ê¸°
+		// ÀÏÁÖÀÏÄ¡ µ¥ÀÌÅÍ °¡Á®¿À±â
 		for(String w : week) {
 			Criteria cri = new Criteria("date");
 			cri.is(w);
@@ -69,24 +69,24 @@ public class GoodTripDAO {
 			String monDate = vo.getDate();
 			StringBuilder sb = new StringBuilder("");
 			String sMon = monDate.substring(4, 6);
-			sb.append(sMon); sb.append("ì›” ");
+			sb.append(sMon); sb.append("¿ù ");
 			String sDay = monDate.substring(6);
-			sb.append(sDay); sb.append("ì¼ ");
+			sb.append(sDay); sb.append("ÀÏ ");
 			switch (i) {
 				case 0:
-					sb.append("(ì¼)"); break;
+					sb.append("(ÀÏ)"); break;
 				case 1:
-					sb.append("(ì›”)"); break;
+					sb.append("(¿ù)"); break;
 				case 2:
-					sb.append("(í™”)"); break;
+					sb.append("(È­)"); break;
 				case 3:
-					sb.append("(ìˆ˜)"); break;
+					sb.append("(¼ö)"); break;
 				case 4:
-					sb.append("(ëª©)"); break;
+					sb.append("(¸ñ)"); break;
 				case 5:
-					sb.append("(ê¸ˆ)"); break;
+					sb.append("(±İ)"); break;
 				case 6:
-					sb.append("(í† )"); break;
+					sb.append("(Åä)"); break;
 			}
 			String lDate = sb.toString();
 			vo.setDate(lDate);
@@ -186,18 +186,18 @@ public class GoodTripDAO {
 	
 	public Map<String, String> statueFileName() {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("0,1", "../icons/weather-png/Sun.png"); // ë§‘ìŒ
-		map.put("0,3", "../icons/weather-png/Cloud-Sun.png"); // êµ¬ë¦„ë§ìŒ
-		map.put("1,3", "../icons/weather-png/Cloud-Rain-Sun.png"); // êµ¬ë¦„ë§ê³  ë¹„
-		map.put("2,3", "../icons/weather-png/Cloud-Hail-Sun.png"); // êµ¬ë¦„ë§ê³  ë¹„/ëˆˆ
-		map.put("3,3", "../icons/weather-png/Cloud-Snow-Sun.png"); // êµ¬ë¦„ë§ê³  ëˆˆ
-		map.put("0,4", "../icons/weather-png/Cloud.png"); // íë¦¼
-		map.put("1,4", "../icons/weather-png/Cloud-Rain.png"); // íë¦¬ê³  ë¹„
-		map.put("2,4", "../icons/weather-png/Cloud-Hail.png"); // íë¦¬ê³  ë¹„/ëˆˆ
-		map.put("3,4", "../icons/weather-png/Cloud-Snow.png"); // íë¦¬ê³  ëˆˆ
-		map.put("4,0", "../icons/weather-png/Umbrella.png"); // ì†Œë‚˜ê¸°
-		map.put("4,3", "../icons/weather-png/Umbrella.png"); // ì†Œë‚˜ê¸°
-		map.put("4,4", "../icons/weather-png/Umbrella.png"); // ì†Œë‚˜ê¸°
+		map.put("0,1", "../icons/weather-png/Sun.png"); // ¸¼À½
+		map.put("0,3", "../icons/weather-png/Cloud-Sun.png"); // ±¸¸§¸¹À½
+		map.put("1,3", "../icons/weather-png/Cloud-Rain-Sun.png"); // ±¸¸§¸¹°í ºñ
+		map.put("2,3", "../icons/weather-png/Cloud-Hail-Sun.png"); // ±¸¸§¸¹°í ºñ/´«
+		map.put("3,3", "../icons/weather-png/Cloud-Snow-Sun.png"); // ±¸¸§¸¹°í ´«
+		map.put("0,4", "../icons/weather-png/Cloud.png"); // Èå¸²
+		map.put("1,4", "../icons/weather-png/Cloud-Rain.png"); // Èå¸®°í ºñ
+		map.put("2,4", "../icons/weather-png/Cloud-Hail.png"); // Èå¸®°í ºñ/´«
+		map.put("3,4", "../icons/weather-png/Cloud-Snow.png"); // Èå¸®°í ´«
+		map.put("4,0", "../icons/weather-png/Umbrella.png"); // ¼Ò³ª±â
+		map.put("4,3", "../icons/weather-png/Umbrella.png"); // ¼Ò³ª±â
+		map.put("4,4", "../icons/weather-png/Umbrella.png"); // ¼Ò³ª±â
 		return map;
 	}
 		

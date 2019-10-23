@@ -16,7 +16,7 @@ public class GoodTripController {
 	
 	@RequestMapping("goodTripday.do")
 	public String goodTrip_goodTripday(Model model) {
-		dao.newInsertAndUpdate(); // ë‚ ì”¨ ë°ì´í„° ì—…ë°ì´íŠ¸
+		dao.newInsertAndUpdate(); // ³¯¾¾ µ¥ÀÌÅÍ ¾÷µ¥ÀÌÆ®
 		List<GTWeatherVO> weathers = dao.findWeatherData();
 		model.addAttribute("weathers", weathers);
 		Map<String, String> statueIcons = dao.statueFileName();
@@ -56,25 +56,25 @@ public class GoodTripController {
 		sb.append("</tr>");
 		sb.append("<tr>");
 		sb.append("<td>");
-		sb.append("ìœ„ì¹˜ : " + vo.getPlace());
+		sb.append("À§Ä¡ : " + vo.getPlace());
 		sb.append("</td>"); // 53line
 		sb.append("<td>");
-		sb.append("ì „í™” : " + vo.getTel());
+		sb.append("ÀüÈ­ : " + vo.getTel());
 		sb.append("</td>"); // 56line
 		sb.append("</tr>"); // 52line
 		sb.append("<tr>");
 		sb.append("<td colspan='2' >");
-		sb.append("ì‹œê°„ : " + vo.getTime());
+		sb.append("½Ã°£ : " + vo.getTime());
 		sb.append("</td>"); // 61line
 		sb.append("</tr>"); // 60line
 		sb.append("<tr>");
 		sb.append("<td colspan='2' >");
-		sb.append("êµí†µí¸ : " + vo.getTrafin());
+		sb.append("±³ÅëÆí : " + vo.getTrafin());
 		sb.append("</td>"); // 66line
 		sb.append("</tr>"); // 65line
 		sb.append("<tr>");
 		sb.append("<td colspan='2' >");
-		sb.append("ì‚¬ì´íŠ¸ : " + vo.getUserHomepage());
+		sb.append("»çÀÌÆ® : " + vo.getUserHomepage());
 		sb.append("</td>"); // 71line
 		sb.append("</tr>"); // 70line
 		sb.append("</table>"); // 39line

@@ -23,26 +23,26 @@ public class GoodTripWeatherManager {
 		cateSet.add("SKY");
 		cateSet.add("PTY");
 		
-		wfMap.put("ë§‘ìŒ", "0,1");
-		wfMap.put("êµ¬ë¦„ë§ìŒ", "0,3");
-		wfMap.put("êµ¬ë¦„ë§ê³  ë¹„", "1,3");
-		wfMap.put("êµ¬ë¦„ë§ê³  ëˆˆ", "3,3");
-		wfMap.put("êµ¬ë¦„ë§ê³  ë¹„/ëˆˆ", "2,3");
-		wfMap.put("êµ¬ë¦„ë§ê³  ëˆˆ/ë¹„", "2,3");
-		wfMap.put("íë¦¼", "0,4");
-		wfMap.put("íë¦¬ê³  ë¹„", "1,4");
-		wfMap.put("íë¦¬ê³  ëˆˆ", "3,4");
-		wfMap.put("íë¦¬ê³  ë¹„/ëˆˆ", "2,4");
-		wfMap.put("íë¦¬ê³  ëˆˆ/ë¹„", "2,4");
+		wfMap.put("¸¼À½", "0,1");
+		wfMap.put("±¸¸§¸¹À½", "0,3");
+		wfMap.put("±¸¸§¸¹°í ºñ", "1,3");
+		wfMap.put("±¸¸§¸¹°í ´«", "3,3");
+		wfMap.put("±¸¸§¸¹°í ºñ/´«", "2,3");
+		wfMap.put("±¸¸§¸¹°í ´«/ºñ", "2,3");
+		wfMap.put("Èå¸²", "0,4");
+		wfMap.put("Èå¸®°í ºñ", "1,4");
+		wfMap.put("Èå¸®°í ´«", "3,4");
+		wfMap.put("Èå¸®°í ºñ/´«", "2,4");
+		wfMap.put("Èå¸®°í ´«/ºñ", "2,4");
 		
-		urlMap.put(1, "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData"); // ë™ë„¤ì˜ˆë³´
-		urlMap.put(2, "http://newsky2.kma.go.kr/service/MiddleFrcstInfoService/getMiddleTemperature"); // ì¤‘ê¸°ì˜ˆë³´ - ê¸°ì˜¨
-		urlMap.put(3, "http://newsky2.kma.go.kr/service/MiddleFrcstInfoService/getMiddleLandWeather"); // ì¤‘ê¸°ì˜ˆë³´ - ê¸°í›„
+		urlMap.put(1, "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData"); // µ¿³×¿¹º¸
+		urlMap.put(2, "http://newsky2.kma.go.kr/service/MiddleFrcstInfoService/getMiddleTemperature"); // Áß±â¿¹º¸ - ±â¿Â
+		urlMap.put(3, "http://newsky2.kma.go.kr/service/MiddleFrcstInfoService/getMiddleLandWeather"); // Áß±â¿¹º¸ - ±âÈÄ
 	}
 	
 	public JSONObject reJsonObj(int key) {
 		JSONObject obj = null;
-		// ê°’ ì´ˆê¸°í™”
+		// °ª ÃÊ±âÈ­
 		String day = new SimpleDateFormat("yyyyMMdd").format(new Date());
 		String servicekey = "pfpbjJdxpHOqhhSt2onlislGkQtMAlEPhRhheTbQVEU%2BxzS81uv15IKOONJlarc07hn291SEM0vs%2BOf1bQpBZQ%3D%3D";
 		String basedate = day;
@@ -86,7 +86,7 @@ public class GoodTripWeatherManager {
 			default:break;
 		}
 		
-		// JSON íŒŒì‹±
+		// JSON ÆÄ½Ì
 		try {
 			URL url = new URL(urlBuild.toString());
 			StringBuffer sb = new StringBuffer();
@@ -110,10 +110,10 @@ public class GoodTripWeatherManager {
 			
 		} catch (Exception ex) {}
 		
-		return obj; // itemsê¹Œì§€ ë¦¬í„´
+		return obj; // items±îÁö ¸®ÅÏ
 	}
 	
-	public List<GTWeatherVO> forecastSpace() { // ë™ë„¤ì˜ˆë³´
+	public List<GTWeatherVO> forecastSpace() { // µ¿³×¿¹º¸
 		JSONObject obj_items = reJsonObj(1);
 		JSONArray itemsArr = (JSONArray)obj_items.get("item");
 		List<GTWeatherVO> list = new ArrayList<GTWeatherVO>();
@@ -219,13 +219,13 @@ public class GoodTripWeatherManager {
 			String dateStr = cal.get(Calendar.YEAR) + "" + (cal.get(Calendar.MONTH)+1) + "" + cal.get(Calendar.DATE);
 			vo.setDate(dateStr);
 			
-			// ê¸°ì˜¨
+			// ±â¿Â
 			amTem = item2.get("taMin" + i).toString();
 			pmTem = item2.get("taMax" + i).toString();
-			// ê°•ìˆ˜í™•ë¥ 
+			// °­¼öÈ®·ü
 			amRain  = item3.get("rnSt"+i+"Am").toString();
 			pmRain  = item3.get("rnSt"+i+"Pm").toString();
-			//ë‚ ì”¨ì˜ˆë³´
+			//³¯¾¾¿¹º¸
 			amStatue = item3.get("wf"+i+"Am").toString();
 			pmStatue = item3.get("wf"+i+"Pm").toString();
 			
