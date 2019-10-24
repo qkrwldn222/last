@@ -24,7 +24,7 @@
                             <li><a href="../search/experience.do">체험여행</a></li>
                             <li><a href="#">도보여행</a></li>
                             <li><a href="../search/themetour.do">테마여행</a></li>
-                            <li><a href="../course/course_list.do">추천여행코스</a></li>
+                            <li><a href="#">추천여행코스</a></li>
                         </ul>
                     </li>
                     <li>

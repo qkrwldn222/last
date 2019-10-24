@@ -4,41 +4,113 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>원, 선, 사각형, 다각형 표시하기</title>
-    
+    <title>Insert title here</title>
+
 </head>
 <body>
-<div id="map" style="width:600px;height:600px;"></div>    
+<div class="row">
+   <div class="col-12">
+         <div class="card">
+            <div class="card-body">
+            <table>
+            <tr width=5% class="text-left" style="margin: 10px;">
+               <td label="숙박">
+               <!--    <h5>숙박&nbsp;</h5> -->
+               </td>
+               <th width=95% class="text-left">
+                  <input type="button" value="바다가보이는" class="btn btn-md btn-info" style="margin: 5px;">
+                  <input type="button" value="호텔" class="btn btn-md btn-info" style="margin: 5px;">
+                  <input type="button" value="야경" class="btn btn-md btn-info" style="margin: 5px;">
+                  <input type="button" value="시설이 좋은" class="btn btn-md btn-info" style="margin: 5px;">
+                  <input type="button" value="저렴한" class="btn btn-md btn-info" style="margin: 5px;">
+               </th>
+            </tr>
+            <tr width=5% class="text-left" style="margin: 10px;">
+               <td>
+                  <h5>맛집&nbsp;</h5>
+               </td>
+               <th width=95% class="text-left">
+                  <input type="button" value="고기" class="btn btn-md btn-info" style="margin: 5px;">
+                  <input type="button" value="해산물" class="btn btn-md btn-info" style="margin: 5px;">
+                   <input type="button" value="뷔페" class="btn btn-md btn-info" style="margin: 5px;">
+                  <input type="button" value="한식" class="btn btn-md btn-info" style="margin: 5px;">
+                  <input type="button" value="양식" class="btn btn-md btn-info" style="margin: 5px;">
+               </th>
+            </tr>
+            <tr width=5% class="text-left" style="margin: 10px;">
+               <td>
+                  <h5>관광&nbsp;</h5>
+               </td>
+              <th width=95% class="text-left">
+                  <input type="button" value="야경" class="btn btn-md btn-info" style="margin: 5px;">
+                  <input type="button" value="도보" class="btn btn-md btn-info" style="margin: 5px;">
+                  <input type="button" value="꼭 가야할 명소" class="btn btn-md btn-info" style="margin: 5px;">
+                  <input type="button" value="영화" class="btn btn-md btn-info" style="margin: 5px;">
+                  <input type="button" value="레저스포츠" class="btn btn-md btn-info" style="margin: 5px;">
+              </th>
+            </tr>
+         </table>
+               <div class="table-responsive">
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+<div class="row">
+   <div class="col-6">
+      <div class="card">
+         <div class="card-body">
+            <div id="map" style="width:auto; height:600px;"></div>
+         </div>
+      </div>
+   </div>
+   <div class="col-6" >
+      <div class="col-3" style="display: inline-block;">
+         <div class="card">
+            <div class="card-body">
+               <h4 class="card-title">숙박</h4>
+                  <div class="table-responsive"></div>
+            </div>
+         </div>
+      </div>
+      <div class="col-3" style="display: inline-block;">
+         <div class="card">
+            <div class="card-body">
+               <h4 class="card-title">맛집</h4>
+                  <div class="table-responsive"></div>
+            </div>
+         </div>
+      </div>
+      <div class="col-3" style="display: inline-block;">
+         <div class="card">
+            <div class="card-body">
+               <h4 class="card-title">관광</h4>
+                  <div class="table-responsive"></div>
+            </div>
+         </div>
+      </div>
+      <div class="col-3">
+         <div class="card">
+            <div class="card-body">
+               <h4 class="card-title">log</h4>
+                  <div class="table-responsive"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0f1979c1b260c4a439f2975fd6f70c01"></script>
 <script>
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
-        center: new kakao.maps.LatLng(35.158240, 129.160362), // 지도의 중심좌표
-        level: 9 // 지도의 확대 레벨
-    };  
-var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-//선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
-var linePath = [
-    new kakao.maps.LatLng(35.075419, 129.016675),
-    new kakao.maps.LatLng(35.153063, 129.118494),
-    new kakao.maps.LatLng(35.158240, 129.160362) 
-];
-
-// 지도에 표시할 선을 생성합니다
-var polyline = new kakao.maps.Polyline({
-    path: linePath, // 선을 구성하는 좌표배열 입니다
-    strokeWeight: 5, // 선의 두께 입니다
-    strokeColor: '#000069', // 선의 색깔입니다
-    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-    strokeStyle: 'solid' // 선의 스타일입니다
-});
-
-// 지도에 선을 표시합니다 
-polyline.setMap(map);
+   var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+       mapOption = { 
+           center: new kakao.maps.LatLng(35.158240, 129.160362), // 지도의 중심좌표
+           level: 9 // 지도의 확대 레벨
+       };  
+   var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
 </script>
 
-<a href="https://map.kakao.com/?sName=부산송도해수욕장&eName=광안리해수욕장">song -> kwang</a>
+   
 </body>
 </html>

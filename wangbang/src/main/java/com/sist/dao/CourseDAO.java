@@ -16,7 +16,7 @@ public class CourseDAO {
 		CourseVO vo = new CourseVO();
 		 BasicQuery query = new BasicQuery("{data:'"+data+"'}");
 		 vo=cs.findOne(query, CourseVO.class,"Course");
-		 System.out.println(vo.getData());
+		 //System.out.println(vo.getData());
 		 return vo;
 	 }
 }
