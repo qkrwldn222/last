@@ -58,26 +58,20 @@
 
 
                     <li>
-<!--                  <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-grid menu-icon"></i><span class="nav-text">코스추천</span>
-                        </a> -->
                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-like menu-icon"></i><span class="nav-text">코스추천</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="../course/course_list.do">당신을위한 추천</a></li>                  
                       </ul>  
-                       <!--
                     </li>
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-layers menu-icon"></i><span class="nav-text">Components</span>
-                        </a>-->
-                        <!-- <ul aria-expanded="false"> 
-            
-                        </ul>
-                    </li>
-                    <li> -->
+                       <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-chart menu-icon"></i><span class="nav-text">부산 해수욕장</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="../beach/beach.do">해수욕장 선호도</a></li>                  
+                      </ul>  
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">

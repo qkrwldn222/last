@@ -1,5 +1,7 @@
 package com.sist.wang;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sist.dao.MemberDAO;
+import com.sist.manager.BeachManager;
+import com.sist.vo.BeachVO;
 import com.sist.vo.MemberVO;
 
 @Controller
@@ -15,6 +19,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberDAO dao;
+	
+	@Autowired
+	private BeachManager bm;
 	
 	@RequestMapping("member/signup.do")
 	public String member_signup(){
@@ -46,8 +53,10 @@ public class MemberController {
 		return "redirect:../main/main.do";
 	}
 	
-	@RequestMapping("member/mypage.do")
-	public String member_mypage(){
-		return "member/mypage";
+	@RequestMapping("beach/beach.do")
+	public String beach_beach(Model model){
+		List<BeachVO> list = bm.beach_like(model);
+		model.addAttribute("list", list);
+		return "beach/beach";
 	}
 }
