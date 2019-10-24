@@ -43,6 +43,7 @@
                         <ul aria-expanded="false">
                             <li><a href="../search/restaurant.do">맛집</a></li>
                             <li><a href="../search/leisure.do">스포츠 & 레저</a></li>
+                            <li><a href="../schedule/schedule.do">일정</a></li>
                         </ul>
                     </li> 
                     <li>
