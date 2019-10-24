@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
@@ -19,7 +20,7 @@
         ]);
 
         var options = {
-          title: 'My Daily Activities',
+          title: '',
           is3D: true,
         };
 
@@ -43,6 +44,7 @@
 		<div class="card">
 			<div class="card-body">
 				<h3 class="text-primary"><b>Map</b></h3>
+				<div id="map" style="height:500px;"></div>
 			</div>
 		</div>
 	</div>  
@@ -54,17 +56,24 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body pb-0 d-flex justify-content-between">
-						<!-- <div class="card-content"> -->
+						<div class="card-content">
 							<h3 class="text-primary"><b>Info</b></h3>
-						<!-- </div> -->
+						</div>
 					</div>
-					
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-                
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a93962adc2c6bebc2cec42c74839b639"></script>
+<script type="text/javascript">
+var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+var options = { //지도를 생성할 때 필요한 기본 옵션
+	center: new kakao.maps.LatLng(35.1529523,129.1192152), //지도의 중심좌표.
+	level: 3 //지도의 레벨(확대, 축소 정도)
+};
 
+var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+</script>
 </body>
 </html>

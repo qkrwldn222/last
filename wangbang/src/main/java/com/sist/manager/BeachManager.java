@@ -103,8 +103,8 @@ public class BeachManager {
     		
     		for(int n=0; n<arr.length;n++){
     			String s = arr[n];
-    			if(count[n] >= 1){
-    			  //System.out.println(s + " : " + count[n]);
+    			if(count[n] >= 0){
+    			  System.out.println(s + " : " + count[n]);
     			  BeachVO vo = new BeachVO();
     			  vo.setCount(count[n]);
     			  vo.setTitle(s);

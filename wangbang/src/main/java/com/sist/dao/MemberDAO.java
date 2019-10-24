@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.MemberMapper;
+import com.sist.vo.BeachAttVO;
+import com.sist.vo.BeachResVO;
 import com.sist.vo.MemberVO;
 
 @Repository
@@ -40,4 +42,11 @@ public class MemberDAO {
 		return mapper.memberGetName(id);
 	}
 	
+	public void beachResInsert(BeachResVO vo){
+		mapper.beachResInsert(vo);
+	}
+	
+	public void beachAttInsert(BeachAttVO vo){
+		mapper.beachAttInsert(vo);
+	}
 }
