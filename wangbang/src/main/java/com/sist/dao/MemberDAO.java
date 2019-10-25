@@ -7,8 +7,6 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.MemberMapper;
-import com.sist.vo.BeachAttVO;
-import com.sist.vo.BeachResVO;
 import com.sist.vo.MemberVO;
 import com.sist.vo.FavVO;
 
@@ -44,14 +42,6 @@ public class MemberDAO {
 	
 	public String memberGetName(String id){
 		return mapper.memberGetName(id);
-	}
-	
-	public void beachResInsert(BeachResVO vo){
-		mapper.beachResInsert(vo);
-	}
-	
-	public void beachAttInsert(BeachAttVO vo){
-		mapper.beachAttInsert(vo);
 	}
 	
 	public int favCount(Map map){

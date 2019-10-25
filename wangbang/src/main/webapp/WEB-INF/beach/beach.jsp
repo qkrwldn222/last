@@ -57,7 +57,52 @@
 				<div class="card">
 					<div class="card-body pb-0 d-flex justify-content-between">
 						<div class="card-content">
-							<h3 class="text-primary"><b>Info</b></h3>
+							<h3 class="text-primary" style="margin-bottom: 20px;"><b>Info</b></h3>
+							
+							<button type="button" class="btn mb-1 btn-outline-secondary" style="margin-right:15px;">광안리</button>
+							<button type="button" class="btn mb-1 btn-outline-secondary" style="margin-right:15px;">해운대</button>
+							<button type="button" class="btn mb-1 btn-outline-secondary" style="margin-right:15px;">송도</button>
+							<button type="button" class="btn mb-1 btn-outline-secondary" style="margin-right:15px;">다대포</button>
+							<button type="button" class="btn mb-1 btn-outline-secondary" style="margin-right:15px;">송정</button>
+							<button type="button" class="btn mb-1 btn-outline-secondary" style="margin-right:15px;">일광</button>
+							<button type="button" class="btn mb-1 btn-outline-secondary" style="margin-right:15px;">임랑</button>
+							<button type="button" class="btn mb-1 btn-outline-secondary" style="margin-right:15px;">감지</button>
+							
+							<h4 class="text-secondary" style="margin-bottom: 20px; margin-top: 30px;"><b>블로그 리뷰</b></h4>
+							<div class="row" style="margin-top:20px;">
+								<c:forEach var="bvo" items="${tList }">
+		                            <div class="col-lg-6">
+		                                <div class="card">
+		                                    <div class="card-body">
+		                                    	<a href="${bvo.link }"><img src="${bvo.image }" style="float:left; margin-right:20px;"></a>
+		                                        <a href="${bvo.link }"><h6 class="card-title">${bvo.title }</h6></a>
+		                                        <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+		                                        <p class="card-text">${bvo.content }</p>
+		                                        <!-- <p class="card-text d-inline"><small class="text-muted">Last updated 3 mins ago</small> -->
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </c:forEach>
+                            </div>
+                            
+							<h4 class="text-secondary" style="margin-bottom: 20px; margin-top: 30px;"><b>주변 맛집</b></h4>
+							<div class="row" style="margin-top:20px;">
+								<c:forEach var="rvo" items="${rList }">
+		                            <div class="col-md-6 col-lg-3">
+		                                <div class="card">
+		                                    <div class="card-body">
+		                                    	<img src="${rvo.image }" style="margin-bottom:15px">
+		                                        <h6 class="card-title">${rvo.title }</h6>
+		                                        <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+		                                        <p class="card-text">${rvo.info }</p>
+		                                        <!-- <p class="card-text d-inline"><small class="text-muted">Last updated 3 mins ago</small> -->
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </c:forEach>
+                            </div>
+                            
+                            
 						</div>
 					</div>
 				</div>

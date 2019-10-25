@@ -5,9 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BeachAttVO {
+public class BeachBlogVO {
 	private int no;
-	private String title;
-	private String info;
 	private String image;
+	private String title;
+	private String link;
+	private String content;
 }

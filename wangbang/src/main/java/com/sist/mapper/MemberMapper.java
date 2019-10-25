@@ -6,8 +6,6 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
-import com.sist.vo.BeachAttVO;
-import com.sist.vo.BeachResVO;
 import com.sist.vo.MemberVO;
 import com.sist.vo.FavVO;
 
@@ -23,12 +21,6 @@ public interface MemberMapper {
 	
 	@Select("SELECT name FROM s_member WHERE id = #{id}")
 	public String memberGetName(String id);
-	
-	@Insert("INSERT INTO s_res VALUES(#{no}, #{title}, #{info}, #{iamge})")
-	public void beachResInsert(BeachResVO vo);
-	
-	@Insert("INSERT INTO s_att VALUES(#{no}, #{title}, #{info}, #{iamge})")
-	public void beachAttInsert(BeachAttVO vo);
 	
 	@Select("SELECT COUNT(*) FROM s_fav WHERE id=#{id} and datasid=#{sid}")
 	public int favCount(Map map);

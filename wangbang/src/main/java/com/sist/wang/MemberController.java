@@ -52,13 +52,6 @@ public class MemberController {
 		return "redirect:../main/main.do";
 	}
 	
-	@RequestMapping("beach/beach.do")
-	public String beach_beach(Model model){
-		List<BeachVO> list = bm.beach_like(model);
-		model.addAttribute("list", list);
-		return "beach/beach";
-	}
-	
 	@RequestMapping("member/fav_list.do")
 	public String fav_list(HttpSession session, Model model) {
 		String id = (String)session.getAttribute("id");
