@@ -12,6 +12,9 @@ var favCheck = false;
 $(function() {       
 	var id = $('#memId').val();
 	var sid = $('#sid').val();
+	var link = '../search/stay_detail.do';
+	var title = $('#title').val();
+	
 	$.ajax({
 		type:'post',
 		url:'../fav/favCheck.do',
@@ -30,7 +33,7 @@ $(function() {
 				$.ajax({
 					type:'post',
 					url:'../fav/favInsert.do',
-					data:{id:id, sid:sid},
+					data:{id:id, sid:sid, link:link, title:title},
 					success:function(res) {
 						$(".fave").toggleClass("animate");
 						favCheck = true;
@@ -79,6 +82,7 @@ $(function() {
 <input type="hidden"  id="YY" value="${vo.wgsy}">
 <input type="hidden" id="memId" value="${sessionScope.id }" >
 <input type="hidden" id="sid" value="${vo.dataSid }" >
+<input type="hidden" id="title" value="${vo.dataTitle }" >
 
   <div class="card shadow mb-4">
 		<div class="card-header py-3">

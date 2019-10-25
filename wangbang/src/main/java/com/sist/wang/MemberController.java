@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sist.dao.MemberDAO;
 import com.sist.manager.BeachManager;
-import com.sist.vo.BeachVO;
-import com.sist.vo.MemberVO;
+import com.sist.vo.*;
 
 @Controller
 public class MemberController {
@@ -58,5 +57,20 @@ public class MemberController {
 		List<BeachVO> list = bm.beach_like(model);
 		model.addAttribute("list", list);
 		return "beach/beach";
+	}
+	
+	@RequestMapping("member/fav_list.do")
+	public String fav_list(HttpSession session, Model model) {
+		String id = (String)session.getAttribute("id");
+		List<FavVO> flist = dao.favList(id);
+		for(FavVO vo : flist) {
+			StringBuilder sb = new StringBuilder(vo.getLink());
+			sb.append("?dataSid=");
+			sb.append(vo.getDataSid());
+			String link = sb.toString();
+			vo.setLink(link);
+		}
+		model.addAttribute("flist", flist);
+		return "member/fav_list";
 	}
 }

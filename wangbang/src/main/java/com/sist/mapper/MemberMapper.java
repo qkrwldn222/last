@@ -1,6 +1,6 @@
 package com.sist.mapper;
 
-import java.util.Map;
+import java.util.*;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import com.sist.vo.BeachAttVO;
 import com.sist.vo.BeachResVO;
 import com.sist.vo.MemberVO;
+import com.sist.vo.FavVO;
 
 public interface MemberMapper {
 	@Select("SELECT COUNT(*) FROM s_member WHERE id = #{id}")
@@ -34,7 +35,7 @@ public interface MemberMapper {
 	
 	@Insert("INSERT INTO s_fav VALUES("
 		  + "(SELECT NVL(MAX(no)+1, 1) FROM s_fav ), "
-		  + "#{id}, #{sid} )")
+		  + "#{id}, #{sid}, #{title}, #{link} )")
 	public void favInsert(Map map);
 	
 	@Select("SELECT no FROM s_fav WHERE id=#{id} and datasid=#{sid}")
@@ -43,4 +44,6 @@ public interface MemberMapper {
 	@Delete("DELETE FROM s_fav WHERE no=#{no}")
 	public void favDelete(int no);
 	
+	@Select("SELECT * FROM s_fav WHERE id=#{id}")
+	public List<FavVO> favList(String id);
 }

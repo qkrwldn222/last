@@ -1,14 +1,16 @@
 package com.sist.dao;
 
-import java.util.Map;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.MemberMapper;
 import com.sist.vo.BeachAttVO;
 import com.sist.vo.BeachResVO;
 import com.sist.vo.MemberVO;
+import com.sist.vo.FavVO;
 
 @Repository
 public class MemberDAO {
@@ -66,5 +68,9 @@ public class MemberDAO {
 	
 	public void favDelete(int no) {
 		mapper.favDelete(no);
+	}
+	
+	public List<FavVO> favList(String id) {
+		return mapper.favList(id);
 	}
 }

@@ -38,11 +38,13 @@ public class MemberRestController {
 	}
 	
 	@RequestMapping("fav/favInsert.do")
-	public String fav_insert(String id, String sid) {
+	public String fav_insert(String id, String sid, String link, String title) {
 		String res = "";
 		Map map = new HashMap();
 		map.put("id", id);
 		map.put("sid", sid);
+		map.put("link", link);
+		map.put("title", title);
 		dao.favInsert(map);
 		return res;
 	}
