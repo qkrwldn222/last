@@ -82,6 +82,13 @@ public class RecommandManager {
     //   equals                    contains()            Pattern
     public List<RecommandVO> recommand_find(String fd,int type)//,Model model
     {
+    	if(type==1){
+    		fd=fd+" 숙소";
+    	}else if(type==2){
+    		fd=fd+" 맛집";
+    	}else if(type==3){
+    		fd=fd+" 명소";
+    	}
     	List<RecommandVO> list=new ArrayList<RecommandVO>();
     	mgr.recommandNaverData(fd);// json
     	getData();// json => parse => 필요한 데이터만 txt
@@ -181,20 +188,15 @@ public class RecommandManager {
         			if(s.contains("해운대")){
         				s=s.replace("해운대", "");
         			}
-        			if(s.contains("호텔")){
-        				s=s.replace("호텔", "");
-        			}
-        			if(s.contains("모텔")){
-        				s=s.replace("모텔", "");
-        			}
-        			if(s.contains("S(에스)모텔")){
-        				s="S모텔";
-        			}
+        			
         			if(s.contains(" - ")){
         				s=s.substring(0,s.indexOf(" - "));
         			}
+        			if(s.contains("-")){
+        				s=s.substring(0,s.indexOf("-"));
+        			}
         			if(s.contains("(")){
-        				s=s.substring(0,s.indexOf("("))+s.substring(s.indexOf(")")+1);
+        				s=s.substring(0,s.indexOf("("));
         			}
         			System.out.println(s.trim());
         			p[i]=Pattern.compile(s.trim());
@@ -261,20 +263,13 @@ public class RecommandManager {
         			if(s.contains("해운대")){
         				s=s.replace("해운대", "");
         			}
-        			if(s.contains("호텔")){
-        				s=s.replace("호텔", "");
-        			}
-        			if(s.contains("모텔")){
-        				s=s.replace("모텔", "");
-        			}
-        			if(s.contains("S(에스)모텔")){
-        				s="S모텔";
-        			}
+        			
         			if(s.contains(" - ")){
         				s=s.substring(0,s.indexOf(" - "));
         			}
+        			
         			if(s.contains("(")){
-        				s=s.substring(0,s.indexOf("("))+s.substring(s.indexOf(")")+1);
+        				s=s.substring(0,s.indexOf("("));
         			}
         			System.out.println(s.trim());
         			p[i]=Pattern.compile(s.trim());
