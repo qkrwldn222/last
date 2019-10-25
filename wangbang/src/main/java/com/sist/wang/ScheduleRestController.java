@@ -33,13 +33,11 @@ public class ScheduleRestController {
 	
 	@RequestMapping(value="schedule/stay_data.do",produces = "application/json; charset=utf8")
 	public String stay_data(String page){
-		System.out.println("==========================1");
 		String json="";
 		if(Integer.parseInt(page)< 1) page="1";
 		List<StayVO> list = dao.stay_data(Integer.parseInt(page));
 		
 		JSONArray arr = new JSONArray();
-		System.out.println("==========================2");
 		for(StayVO vo:list){
 			JSONObject obj = new JSONObject();
 			obj.put("mainimgthumb", vo.getMainimgthumb());
@@ -59,13 +57,17 @@ public class ScheduleRestController {
 		return json;
 	}
 	@RequestMapping(value="schedule/sch_insert.do",produces = "application/json; charset=utf8")
-	public String sch_insert(String insertdata){
+	public String sch_insert(String insertdata,String daydata){
 		StringTokenizer st = new StringTokenizer(insertdata,",");
-
 		while (st.hasMoreTokens()) {
-			System.out.println(st.nextToken());
-			
+			String allst = st.nextToken();
+			String time = allst.substring(0,allst.indexOf(":"));
+			String cosname = allst.substring(allst.indexOf(":")+1);		
+			System.out.println(time);
+			System.out.println(cosname);
 		}
+		System.out.println(daydata.substring(3));
+		
 		return "¼º°ø";
 	}
 }
