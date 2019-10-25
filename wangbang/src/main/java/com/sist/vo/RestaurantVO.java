@@ -41,9 +41,11 @@ public class RestaurantVO {
 	private String img1thumb;
 	private String img2thumb;
 	private String img3thumb;
-	private String xgsx;
-	private String ygsx;
+	private String wgsx;
+	private String wgsy;
 	private String dataContent;
 	private String holiday;
 	private String userHomepage;
+	private String xgsx;
+	private String ygsx;
 }
