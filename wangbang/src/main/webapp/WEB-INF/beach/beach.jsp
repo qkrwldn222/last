@@ -6,9 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="../css/Nwagon.css" rel="stylesheet">
+<script src="../js/Nwagon_no_vml.js"></script>
+<script src="../js/Nwagon.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-    <script type="text/javascript">
+<!--     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
@@ -27,7 +30,7 @@
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
         chart.draw(data, options);
       }
-    </script>
+    </script> -->
 </head>
 <body>
 
@@ -36,7 +39,26 @@
 		<div class="card">
 			<div class="card-body">
 				<h3 class="text-primary"><b>해수욕장 선호도 조사</b></h3>
-				<div id="piechart_3d" style="width: 700px; height: 500px;"></div>
+				<!-- <div id="piechart_3d" style="width: 700px; height: 500px;"></div> -->
+				<div id="chart"></div>
+	<script>
+		
+		var options = {
+			'dataset': {
+				title: 'Web accessibility status',
+				values:[<c:forEach var="vo" items="${list}"><c:out value="${vo.count}"/>, </c:forEach>],
+				colorset: ['#56b4e9', '#e69f00', '#cc79a7', '#009e73', '#0072b2'],
+				fields: [<c:forEach var="vo" items="${list}">'<c:out value="${vo.title}"/>', </c:forEach>] 
+			},
+			'donut_width' : 150, 
+			'core_circle_radius':0,
+			'chartDiv': 'chart',
+			'chartType': 'pie',
+			'chartSize': {width:700, height:500}
+		};
+
+		Nwagon.chart(options);
+	</script>
 			</div>
 		</div>
 	</div>  
