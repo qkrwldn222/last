@@ -4,9 +4,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.dao.MemberDAO;
+import java.util.*;
 
 @RestController
 public class MemberRestController {
@@ -24,6 +26,35 @@ public class MemberRestController {
 		}
 		return result;
 	}
+
+	@RequestMapping("fav/favCheck.do")
+	public String fav_check(String id, String sid) {
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("sid", sid);
+		int cnt = dao.favCount(map);
+		String res = Integer.toString(cnt);
+		return res;
+	}
 	
+	@RequestMapping("fav/favInsert.do")
+	public String fav_insert(String id, String sid) {
+		String res = "";
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("sid", sid);
+		dao.favInsert(map);
+		return res;
+	}
 	
+	@RequestMapping("fav/favDelete.do")
+	public String fav_delete(String id, String sid) {
+		String res = "";
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("sid", sid);
+		int no = dao.favGetNo(map);
+		dao.favDelete(no);
+		return res;
+	}
 }

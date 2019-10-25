@@ -1,5 +1,7 @@
 package com.sist.dao;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -48,5 +50,21 @@ public class MemberDAO {
 	
 	public void beachAttInsert(BeachAttVO vo){
 		mapper.beachAttInsert(vo);
+	}
+	
+	public int favCount(Map map){
+		return mapper.favCount(map);
+	}
+	
+	public void favInsert(Map map) {
+		mapper.favInsert(map);
+	}
+	
+	public int favGetNo(Map map) {
+		return mapper.favGetNo(map);
+	}
+	
+	public void favDelete(int no) {
+		mapper.favDelete(no);
 	}
 }

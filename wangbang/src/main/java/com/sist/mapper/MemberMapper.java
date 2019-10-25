@@ -1,5 +1,8 @@
 package com.sist.mapper;
 
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
@@ -25,5 +28,19 @@ public interface MemberMapper {
 	
 	@Insert("INSERT INTO s_att VALUES(#{no}, #{title}, #{info}, #{iamge})")
 	public void beachAttInsert(BeachAttVO vo);
+	
+	@Select("SELECT COUNT(*) FROM s_fav WHERE id=#{id} and datasid=#{sid}")
+	public int favCount(Map map);
+	
+	@Insert("INSERT INTO s_fav VALUES("
+		  + "(SELECT NVL(MAX(no)+1, 1) FROM s_fav ), "
+		  + "#{id}, #{sid} )")
+	public void favInsert(Map map);
+	
+	@Select("SELECT no FROM s_fav WHERE id=#{id} and datasid=#{sid}")
+	public int favGetNo(Map map);
+	
+	@Delete("DELETE FROM s_fav WHERE no=#{no}")
+	public void favDelete(int no);
 	
 }
