@@ -32,7 +32,7 @@
 
   <div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h3 class="m-0 font-weight-bold text-primary">숙박 상세보기 [${vo.dataTitle }]</h3>
+			<h3 class="m-0 font-weight-bold text-primary">테마여행  [${vo.dataTitle }]</h3>
 		</div>
 		<div class="container-fluid">
 		<div class="row">
@@ -45,16 +45,7 @@
 		     </td>
 		     <td class="text-left" colspan="2"><h4 class="text-center"><b>${vo.dataTitle }</b></h4></td>
 		    </tr>
-			    <tr>
-			     <td width=8% class="text-right"><i class="fa fa-won"></i>&nbsp;&nbsp;금　　액&nbsp;&nbsp;&nbsp;</td>
-				 <c:if test="${vo.price!='-' }">
-				    <td colspan="3">${vo.price}</td>
-				 </c:if>
-				 <c:if test="${vo.price=='-' }">
-				 	<td colspan="3">채팅 문의 바랍니다.</td>
-				 </c:if>
-			    </tr>
-		    <tr>
+		    		    <tr>
 		  	  <td width=8% class="text-right"><i class="icon-map menu-icon">&nbsp;</i>주　　소&nbsp;&nbsp;&nbsp;</td>
 		      <td colspan="3">${vo.addr}</td>
 		    </tr>
@@ -68,7 +59,7 @@
 		    </tr>
 		    <tr>
 		     <td width=8% valign="top" align="right"><i class="icon-list menu-icon">&nbsp;</i>정　　보&nbsp;&nbsp;&nbsp;</td>
-		      <td colspan="3" style="white-space:pre-line;" valign="top">${vo.dataContent}</td>
+		      <td colspan="3" style="white-space:pre-line;" valign="top">${vo.info}</td>
 		    </tr>
 		    <tr>
 		      <td colspan="3" ></td>
@@ -136,29 +127,21 @@
 							<!-- 지도 -->
 							<table class="card">
 		  					 <ul class="metismenu" id="menu">
-		  					 <!-- 
-		  					 				 <c:if test="${vo.price!='-' }">
-											    <td colspan="3">${vo.price}</td>
-											 </c:if>
-											 <c:if test="${vo.price=='-' }">
-											 	<td colspan="3">채팅 문의 바랍니다.</td>
-											 </c:if>
-		  					  -->
 								<tr>
 							     <td width=20% valign="top" align="right"><i class="fa fa-subway"></i>&nbsp;&nbsp;지하철&nbsp;&nbsp;&nbsp;</td>
-							      <c:if test="${vo.trafln!=null }">
+							      <c:if test="${vo.trafin!=null }">
 							      	<td colspan="3" style="white-space:pre-line;" valign="top">${vo.trafln}</td>
 							      </c:if>
-							      <c:if test="${vo.trafln==null }">
+							      <c:if test="${vo.trafin==null }">
 									<td colspan="3">채팅 문의 바랍니다.</td>
 									</c:if>
 							    </tr>
 								<tr>
 							     <td width=20% valign="top" align="right"><i class="fa fa-bus"></i>&nbsp;&nbsp;버　스&nbsp;&nbsp;&nbsp;</td>
-							      <c:if test="${vo.traOut!=null }">
+							      <c:if test="${vo.trafout!=null }">
 								      <td colspan="3" style="white-space:pre-line;" valign="top">${vo.traOut}</td>
 							      </c:if>
-							      <c:if test="${vo.traOut==null }">
+							      <c:if test="${vo.trafout==null }">
 									<td colspan="3">채팅 문의 바랍니다.</td>
 								</c:if>
 							    </tr>

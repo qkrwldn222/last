@@ -75,6 +75,7 @@ public class RestMongDAO {
 		 list = mt.find(query, TouristattrVO.class,"TouristAttr");
 		 return list;
 	 }
+	 
 	 public ThemeTourVO themeDetail(String dataSid){
 		 ThemeTourVO vo = new ThemeTourVO();
 		 BasicQuery query = new BasicQuery("{dataSid:'"+dataSid+"'}");

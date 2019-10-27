@@ -16,6 +16,7 @@ import com.sist.manager.API;
 import com.sist.manager.KkmaManager;
 import com.sist.manager.NaverRestaurantManager;
 import com.sist.vo.ThemeTourVO;
+import com.sist.vo.TouristattrVO;
 
 @RestController
 public class RestaurantRestController {
@@ -70,9 +71,9 @@ public class RestaurantRestController {
 	public String touristattr_data(int page){
 		String json="";
 		if(page< 1) page=1;
-		List<ThemeTourVO> list = dao.themeListData(page);
+		List<TouristattrVO> list = dao.touristattr(page);
 		JSONArray arr = new JSONArray(); // []
-		for(ThemeTourVO vo:list){
+		for(TouristattrVO vo:list){
 			JSONObject obj = new JSONObject();
 			obj.put("addr", vo.getAddr());
 			obj.put("dataTitle", vo.getDataTitle());
