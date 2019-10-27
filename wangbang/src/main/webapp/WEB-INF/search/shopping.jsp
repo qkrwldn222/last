@@ -10,6 +10,44 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+$(function(){
+   $('.thisajax').click(function(){
+      var no = $(this).attr("data-no");
+      var result = $('#img'+no).attr("src");
+      var dataSid = $(this).find(".sidNo").val();
+      $.ajax({
+         type:"post",
+         url:"../search/shopping_data.do",
+         dataType:"json",
+         data: {dataSid : dataSid}, // 앞에께 RestController : 뒤에께 JSP
+         success: function(data) {
+            // $('#shopping_detail').html(res);
+/*         alert("! : "+data.DataSid );
+            alert("! : "+data.DataTitle );
+            alert("! : "+data.Mainimgthumb );
+            alert("! : "+data.Addr );
+            alert("! : "+data.Price ); */
+            
+            /* var temp="";
+            temp ="<table>"
+            +"<tr>"
+            +"<td>"
+            +data.DataTitle
+            +"</td>"
+            +"</tr>"
+            +"</table>";
+            
+         $('#shopping_detail').html(temp); */
+         $("#shopping_detail").show();
+         $("#sidTitle").html(data.DataTitle);
+         $("#sidImg").html("<img src='"+data.Mainimgthumb+"'>");
+         $("#sidCon").html(data.DataContent);
+         }
+      });
+   });
+});
+</script>
 
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
@@ -19,208 +57,129 @@
 <body>
 <div class="card shadow mb-4">
         <div class="row">
-	         <div class="card-header py-3">
-	              <h2 class="m-0 font-weight-bold text-primary text-center">쇼핑목록	</h2>
-	              </div>
-	          </div>
-	          
-	   <div class="col-12 m-b-30" id="root">                 
-          <script type="text/babel">
-		  class Shopping extends React.Component{
-			  // 데이터 저장하는 변수 설정  => props(속성:불변) / state(상태:데이터 변경) 
-			  constructor(props){
-				  super(props);
-				  // 변수 선언
-				  this.state={
-					data_json:[],
-					page : 1
-				  }
-				this.prevHandler=this.prevHandler.bind(this);
-				this.nextHandler=this.nextHandler.bind(this);
-			  }
-			  componentWillMount(){
-				  var _this=this;
-				  axios.get('http://localhost:8080/wang/search/shopping_data.do',{
-					  params:{
-						  page:1
-					  }
-				  }).then((response)=>{
-					  _this.setState({data_json:response.data});
-					  console.log(response.data);
-				  });
-			  }
-		
-		prevHandler(){
-       		this.setState({page:this.state.page>1?this.state.page-1:this.state.page});
-      		var _this=this;
-			
-       			axios.get('http://localhost:8080/wang/search/shopping_data.do',{
-         	  	 params:{
-         	     	  page:_this.state.page-1
-            		}
-        		}).then(function (response) {
-         	   	_this.setState({data_json:response.data});
-        		})
-    	}  
-		nextHandler(){
-        	this.setState({page:this.state.page<300?this.state.page+1:this.state.page});
-        	var _this=this;
-        	axios.get('http://localhost:8080/wang/search/shopping_data.do',{
-            	params:{
-                	page:_this.state.page+1
-            	}
-        	}).then(function (response) {
-            _this.setState({data_json:response.data});
-        	})
-    	}
-			  render(){
-                  const html=this.state.data_json.map((m)=>
-                     <div className="col-md-6 col-lg-3">
-                                <div className="card">
-                                  <a href={"../search/shopping_detail.do?dataSid="+m.dataSid}><img className="img-fluid" src={m.mainimgthumb} alt=""/></a>
-                                    <div className="card-body">
-                                        <h5 className="card-title">{m.dataTitle }</h5>
-                                        <p className="card-text">{m.tel }</p>
-                                        <p className="card-text">{m.addr }</p>
-                                        <p className="card-text">{m.time }</p>
+            <div class="card-header py-3">
+                 <h2 class="m-0 font-weight-bold text-primary text-center">쇼핑목록   </h2>
+                 </div>
+             </div>
+	<div class="container-fluid">
+	<div class="row">
+       <div class="col-lg-6">
+             <table class="table table-striped">
+               <tr>
+                  <th width="50%" class="text-center">&nbsp;&nbsp;&nbsp;<h4><b>관광기념품</b></h4></th>
+               </tr>
+               <c:forEach var="vo" items="${list }" varStatus="s">
+               <tr class="text-left thisajax" data-no="${s.index }" >
+                  <td width="50%" class="text-left">
+                  <input type="image" class="sidNo" src="${vo.mainimgthumb }" width="10%" height="10%" id="img${s.index }"  value="${vo.dataSid }">
+                                                         <%-- &nbsp;<img src="${vo.mainimgthumb }" width="10%" height="10%" id="img"> --%>
+                                                         &nbsp;${vo.dataTitle }&nbsp;${vo.dataSid }</td>
+                  <%-- <td width="80%" class="text-left">&nbsp;${vo.dataTitle }</td> --%>
+               </tr>
+               </c:forEach>
+         </table>
+      </div>
+       <div class="col-lg-6" id="shopping_detail" style="display: none;">
+<!--        1111
+       <table>
+       		<tr>
+       			<td id="sidTitle">
+       			</td>
+       		</tr>
+       		<tr>
+       			<td id="sidImg" >
+       			</td>
+       		</tr>
+       		<tr>
+       			<td id="sidCon">
+       			</td>
+       		</tr>
+       </table> -->
+                        	<div class="card">
+                                    <div class="img-fluid" id="sidImg" ></div>
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="sidTitle"></h5>
+                                        <p class="card-text" id="sidCon"></p>
                                     </div>
+                             </div>
+      </div>
+     </div>
+     </div>
+                   <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="bootstrap-pagination">
+                                    <nav>
+                                         <ul class="pagination justify-content-center">
+                                        
+                                           <c:if test="${curpage<1 }">
+                                            <li class="page-item disabled"><a class="page-link" href="../search/shopping.do?page=${page-1 }">Previous</a>
+                                            </li>      
+                                           </c:if>
+                                           <c:if test="${curpage>1 }">
+                                            <li class="page-item"><a class="page-link" href="../search/shopping.do?page=${page-1 }">Previous</a>
+                                            </li>      
+                                           </c:if>
+                                           
+                                           <c:if test="${curpage != 1 && curpage >1 }">
+                                            <li class="page-item"><a class="page-link" href="../search/shopping.do?page=${curpage-1}">${curpage-1}</a>
+                                            </li>
+                                            
+                                           </c:if>
+                                            <c:if test="${curpage >=1 }">
+                                            <li class="page-item active"><a class="page-link" href="../search/shopping.do?page=${curpage}">${curpage} <span class="sr-only">(current)</span></a>
+                                            </li>
+                                            </c:if>
+                                            <li class="page-item"><a class="page-link" href="../search/shopping.do?page=${curpage+1}">${curpage+1}</a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="../search/shopping.do?page=${page+1 }">Next</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
                                 </div>
+                                 <h4 class="card-title text-center"><font color="grey">&nbsp;&nbsp;&nbsp;&nbsp;${curpage } page / 20 pages</font></h4>
                             </div>
-                  );
-				  return (
-                   <div className="row">
-                            {html}
-						<div className={"text-center"}>
-                  			<input type={"button"} value={"이전"} className={"btn btn-lg btn-danger"} onClick={this.prevHandler}/>
-							{this.state.page} page / 22 pages                   			
-
-							<input type={"button"} value={"다음"} className={"btn btn-lg btn-primary"} onClick={this.nextHandler}/>
-      					</div> 
+                        </div>
                     </div>
-				  )
-			  }
-		  }
-         ReactDOM.render(<Shopping />,document.getElementById('root'));
-		</script>                
-       </div>
+             
+             <%-- 
+            <div class="container-fluid" id="root">
+            
+            </div>
+         <script type="text/babel">
+class Shopping extends React.Component {
+               constructor(props) {
+                  super(props);
+                  this.state ={
+                     data_json:[],
+                     fd:''
+                  }
+               }
+               componentWillMount() {
+                  var _this=this; 
+                  axios.get('http://localhost:8080/mvc/search/shopping_data.do').then((res)=>{
+                     _this.setState({data_json:res.data});
+                     console.log(res);
+                  });
+            }
+            render() {
+               const html=this.state.data_json.map((m)=>
+                  <div>
+                     {m.dataTitle}
+                  </div>
+               );
+               return(
+                  <div>
+                     {html}
+                  </div>
+               )
+            }
+            componentDidMount() {
+            }
+}
+            ReactDOM.render(<Shopping />, document.getElementById('root'))
+         </script>
+          --%>
 </div>
 </body>
-</html> 
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script src="https://unpkg.com/vue"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<!-- <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script> -->
-<script type="text/javascript">
-$(function(){
-	$('.clicks').click(function(){
-		var dataSid=$(this).attr("value"); 
-		alert("dataSid="+dataSid);
-	});
-});
-</script>
-</head>
-<body>
-  <div class="card shadow mb-4">
-		<div class="card-header py-3">
-			<h3 class="m-0 font-weight-bold text-primary">쇼핑리스트</h3>
-		</div>
-		<div class="container-fluid" id="app">
-		  <div class="row">
-		  <div class="col-sm-8">
-		   <shoppingdata-office v-bind:shoppingdata="shopping_data"></shoppingdata-office>
-		  </div>
-		  <div class="col-sm-4">
-		   <table class="table">
-		    <tr>
-		     <td class="text-center" width=30% rowspan="7">
-		       <img :src="shopping_detail.mainimgthumb" width=100%>
-		     </td>
-		     <td class="text-left" colspan="2">{{shopping_detail.dataTitle}}</td>
-		    </tr>
-		    <tr>
-		      <td width=30% class="text-right">시간</td>
-		      <td width=40% class="text-left">{{shopping_detail.time}}</td>
-		    </tr>
-		    <tr>
-		      <td colspan="3">{{shopping_detail.story}}</td>
-		    </tr>
-		   </table>
-		  </div>
-		</div>
-		</div>
-		</div>
-		
-		      constructor(props){
-				  super(props);
-				  // 변수 선언
-				  this.state={
-					  data_json:[],
-					  data_detail:{},
-                      isShow:false
-				  }
-				  // 이벤트 선언 
-			  }
-		
-		<script>
-		var eventBus=new Vue();
-		Vue.component('shopping-office',{
-			props:['shoppingdata'],
-			template:'<table class="table table-hover">'
-				     +'<thead>'
-				     +'<tr>'
-				         +'<th></th>'
-				         +'<th>이름</th>'
-				         +'<th>시간</th>'
-				       +'</tr>'
-				       +'<tr v-for="m in shoppingdata">'
-				         +'<td><img :src="m.mainimgthumb" width="35" height="35"></td>'
-				         +'<td v-on:click="showMovie(m.dataSid)">{{m.dataTitle}}</td>'
-				       +'</tr>'
-				     +'</thead>'
-				   +'</table>',
-		    methods:{
-		    	
-		        // showMovie(value)
-		    	showMovie:function(value){
-		    		//alert("value:"+value);
-		    		eventBus.$emit('showMovieEvent',value);
-		    	}
-		    }
-		});
-		new Vue({
-			el:'#app',
-			data:{
-				shopping_data:[],
-				shopping_detail:{},
-				dataSid:1
-			},
-			mounted:function(){
-				var _this=this;
-				axios.get('http://localhost:8080/mvc/search/shopping_data.do').then(function(response){
-					_this.shopping_data=response.data;
-				});
-			},
-			updated:function(){
-				var _this=this;
-				eventBus.$on('showMovieEvent',function(value){
-					_this.dataSid=value;
-					axios.get('http://localhost:8080/mvc/search/shopping_detail.do',{
-						params:{
-							dataSid:_this.dataSid
-						}
-					}).then(function(response){
-						_this.shopping_detail=response.data
-					});
-				})
-			}
-		})
-		</script>
-</body>
 </html>
- --%>
