@@ -18,17 +18,19 @@ $(function(){
 		}
 		
 	}); */
+
+	
 	
 	$('.genreBtn').click(function(){
 		var no=$(this).attr("data-no");
 		if(no==1){
-			var color="success"
+			var color="primary"
 		}
 		if(no==2){
-			var color="danger"
+			var color="secondary"
 		}
 		if(no==3){
-			var color="info"
+			var color="success"
 		}
 		$.ajax({
 			type:'post',
@@ -42,14 +44,22 @@ $(function(){
 				var html="";
 				for(i=0;i<genre_data.length;i++)
 				{
-					html+='<input type="button" class="btn btn-lg btn-'+color+'" data-no="'+no+'" onclick="recommand(\''+genre_data[i]+'\',\''+no+'\')" value='+genre_data[i]+'>&nbsp;';
+					html+='<input type="button" class="btn btn-md btn-'+color+'" data-no="'+no+'" onclick="recommand(\''+genre_data[i]+'\',\''+no+'\')" value='+genre_data[i]+'>&nbsp;';
 				}
 				
 				$('#print').html(html);
 			}
 		})
-	});
+		
+		
+	})
+	
+
+
+ 	
 });
+
+
 function recommand(rd,sno){
 	$.ajax({
 		type:'post',
@@ -59,9 +69,61 @@ function recommand(rd,sno){
 		{
 			
 			$('#map').html(response);
+
 		}
 		
 	});
+	$.ajax({
+		type:'post',
+		url:'../course/course_type.do',
+		data:{fd:rd,sno:sno},
+		success:function(response)
+		{
+			
+			if(sno==1){
+				$('#stay').html(response);
+			}
+			if(sno==2){
+				$('#res').html(response);
+			}
+			if(sno==3){
+				$('#tour').html(response);
+			}
+
+		}
+	});
+}
+var count=0;
+function course(ss){
+	var htt="";
+	
+	if(count==0){
+		htt="<a id='test'>"+ss+"-&gt</a>"
+		$('#log').html(htt);
+		count++;
+		
+	}else if(count==1){
+		var start=$('#test').text().substring(0,$('#test').text().indexOf("-"));
+		$('#test').remove();
+		//htt="<a href=https://map.kakao.com/?sName="+start+"&eName="+ss+">"+start+"-&gt"+ss+"</a>";
+		htt='<input type="button" onclick="test(\''+start+'\',\''+ss+'\')"  id="testHi" class="test1234 btn btn-md btn-primary" value='+start+'-&gt'+ss+'>';
+		$('#log').html(htt);
+		count=0;
+	}
+}
+function test(start,end){	
+		$.ajax({
+			type:'post',
+			url:'../course/test.do',
+			data:{start:start,end:end},
+			success:function(response)
+			{
+				
+				$('#mapCT').html(response);
+
+			}
+		});
+	 
 }
 </script>
 </head>
@@ -69,13 +131,16 @@ function recommand(rd,sno){
 <div class="row">
    <div class="col-12">
          <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="height:160px">
             	<table>
             		<tr>
+            			<td><h4 class="card-title">코스추천</h4></td>
+            		</tr>
+            		<tr>
             			<td>
-            				<input type=button class="btn btn-lg btn-success genreBtn" value="숙박" data-no="1">
-	                		<input type=button class="btn btn-lg btn-danger genreBtn" value="맛집" data-no="2">
-	                		<input type=button class="btn btn-lg btn-info genreBtn" value="놀거리" data-no="3">
+            				<input type="button" value="숙박" class="btn mb-1 btn-rounded btn-outline-primary genreBtn" data-no="1">
+	                		<input type="button" value="맛집" class="btn mb-1 btn-rounded btn-outline-secondary genreBtn" data-no="2">
+	                		<input type="button" value="관광" class="btn mb-1 btn-rounded btn-outline-success genreBtn" data-no="3">
             			</td>
             		</tr>
             		<tr>
@@ -136,7 +201,7 @@ function recommand(rd,sno){
 <div class="row">
    <div class="col-6">
       <div class="card">
-         <div class="card-body">
+         <div class="card-body" id="mapCT" style="width:auto; height:600px;">
             <div id="map" style="width:auto; height:600px;"></div>
          </div>
       </div>
@@ -145,33 +210,37 @@ function recommand(rd,sno){
       <div class="col-3" style="display: inline-block;">
          <div class="card">
          
-            <div class="card-body">
+            <div class="card-body" style="height: 360px;">
                <h4 class="card-title">숙박</h4>
-                  <div class="table-responsive"></div>
+                  <div class="table-responsive" id="stay"></div>
             </div>
          </div>
       </div>
       <div class="col-3" style="display: inline-block;">
          <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="height: 360px;">
                <h4 class="card-title">맛집</h4>
-                  <div class="table-responsive"></div>
+                  <div class="table-responsive" id="res"></div>
             </div>
          </div>
       </div>
       <div class="col-3" style="display: inline-block;">
          <div class="card">
-            <div class="card-body">
-               <h4 class="card-title">관광</h4>
-                  <div class="table-responsive"></div>
+            <div class="card-body" style="height: 360px;">
+               <h4 class="card-title test1234">관광</h4>
+                  <div class="table-responsive" id="tour"></div>
             </div>
          </div>
       </div>
-      <div class="col-3">
+      
+      
+      	
+     
+      <div class="col-12">
          <div class="card">
-            <div class="card-body">
-               <h4 class="card-title">log</h4>
-                  <div class="table-responsive"></div>
+            <div class="card-body" style="height: 270px;">
+               <h4 class="card-title"><h3>log</h3><sub>경로를 표시합니다 (두곳을 골라주시고 경로찾기 버튼을 클릭하세요)</sub></h4>
+                  <div class="table-responsive" id="log"></div>
             </div>
          </div>
       </div>

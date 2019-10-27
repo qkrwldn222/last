@@ -2,6 +2,7 @@ package com.sist.wang;
 
 import java.util.List;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,4 +23,6 @@ public class RestCourseController {
     	
     	return result;
     }
+    
+	
 }
