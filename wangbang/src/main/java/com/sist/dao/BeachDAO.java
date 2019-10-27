@@ -22,11 +22,11 @@ public class BeachDAO {
 		mapper.beachBlogInsert(vo);
 	}
 	
-	public List<BeachBlogVO> beachBlogData(){
-		return mapper.beachBlogData();
+	public List<BeachBlogVO> beachBlogData(int no){
+		return mapper.beachBlogData(no);
 	}
 	
-	public List<BeachResVO> beachResData(){
-		return mapper.beachResData();
+	public List<BeachResVO> beachResData(int no){
+		return mapper.beachResData(no);
 	}
 }
