@@ -19,10 +19,10 @@
                             <i class="icon-anchor menu-icon"></i><span class="nav-text">관광지</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">명품관광</a></li>
+                            <li><a href="../search/luxurytour.do">명품관광</a></li>
                             <li><a href="../search/touristattr.do">관광명소</a></li>
                             <li><a href="../search/experience.do">체험여행</a></li>
-                            <li><a href="#">도보여행</a></li>
+                            <li><a href="../search/walkingtour.do">도보여행</a></li>
                             <li><a href="../search/themetour.do">테마여행</a></li>
                             <li><a href="#">추천여행코스</a></li>
                         </ul>
@@ -42,8 +42,7 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="../search/restaurant.do">맛집</a></li>
-                            <li><a href="../search/leisure.do">스포츠 & 레저</a></li>
-                            <li><a href="../schedule/schedule.do">일정</a></li>
+                            <li><a href="../search/leisure.do">스포츠 & 레저</a></li>          
                         </ul>
                     </li> 
                     <li>

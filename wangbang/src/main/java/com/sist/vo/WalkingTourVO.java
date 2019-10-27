@@ -5,8 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class LeisureVO {
-	   private String dataSid;
+public class WalkingTourVO {
+	private String dataSid;
 	   private String addr;
 	   private String dataContent;
 	   private String dataTitle;

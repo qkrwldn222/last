@@ -49,9 +49,14 @@
        p:sqlSessionFactory-ref="ssf"
        p:mapperInterface="com.sist.mapper.BeachMapper"
     />
+    <bean id="ScheduleMapper" 
+       class="org.mybatis.spring.mapper.MapperFactoryBean"
+       p:sqlSessionFactory-ref="ssf"
+       p:mapperInterface="com.sist.mapper.ScheduleMapper"
+    />
      <mongo:mongo-client
 		id="mc"
-		host="211.238.142.207"
+		host="127.0.0.1"
 		port="27017"
 	/>
     <bean id="mongoTemplate"

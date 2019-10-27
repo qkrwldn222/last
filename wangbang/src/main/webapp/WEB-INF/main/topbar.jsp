@@ -178,6 +178,9 @@ $(function(){
                             </div>
                         </li>
                         <li class="icons dropdown d-none d-md-flex">
+                            <a href="../schedule/schedule.do"><button type="button" class="btn btn-info m-b-10 m-1-5" id="toastr-success-top-right">일정 관리</button></a>
+                        </li>
+                        <li class="icons dropdown d-none d-md-flex">
                             <a href="../member/fav_list.do"><button type="button" class="btn btn-info m-b-10 m-1-5" id="toastr-success-top-right">찜 목록</button></a>
                         </li>
                         <li class="icons dropdown d-none d-md-flex">

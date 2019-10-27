@@ -20,7 +20,7 @@
   left:100px; 
   top:-200px; 
   width:1200px;
-  height:1100px;
+  height:1050px;
   background:#fff;
 }
 
@@ -29,7 +29,7 @@
 }
 
 .timetable tr{
-	border: solid;
+	border: 1px solid #e3e3e3;
 	font-size: large;
 }
 
@@ -76,7 +76,7 @@ $(function(){
 						  	  <div class="sch_div" style="overflow: auto;">								
 								  													 												          
 											
-	   <div class="aaaa" id="root">  </div>               
+	   <div class="root" id="root">  </div>               
           <script type="text/babel">
 
 		  class Stay extends React.Component{
@@ -85,6 +85,7 @@ $(function(){
 				  this.state={
 					data_json:[],
 					page : 1,
+					no:1,
 					listData:[]
 				  }
 				this.prevHandler=this.prevHandler.bind(this);
@@ -95,6 +96,7 @@ $(function(){
 				  var _this=this;				  
 				  axios.get('http://localhost:8080/wang/schedule/stay_data.do',{
 					  params:{
+						  no:1,
 						  page:1
 					  }
 				  }).then((response)=>{
@@ -109,7 +111,8 @@ $(function(){
 			
        			axios.get('http://localhost:8080/wang/schedule/stay_data.do',{
          	  	 params:{
-         	     	  page:_this.state.page-1
+         	     	  page:_this.state.page-1,
+					  no:this.state.no
             		}
         		}).then(function (response) {
          	   	_this.setState({data_json:response.data});
@@ -120,7 +123,8 @@ $(function(){
         	var _this=this;
         	axios.get('http://localhost:8080/wang/schedule/stay_data.do',{
             	params:{
-                	page:_this.state.page+1
+                	page:_this.state.page+1,
+					no:this.state.no
             	}
         	}).then(function (response) {
             _this.setState({data_json:response.data});
@@ -130,6 +134,7 @@ $(function(){
 		insert(){
 			var timedata = new Array();
 			var insertdata = "";
+			var schtitle = document.getElementById("schtitle");
 			var daydata = document.getElementById("day1");
 			for(var i=0;i<17;i++){
 				timedata[i] = document.getElementById("time"+(i+8));
@@ -141,7 +146,8 @@ $(function(){
         	axios.get('http://localhost:8080/wang/schedule/sch_insert.do',{
             	params:{
                 	insertdata:insertdata,
-					daydata:daydata.id
+					daydata:daydata.id,
+					schtitle:schtitle.value
             	}
         	}).then(function (response) {
            alert("저장되었습니다.");
@@ -160,8 +166,7 @@ $(function(){
 
 		}
 
-		drop(ev){
-			
+		drop(ev){			
  			ev.preventDefault();
 			var data = ev.dataTransfer.getData("html");
 			var optionElement = document.getElementById(data);
@@ -177,15 +182,12 @@ $(function(){
 			level: 8	
       		});
 
-			alert(addr);
     		ev.target.append(title);
-			var aa=[];
-            aa.push(addr)
-            this.setState({listData:aa});	
+			var addrData = this.state.listData;			
+            addrData.push(addr)
+            this.setState({listData:addrData});	
             	
-			alert(this.state.listData[0]);
-			
-	
+			addrData.forEach(function(addr, index) {
 			geocoder.addressSearch(addr, function(result, status) {
      			if (status === kakao.maps.services.Status.OK) {
        			var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
@@ -196,49 +198,62 @@ $(function(){
         		});
 				
         		var infowindow = new kakao.maps.InfoWindow({
-            		content: '<div style="width:150px;text-align:center;padding:6px 0;">'+addr+'</div>'
+            		content: '<div style="width:150px;text-align:center;padding:6px 0;">'+addrData[index]+'</div>'
         		});
         		infowindow.open(map, marker);
-
+				if(index=addrData.length){
         		map.setCenter(coords);
+				}
     			} 
 			});
+		});
+		}
+
+		listChange(no){
+		
+			this.setState({no:no});
+        	var _this=this;
+        	axios.get('http://localhost:8080/wang/schedule/stay_data.do',{
+            	params:{
+                	no:no,
+					page:1
+            	}
+        	}).then(function (response) {
+            _this.setState({data_json:response.data});
+        	})
 		} 
 				 
 		 componentDidMount() {                                                    
-      		let el = document.getElementById('map');
-      		let map = new daum.maps.Map(el, {
-       		center: new daum.maps.LatLng(33.450701,126.570667),
- 			level: 8 	
-      		});
+      		
+			 
     	 }
 	
 			  render(){
                   const html=this.state.data_json.map((m)=>                    
 
        <div id={m.dataTitle} data-img={m.mainimgthumb} data-addr={m.addr} draggable='true' onDragStart={this.drag.bind(this)} width="336" height="69">                            
-                                  <img className="imgaa" src={m.mainimgthumb} alt="" style={{"width":"50","height":"50"}}/>
-								  <h6>{m.dataTitle}</h6>
+                                  <img className="imgaa" src={m.mainimgthumb} alt="" style={{"width":"80","height":"60"}}/>
+								  <b>  {m.dataTitle}</b>
+								  <br>{m.addr}</br>
        </div>                                                                                  
 
                   );
 				  return (
 					<div>
-					<div className="sch_top" style={{"height":"310px","border":"solid"}}>
-								  	<div className="sch_left_top" style={{"width":"300px","height":"300px","border":"solid","float":"left"}}>
+					<div className="sch_top" style={{"height":"310px","border":"1px solid #e3e3e3"}}>
+								  	<div className="sch_left_top" style={{"width":"300px","height":"300px","border":"1px solid #e3e3e3","float":"left"}}>
 								  		<div className="sch_left_top_schbtn" style={{"width":"100%"}}>
-									  		<button className="btn btn-primary">새 여행 일정등록</button>
-									  		<button className="btn btn-primary">나의 여행 일정</button>
+									  		<h4>여행 일정 만들기</h4>
 								  		</div>
 								  		<ul>
 								  			<li><label style={{"width":"15%"}}>제목 : </label>
-								  			<input type="text" placeholder="신나는 부산여행" style={{"width":"80%"}}/></li>
-								  			<li><label>기간</label>
-								  			<input type="date" style={{"width":"45%"}} id="strdate"/>&nbsp;<input type="date" style={{"width":"45%"}} id="enddate"/>
+								  			<input type="text" placeholder="신나는 부산여행" style={{"width":"80%"}} id="schtitle" /></li>
+								  			<li><label>날짜 : </label>
+								  			<input type="date" style={{"width":"45%"}} id="strdate"/>
 								  			</li>
 								  		</ul>
 								  		<div className="sch_left_top_makebtn">				  			
-								  			<center><input type="button" value="일정 만들기" className="btn btn-primary"/></center>
+								  			
 								  		</div>
 								  	</div>
 								  	
@@ -246,28 +261,31 @@ $(function(){
 								  																																			  	
 								  	</div>
 								  	
-					<div className="sch_left_bottom">	
-                   <div className="drag1">
-<div className="sch_left_bottom_schbtn" style={{"width":"400px"}}>
+					<div className="sch_left_bottom" style={{"float":"left"}}>	
+                   <div className="drag1" style={{"border":"1px solid #e3e3e3"}}>
+<div className="sch_left_bottom_schbtn" style={{"width":"300px"}}>
 									  		<button className="btn btn-primary">내가 찜한 여행지</button>
 									  		<button className="btn btn-primary">여행지 검색</button>
 								  		</div>
 								  		
-								  		<div className="scg_left_bottom_category" style={{"width":"400px","float":"left"}}>
-								  		<a href="" className="active">전체</a>
-								  		<a href="" className="a">관광지</a>
-								  		<a href="" className="a">음식점</a>
-								  		<a href="" className="a">숙소</a>
-								  		<a href="" className="a">쇼핑</a>
+								  		<div className="sch_left_bottom_category" style={{"width":"300px","overflow":"auto"}}>
+								  		<a href='javascript:void(0)' onClick={this.listChange.bind(this, 1)} className="a">관광지</a>
+								  		<a href='javascript:void(0)' onClick={this.listChange.bind(this, 2)} className="a">음식점</a>
+								  		<a href='javascript:void(0)' onClick={this.listChange.bind(this, 3)} className="a">숙소</a>
+							<div className="sch_left_bottom_result" style={{"width":"300px","height":"450px","overflow":"auto"}}>
                             {html}
+							</div>
 						<div className={"text-center"}>						  					
                   			<input type={"button"} value={"이전"} className={"btn btn-lg btn-danger"} onClick={this.prevHandler}/>
-							{this.state.page} page / 22 pages                   			
+							{this.state.page} page / <b id="totalpage">${walkTotalPage}</b> pages                   			
 							<input type={"button"} value={"다음"} className={"btn btn-lg btn-primary"} onClick={this.nextHandler}/>
       					</div> 	
+						
 							  		</div>
 
-<div className="sch_right_bottom">								 
+  								</div>	
+                    </div>
+									<div className="sch_right_bottom">								 
 								  		<table className="timetable">
 								  			<tr>
 												<th>Time</th>
@@ -276,14 +294,12 @@ $(function(){
 								  			<c:forEach var="i" begin="8" end="24" step="1">								  			
 								  				<tr data-time="${i}:00">
 								  					<td>${i }:00</td>
-								  					<td><div id="time${i}" onDragOver={this.allowDrop.bind(this)} onDrop={this.drop.bind(this)} style={{"border":"solid","width":"300px","height":"30px"}}></div></td>		
+								  					<td><div id="time${i}" onDragOver={this.allowDrop.bind(this)} onDrop={this.drop.bind(this)} style={{"border":"1px solid #e3e3e3","width":"300px","height":"30px"}}></div></td>		
 								  				</tr>
 								  			</c:forEach>								  			
 								  		</table>
 								  	</div> 
-  								</div>	
-<input type={"button"} value={"저장"} className={"btn btn-lg btn-danger"} onClick={this.insert}/>
-                    </div>
+<input type={"button"} value={"저장"} className={"btn btn-lg btn-danger"} onClick={this.insert} style={{"margin":"auto"}}/>
 </div>
 				  )
 			  }

@@ -25,4 +25,10 @@
        p:sqlSessionFactory-ref="ssf"
        p:mapperInterface="com.sist.mapper.BeachMapper"
     />
+    
+    <bean id="schedule_mapper"
+       class="org.mybatis.spring.mapper.MapperFactoryBean"
+       p:sqlSessionFactory-ref="ssf"
+       p:mapperInterface="com.sist.mapper.ScheduleMapper"
+    />
 </beans>

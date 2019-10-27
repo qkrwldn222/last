@@ -34,9 +34,9 @@ public class APIJJ {
 
 		public static List<String> getThemeTourList() throws IOException, SAXException {
 				List<String> list = new ArrayList<String>();
-				StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/6260000/BusanTourInfoService/getRestaurantList"); 
+				StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/6260000/BusanTourInfoService/getThemeTourList"); 
 				urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8")+ "=%2Bcd%2BbGwLGvt2lmb1xThNt2jcw19ri%2Bpoy%2FCodf1Tt%2BCtJJ8EidfTuhWHGHpz7Ds55aTZFVHSInEXoonX1F%2FL0A%3D%3D");																																 
-				urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("468", "UTF-8")); 
+				urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("100", "UTF-8")); 
 				urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
 				URL url = new URL(urlBuilder.toString());
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -90,7 +90,7 @@ public class APIJJ {
 			 JSONArray arr = new JSONArray();
 			JSONArray Array = new JSONArray();
 				for(String no:list) {
-				       StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/6260000/BusanTourInfoService/getRestaurantDetail"); /*URL*/
+				       StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/6260000/BusanTourInfoService/getThemeTourDetail"); /*URL*/
 				           urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=%2Bcd%2BbGwLGvt2lmb1xThNt2jcw19ri%2Bpoy%2FCodf1Tt%2BCtJJ8EidfTuhWHGHpz7Ds55aTZFVHSInEXoonX1F%2FL0A%3D%3D"); /*Service Key*/ 
 				           urlBuilder.append("&" + URLEncoder.encode("data_sid","UTF-8") + "=" + URLEncoder.encode(no, "UTF-8")); 
 				           URL url = new URL(urlBuilder.toString());

@@ -20,13 +20,13 @@
 <div class="card shadow mb-4">
         <div class="row">
 	         <div class="card-header py-3">
-	              <h2 class="m-0 font-weight-bold text-primary text-center">레저&스포츠</h2>
+	              <h2 class="m-0 font-weight-bold text-primary text-center">명품 관광</h2>
 	              </div>
 	          </div>
 	          
 	   <div class="col-12 m-b-30" id="root">                 
           <script type="text/babel">
-		  class Leisure extends React.Component{
+		  class Luxurytour extends React.Component{
 			  // 데이터 저장하는 변수 설정  => props(속성:불변) / state(상태:데이터 변경) 
 			  constructor(props){
 				  super(props);
@@ -40,7 +40,7 @@
 			  }
 			  componentWillMount(){
 				  var _this=this;
-				  axios.get('http://localhost:8080/wang/search/leisure_data.do',{
+				  axios.get('http://localhost:8080/wang/search/luxurytour_data.do',{
 					  params:{
 						  page:1
 					  }
@@ -54,7 +54,7 @@
        		this.setState({page:this.state.page>1?this.state.page-1:this.state.page});
       		var _this=this;
 			
-       			axios.get('http://localhost:8080/wang/search/leisure_data.do',{
+       			axios.get('http://localhost:8080/wang/search/luxurytour_data.do',{
          	  	 params:{
          	     	  page:_this.state.page-1
             		}
@@ -65,7 +65,7 @@
 		nextHandler(){
         	this.setState({page:this.state.page<${totalPage}?this.state.page+1:this.state.page});
         	var _this=this;
-        	axios.get('http://localhost:8080/wang/search/leisure_data.do',{
+        	axios.get('http://localhost:8080/wang/search/luxurytour_data.do',{
             	params:{
                 	page:_this.state.page+1
             	}
@@ -78,7 +78,7 @@
                   const html=this.state.data_json.map((m)=>
                      <div className="col-md-6 col-lg-3">
                                 <div className="card">
-                                  <a href={"../search/leisure_detail.do?dataSid="+m.dataSid}><img className="img" src={m.mainimgthumb} alt="" style={{"width":"100%","height":"230"}}/></a>
+                                  <a href={"../search/luxurytour_detail.do?dataSid="+m.dataSid}><img className="img" src={m.mainimgthumb} alt="" style={{"width":"100%","height":"230"}}/></a>
                                     <div className="card-body">
                                         <h5 className="card-title">{m.dataTitle }</h5>
                                         <p className="card-text">{m.tel }</p>
@@ -101,7 +101,7 @@
 				  )
 			  }
 		  }
-         ReactDOM.render(<Leisure />,document.getElementById('root'));
+         ReactDOM.render(<Luxurytour />,document.getElementById('root'));
 		</script>                
        </div>
 </div>
