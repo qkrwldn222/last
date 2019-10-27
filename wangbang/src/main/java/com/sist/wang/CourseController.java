@@ -31,11 +31,7 @@ public class CourseController {
 		model.addAttribute("end", end);
 		return "course/course_list";
 	}
-	@RequestMapping("course/test.do")//
-	public String testMap(Model model){
-		
-		return "testMap";
-	}
+	
 	@RequestMapping("course/course_type.do")
 	public String course_type(Model model,String fd,String sno){
 		/*List<RecommandVO> list=rm.recommand_find(fd,Integer.parseInt(sno));

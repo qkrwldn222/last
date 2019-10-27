@@ -6,6 +6,11 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<style type="text/css">
+.collect{
+	margin: 5px 5px;
+}
+</style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -95,23 +100,23 @@ function recommand(rd,sno){
 }
 var count=0;
 function course(ss){
-	var htt="";
+	
 	
 	if(count==0){
-		htt="<a id='test'>"+ss+"-&gt</a>"
-		$('#log').html(htt);
+		var htt1=$('#log').html()+" "+"<a id='test'>"+ss+"-&gt</a>"
+		$('#log').html(htt1);
 		count++;
 		
 	}else if(count==1){
 		var start=$('#test').text().substring(0,$('#test').text().indexOf("-"));
 		$('#test').remove();
-		//htt="<a href=https://map.kakao.com/?sName="+start+"&eName="+ss+">"+start+"-&gt"+ss+"</a>";
-		htt='<input type="button" onclick="test(\''+start+'\',\''+ss+'\')"  id="testHi" class="test1234 btn btn-md btn-primary" value='+start+'-&gt'+ss+'>';
-		$('#log').html(htt);
+		var htt2=$('#log').html()+" "+"<a class='btn btn-md btn-primary collect' href=https://map.kakao.com/?sName="+start+"&eName="+ss+" target=_blank>"+start+"-&gt"+ss+"</a>";
+		
+		$('#log').html(htt2);
 		count=0;
 	}
 }
-function test(start,end){	
+/* function test(start,end){	
 		$.ajax({
 			type:'post',
 			url:'../course/test.do',
@@ -124,7 +129,7 @@ function test(start,end){
 			}
 		});
 	 
-}
+} */
 </script>
 </head>
 <body>
@@ -201,7 +206,7 @@ function test(start,end){
 <div class="row">
    <div class="col-6">
       <div class="card">
-         <div class="card-body" id="mapCT" style="width:auto; height:600px;">
+         <div class="card-body" id="mapCT" style="width:auto; height:660px;">
             <div id="map" style="width:auto; height:600px;"></div>
          </div>
       </div>
@@ -239,8 +244,10 @@ function test(start,end){
       <div class="col-12">
          <div class="card">
             <div class="card-body" style="height: 270px;">
-               <h4 class="card-title"><h3>log</h3><sub>경로를 표시합니다 (두곳을 골라주시고 경로찾기 버튼을 클릭하세요)</sub></h4>
-                  <div class="table-responsive" id="log"></div>
+               <h4 class="card-title"><h3>경로 상세보기&nbsp;<sub>(두곳을 골라주시고 아래 버튼을 클릭하세요)</sub></h3></h4><br>
+                  <div class="table-responsive">
+                  	<div id="log"></div>
+                  </div>
             </div>
          </div>
       </div>
