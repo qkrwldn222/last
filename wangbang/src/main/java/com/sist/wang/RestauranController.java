@@ -66,6 +66,7 @@ public class RestauranController {
 	
 	@RequestMapping("search/touristattr_detail.do")
 	public String touristattr_detail(String dataSid,Model model){
+		
 		ThemeTourVO vo = dao.themeDetail(dataSid);
 		main.realData(model);
 		model.addAttribute("vo", vo);

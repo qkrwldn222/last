@@ -51,7 +51,8 @@
 			  //boxoffice_data.do?no=1
 			  componentWillMount(){
 				  var _this=this;
-				  axios.get('http://localhost:8080/wang/search/themetour_data.do',{
+
+				  axios.get('http://localhost:8080/wang/search/touristattr_data.do',{
 					  params:{
 						  page:1
 					  }

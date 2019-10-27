@@ -14,6 +14,13 @@ public class TouristattrVO {
 	private String img1thumb;
 	private String holiday;
 	private String trafin;
+	private String trafout;
+	public String getTrafout() {
+		return trafout;
+	}
+	public void setTrafout(String trafout) {
+		this.trafout = trafout;
+	}
 	private String usetime;
 	private String dataTitle;
 	private String tel;
@@ -21,6 +28,20 @@ public class TouristattrVO {
 	private String addr;
 	private String info;
 	private String img2thumb;
+	private String wgsy;
+	private String wgsx;
+	public String getWgsy() {
+		return wgsy;
+	}
+	public void setWgsy(String wgsy) {
+		this.wgsy = wgsy;
+	}
+	public String getWgsx() {
+		return wgsx;
+	}
+	public void setWgsx(String wgsx) {
+		this.wgsx = wgsx;
+	}
 	public String getDataSid() {
 		return dataSid;
 	}

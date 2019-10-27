@@ -50,8 +50,8 @@
 		      <td colspan="3">${vo.addr}</td>
 		    </tr>
 		    <tr>
-		      <td width=8% class="text-right"><i class="icon-map menu-icon">&nbsp;</i>상세주소&nbsp;&nbsp;&nbsp;</td>
-		      <td colspan="3">${vo.detail}</td>  
+		      <td width=8% class="text-right"><i class="icon-map menu-icon">&nbsp;</i>운영시간&nbsp;&nbsp;&nbsp;</td>
+		      <td colspan="3">${vo.usetime}</td>  
 		    </tr>
 		    <tr>
 		     <td width=8% class="text-right"><i class="icon-phone menu-icon">&nbsp;</i>전화번호&nbsp;&nbsp;&nbsp;</td>
@@ -130,7 +130,7 @@
 								<tr>
 							     <td width=20% valign="top" align="right"><i class="fa fa-subway"></i>&nbsp;&nbsp;지하철&nbsp;&nbsp;&nbsp;</td>
 							      <c:if test="${vo.trafin!=null }">
-							      	<td colspan="3" style="white-space:pre-line;" valign="top">${vo.trafln}</td>
+							      	<td colspan="3" style="white-space:pre-line;" valign="top">${vo.trafin}</td>
 							      </c:if>
 							      <c:if test="${vo.trafin==null }">
 									<td colspan="3">채팅 문의 바랍니다.</td>
@@ -139,7 +139,7 @@
 								<tr>
 							     <td width=20% valign="top" align="right"><i class="fa fa-bus"></i>&nbsp;&nbsp;버　스&nbsp;&nbsp;&nbsp;</td>
 							      <c:if test="${vo.trafout!=null }">
-								      <td colspan="3" style="white-space:pre-line;" valign="top">${vo.traOut}</td>
+								      <td colspan="3" style="white-space:pre-line;" valign="top">${vo.trafout}</td>
 							      </c:if>
 							      <c:if test="${vo.trafout==null }">
 									<td colspan="3">채팅 문의 바랍니다.</td>
