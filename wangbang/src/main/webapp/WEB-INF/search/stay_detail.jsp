@@ -124,14 +124,16 @@ $(function() {
 		     <td width=8% valign="top" align="right"><i class="icon-list menu-icon">&nbsp;</i>정　　보&nbsp;&nbsp;&nbsp;</td>
 		      <td colspan="3" style="white-space:pre-line;" valign="top">${vo.dataContent}</td>
 		    </tr>
-		    <tr>
-		      <td colspan="3" ></td>
-		      <td width="10%" >
-		        <div class="text-right" >
-		          <section id="favorite" class="fave" ></section> <br>
-		        </div>
-		      </td>
-		    </tr>
+		    <c:if test="${sessionScope.id!=null }" >
+			    <tr>
+			      <td colspan="3" ></td>
+			      <td width="10%" >
+			        <div class="text-right" >
+			          <section id="favorite" class="fave" ></section> <br>
+			        </div>
+			      </td>
+			    </tr>
+			</c:if>
 		    </ul>
 		   </table>
 		  </div>

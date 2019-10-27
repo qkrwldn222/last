@@ -6,6 +6,60 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+var favCheck = false;
+$(function() {       
+	var id = $('#memId').val();
+	var sid = $('#sid').val();
+	var link = '../search/touristattr_detail.do';
+	var title = $('#title').val();
+	
+	$.ajax({
+		type:'post',
+		url:'../fav/favCheck.do',
+		data:{id:id, sid:sid},
+		success:function(res){
+			if(res=="1") {
+				$(".fave").toggleClass("animate");
+				favCheck = true;
+			}
+		}
+	});
+	
+	  $(".fave").click(function() { 
+		if(!favCheck) {
+			if(confirm("찜하시겠습니까?")) {
+				$.ajax({
+					type:'post',
+					url:'../fav/favInsert.do',
+					data:{id:id, sid:sid, link:link, title:title},
+					success:function(res) {
+						$(".fave").toggleClass("animate");
+						favCheck = true;
+					}
+				});
+			}else {
+				return;
+			}
+		} else {
+			if(confirm("찜 삭제하시겠습니까?")) {
+				$.ajax({
+					type:'post',
+					url:'../fav/favDelete.do',
+					data:{id:id, sid:sid},
+					success:function(res) {
+						$(".fave").toggleClass("animate");
+						favCheck = true;
+					}
+				});
+			}else {
+				return;
+			}
+		}
+	  });
+});
+</script>
 <style type="text/css">
 .fave {
 	width: 70px;
@@ -61,14 +115,16 @@
 		     <td width=8% valign="top" align="right"><i class="icon-list menu-icon">&nbsp;</i>정　　보&nbsp;&nbsp;&nbsp;</td>
 		      <td colspan="3" style="white-space:pre-line;" valign="top">${vo.info}</td>
 		    </tr>
-		    <tr>
-		      <td colspan="3" ></td>
-		      <td width="10%" >
-		        <div class="text-right" >
-		          <section id="favorite" class="fave" ></section> <br>
-		        </div>
-		      </td>
-		    </tr>
+		    <c:if test="${sessionScope.id!=null }" >
+			    <tr>
+			      <td colspan="3" ></td>
+			      <td width="10%" >
+			        <div class="text-right" >
+			          <section id="favorite" class="fave" ></section> <br>
+			        </div>
+			      </td>
+			    </tr>
+			</c:if>
 		    </ul>
 		   </table>
 		  </div>
