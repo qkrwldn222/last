@@ -8,12 +8,24 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div style="overflow:scroll; width:auto; height:290px;">
+
 <ul>
+	<li><input type="button" value="부산시청" class="btn mb-1 btn-rounded btn-outline-primary" onclick="course('부산시청')"></li>
+	<li><input type="button" value="해운대" class="btn mb-1 btn-rounded btn-outline-primary" onclick="course('해운대')"></li>
+	<li><input type="button" value="부산시청" class="btn mb-1 btn-rounded btn-outline-primary" onclick="course('부산시청')"></li>
+	<li><input type="button" value="해운대" class="btn mb-1 btn-rounded btn-outline-primary" onclick="course('해운대')"></li>
+	<li><input type="button" value="부산시청" class="btn mb-1 btn-rounded btn-outline-primary" onclick="course('부산시청')"></li>
+	<li><input type="button" value="해운대" class="btn mb-1 btn-rounded btn-outline-primary" onclick="course('해운대')"></li>
+	<li><input type="button" value="부산시청" class="btn mb-1 btn-rounded btn-outline-primary" onclick="course('부산시청')"></li>
+	<li><input type="button" value="해운대" class="btn mb-1 btn-rounded btn-outline-primary" onclick="course('해운대')"></li>
+	<li><input type="button" value="부산시청" class="btn mb-1 btn-rounded btn-outline-primary" onclick="course('부산시청')"></li>
+	<li><input type="button" value="해운대" class="btn mb-1 btn-rounded btn-outline-primary" onclick="course('해운대')"></li>
 	<li><input type="button" value="부산시청" class="btn mb-1 btn-rounded btn-outline-primary" onclick="course('부산시청')"></li>
 	<li><input type="button" value="해운대" class="btn mb-1 btn-rounded btn-outline-primary" onclick="course('해운대')"></li>
 	
 </ul>
-
+</div>
 <c:forEach var="vo" items="${mList}">
 
 </c:forEach>
