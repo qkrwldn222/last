@@ -21,14 +21,16 @@ $(function(){
 <body>
 <div class="row">
                     <div class="col-lg-9 col-sm-9">
-                        <div class="card gradient-1">
+                        <div class="card">
                             <div class="card-body">
-                                <h3 class="card-title text-white">뉴스</h3>
-                                <div class="d-inline-block">
-                                    <h2 class="text-white">4565</h2>
-                                    <p class="text-white mb-0">Jan - March 2019</p>
+                                <h3 class="card-title text-primary"><b>뉴스</b></h3>
+                                <div class="bootstrap-media">
+                                    <div class="media">
+                                        <img class="mr-3 img-fluid" src="https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F082%2F2019%2F10%2F28%2F952618.jpg&type=ofullfill80_80_q75_re2" alt="Generic placeholder image" width="60px" height="60px">
+                                        <div class="media-body">
+                                            <h5 class="mt-0"><a href="http://www.busan.com/view/busan/view.php?code=2019102808232162688">부산 주택가에 멧돼지 출몰... 4마리 사살, 1마리 추적 중</h5></a>부산경찰청 제공 부산경찰청 제공 부산경찰청 제공 부산 동래구 주택가에서 멧돼지가 여럿 출몰해 일부가 사살됐다. 28일 동래경찰서에 따르면 이날 오전 4시 30분께 부산 동래구 명륜동 일대에서 멧돼지 5~6마리가...</div>
+                                    </div>
                                 </div>
-                                <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
                             </div>
                         </div>
                     </div>
@@ -36,6 +38,7 @@ $(function(){
                     <div class="col-lg-3 col-sm-6">
                         <div class="card" style="background-color: #FFFFFF">
                             <div class="card-body">
+                            	<h3 class="card-title text-primary"><b>날씨</b></h3>
 								<h4><b>${time1 }</b></h4>
                                 <div class="bootstrap-carousel">
                                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
