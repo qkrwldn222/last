@@ -216,7 +216,9 @@ public class GoodTripWeatherManager {
 			
 			cal.setTime(date);
 			cal.add(Calendar.DATE, i);
-			String dateStr = cal.get(Calendar.YEAR) + "" + (cal.get(Calendar.MONTH)+1) + "" + cal.get(Calendar.DATE);
+			String dateStr = cal.get(Calendar.YEAR) + "";
+			dateStr += (cal.get(Calendar.MONTH)+1) < 10 ? "0" + (cal.get(Calendar.MONTH)+1) + "" : (cal.get(Calendar.MONTH)+1) + "";
+			dateStr += cal.get(Calendar.DATE) < 10 ? "0" + cal.get(Calendar.DATE) : cal.get(Calendar.DATE) + "";
 			vo.setDate(dateStr);
 			
 			// ±â¿Â

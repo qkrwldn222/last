@@ -12,7 +12,7 @@ var favCheck = false;
 $(function() {       
 	var id = $('#memId').val();
 	var sid = $('#sid').val();
-	var link = '../search/leisure_detail.do';
+	var link = '../search/luxurytour_detail.do';
 	var title = $('#title').val();
 	
 	$.ajax({
