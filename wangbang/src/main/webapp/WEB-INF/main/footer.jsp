@@ -12,7 +12,8 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright &copy; 쌍용강북센터 왕방갑서 <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+                <p>Copyright &copy; 쌍용강북센터 어서오이소  2019<a href="https://themeforest.net/user/quixlab"> Quixlab</a></p>
+                <p><a href="https://github.com/Springfinalproject/last">https://github.com/Springfinalproject/last</a></p>
             </div>
         </div>
         <!--**********************************
