@@ -26,6 +26,7 @@ public class TourstayresDAO {
 		List<StayVO> list = new ArrayList<StayVO>();
 		Query query = new Query();
 		list = mt.find(query, StayVO.class,"stay");// find = select , findOne = selectOne(하나만가져올때)
+		System.out.println(list.get(1).getDataTitle());
 		return list;
 	}
 	public List<RestaurantVO> res_AllData() {

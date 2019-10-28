@@ -34,7 +34,82 @@ public class CourseController {
 	
 	@RequestMapping("course/course_type.do")
 	public String course_type(Model model,String fd,String sno){
-		/*List<RecommandVO> list=rm.recommand_find(fd,Integer.parseInt(sno));
+		List<RecommandVO> list=rm.recommand_find(fd,Integer.parseInt(sno));
+		
+		
+		if(sno.equals("1")){
+			List<StayVO> mList=new ArrayList<StayVO>();
+			//System.out.println("여기까지1"+list.get(1).getTitle());
+			for(RecommandVO vo:list){
+				StayVO mvo=dao.stay_detail(vo.getTitle());
+				if(mvo.getWgsx().equals("-")){
+					continue;
+				}
+				if(mvo.getDataTitle().contains(" - ")){
+					mvo.setDataTitle(mvo.getDataTitle().substring(0,mvo.getDataTitle().indexOf(" - ")));
+				}
+				System.out.println("=========");
+				System.out.println(mvo.getDataTitle());
+				System.out.println(mvo.getWgsx());
+				System.out.println(mvo.getWgsy());
+				System.out.println("@@@@@@@@@");
+				mList.add(mvo);
+			}
+			model.addAttribute("mList", mList);
+			model.addAttribute("list", list);
+			
+			
+		}else if(sno.equals("2")){
+			List<RestaurantVO> mList=new ArrayList<RestaurantVO>();
+			for(RecommandVO vo:list){
+				RestaurantVO mvo=dao.res_detail(vo.getTitle());
+				if(mvo.getWgsx().equals("-")){
+					continue;
+				}
+				if(mvo.getDataTitle().contains(" - ")){
+					mvo.setDataTitle(mvo.getDataTitle().substring(0,mvo.getDataTitle().indexOf(" - ")));
+				}
+				System.out.println("=========");
+				System.out.println(mvo.getDataTitle());
+				System.out.println(mvo.getWgsx());
+				System.out.println(mvo.getWgsy());
+				System.out.println("@@@@@@@@@");
+				mList.add(mvo);
+			}
+			model.addAttribute("mList", mList);
+			model.addAttribute("list", list);
+			
+		}else if(sno.equals("3")){
+			List<ThemeTourVO> mList=new ArrayList<ThemeTourVO>();
+			for(RecommandVO vo:list){
+				ThemeTourVO mvo=dao.tour_detail(vo.getTitle());
+				if(mvo.getWgsx().equals("-")){
+					continue;
+				}
+				if(mvo.getDataTitle().contains(" - ")){
+					mvo.setDataTitle(mvo.getDataTitle().substring(0,mvo.getDataTitle().indexOf(" - ")));
+				}
+				
+				System.out.println("=========");
+				System.out.println(mvo.getDataTitle());
+				System.out.println(mvo.getWgsx());
+				System.out.println(mvo.getWgsy());
+				System.out.println("@@@@@@@@@");
+				mList.add(mvo);
+			}
+			model.addAttribute("mList", mList);
+			model.addAttribute("list", list);
+			
+		}
+		
+		
+		
+		return "type";
+	}
+	
+	@RequestMapping("course/course_list_data.do")//
+	public String course_list_data(Model model,String fd,String sno){	//fd:rd,sno:sno
+		List<RecommandVO> list=rm.recommand_find(fd,Integer.parseInt(sno));
 		
 		
 		if(sno.equals("1")){
@@ -90,70 +165,6 @@ public class CourseController {
 			model.addAttribute("list", list);
 			
 		}
-		*/
-		
-		
-		return "type";
-	}
-	
-	@RequestMapping("course/course_list_data.do")//
-	public String course_list_data(Model model,String fd,String sno){	//fd:rd,sno:sno
-		/*List<RecommandVO> list=rm.recommand_find(fd,Integer.parseInt(sno));
-		
-		
-		if(sno.equals("1")){
-			List<StayVO> mList=new ArrayList<StayVO>();
-			for(RecommandVO vo:list){
-				StayVO mvo=dao.stay_detail(vo.getTitle());
-				if(mvo.getWgsx().equals("-")){
-					continue;
-				}
-				System.out.println("=========");
-				System.out.println(mvo.getDataTitle());
-				System.out.println(mvo.getWgsx());
-				System.out.println(mvo.getWgsy());
-				System.out.println("@@@@@@@@@");
-				mList.add(mvo);
-			}
-			model.addAttribute("mList", mList);
-			model.addAttribute("list", list);
-			
-			
-		}else if(sno.equals("2")){
-			List<RestaurantVO> mList=new ArrayList<RestaurantVO>();
-			for(RecommandVO vo:list){
-				RestaurantVO mvo=dao.res_detail(vo.getTitle());
-				if(mvo.getWgsx().equals("-")){
-					continue;
-				}
-				System.out.println("=========");
-				System.out.println(mvo.getDataTitle());
-				System.out.println(mvo.getWgsx());
-				System.out.println(mvo.getWgsy());
-				System.out.println("@@@@@@@@@");
-				mList.add(mvo);
-			}
-			model.addAttribute("mList", mList);
-			model.addAttribute("list", list);
-			
-		}else if(sno.equals("3")){
-			List<ThemeTourVO> mList=new ArrayList<ThemeTourVO>();
-			for(RecommandVO vo:list){
-				ThemeTourVO mvo=dao.tour_detail(vo.getTitle());
-				if(mvo.getWgsx().equals("-")){
-					continue;
-				}
-				System.out.println("=========");
-				System.out.println(mvo.getDataTitle());
-				System.out.println(mvo.getWgsx());
-				System.out.println(mvo.getWgsy());
-				System.out.println("@@@@@@@@@");
-				mList.add(mvo);
-			}
-			model.addAttribute("mList", mList);
-			model.addAttribute("list", list);
-			
-		}*/
 		
 		
 		

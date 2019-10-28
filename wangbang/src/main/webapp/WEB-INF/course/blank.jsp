@@ -21,7 +21,6 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 	var markers = [];
 
 	// 마커 하나를 지도위에 표시합니다 
-	addMarker(new kakao.maps.LatLng(35.179820,129.074991 ));
 	<c:if test="${mList!=null }">
 		<c:forEach var="vo" items="${mList}">
 			addMarker(new kakao.maps.LatLng(<c:out value="${vo.wgsx}"/>, <c:out value="${vo.wgsy}"/>));
