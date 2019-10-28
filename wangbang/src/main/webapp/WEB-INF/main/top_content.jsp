@@ -38,8 +38,7 @@ $(function(){
                     <div class="col-lg-3 col-sm-6">
                         <div class="card" style="background-color: #FFFFFF">
                             <div class="card-body">
-                            	<h3 class="card-title text-primary"><b>날씨</b></h3>
-								<h4><b>${time1 }</b></h4>
+                            	<h3 class="card-title text-primary"><b>날씨 [ ${time1 } ]</b></h3>
                                 <div class="bootstrap-carousel">
                                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                                         <div class="carousel-inner">
