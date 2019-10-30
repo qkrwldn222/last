@@ -45,6 +45,19 @@ $(function(){
 		
 		$.ajax({
 			type:'post',
+			url:'../beach/beach_spot.do',
+			data:{no:no},
+			success:function(res){
+				//alert(res);
+				//console.log("success");
+				$('#spotprint').html("");
+				$('#spotprint').html(res);
+				$('#spotprint').show();
+			}
+		});
+		
+		$.ajax({
+			type:'post',
 			url:'../beach/beach_location.do',
 			data:{no:no},
 			success:function(response)
@@ -202,6 +215,7 @@ $(function(){
 							
 							<div id="blogprint"></div>
 							<div id="resprint"></div>
+							<div id="spotprint"></div>
 							<h4 class="text-secondary" id="bChoose" style="margin-bottom: 20px; margin-top: 30px;"><b>정보를 표시할 해수욕장을 선택해주세요!</b></h4>
 							<%-- <h4 class="text-secondary" style="margin-bottom: 20px; margin-top: 30px;"><b>블로그 리뷰</b></h4>
 								<div class="row" style="margin-top:20px;">

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import com.sist.dao.BeachDAO;
 import com.sist.vo.BeachBlogVO;
 import com.sist.vo.BeachResVO;
+import com.sist.vo.BeachSpotVO;
 
 @Component("bmm")
 public class BeachInfoManager {
@@ -24,8 +25,9 @@ public class BeachInfoManager {
 	public static void main(String[] args) {
 		ApplicationContext app = new ClassPathXmlApplicationContext("app2.xml");
 		BeachInfoManager mgr = (BeachInfoManager)app.getBean("bmm");
-		mgr.beachResListData();
+		//mgr.beachResListData();
 		//mgr.beachAttListData();
+		mgr.beachSpotListData();
 	}
 	
 	public void beachResListData(){
@@ -82,5 +84,32 @@ public class BeachInfoManager {
 			}
 		} catch (Exception e) {e.printStackTrace();}
 		
+	}
+	
+	public void beachSpotListData(){
+		List<BeachSpotVO> list = new ArrayList<BeachSpotVO>();
+		
+		try {
+			Document doc = Jsoup.connect("https://store.naver.com/attractions/detail?id=13490896&query=%EC%9D%BC%EA%B4%91%ED%95%B4%EC%88%98%EC%9A%95%EC%9E%A5&tab=attractions").get();
+			Elements title = doc.select("div.nearbiz_tab span.tit_inner a.name");
+			Elements info = doc.select("div.nearbiz_tab div.txt");
+			Elements image = doc.select("div.nearbiz_tab div.thumb img");
+			
+			for(int i=0; i<4; i++){
+				System.out.println("이름 : " + title.get(i).text());
+				System.out.println("소개 : " + info.get(i).text());
+				System.out.println(image.get(i).attr("src"));
+				System.out.println("================================");
+				
+				BeachSpotVO vo = new BeachSpotVO();
+				vo.setNo(6);
+				vo.setTitle(title.get(i).text());
+				vo.setInfo(info.get(i).text());
+				vo.setImage(image.get(i).attr("src"));
+				
+				dao.beachSpotInsert(vo);
+			}
+			
+		} catch (Exception e) {e.printStackTrace();}
 	}
 }

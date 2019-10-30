@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.sist.mapper.BeachMapper;
 import com.sist.vo.BeachBlogVO;
 import com.sist.vo.BeachResVO;
+import com.sist.vo.BeachSpotVO;
 
 @Repository
 public class BeachDAO {
@@ -22,11 +23,19 @@ public class BeachDAO {
 		mapper.beachBlogInsert(vo);
 	}
 	
+	public void beachSpotInsert(BeachSpotVO vo){
+		mapper.beachSpotInsert(vo);
+	}
+	
 	public List<BeachBlogVO> beachBlogData(int no){
 		return mapper.beachBlogData(no);
 	}
 	
 	public List<BeachResVO> beachResData(int no){
 		return mapper.beachResData(no);
+	}
+	
+	public List<BeachSpotVO> beachSpotData(int no){
+		return mapper.beachSpotData(no);
 	}
 }

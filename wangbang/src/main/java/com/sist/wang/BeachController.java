@@ -12,6 +12,7 @@ import com.sist.dao.BeachDAO;
 import com.sist.manager.BeachManager;
 import com.sist.vo.BeachBlogVO;
 import com.sist.vo.BeachResVO;
+import com.sist.vo.BeachSpotVO;
 import com.sist.vo.BeachVO;
 
 @Controller
@@ -84,6 +85,33 @@ public class BeachController {
 			html = sb.toString();
 		}
 		
+		return html;
+	}
+	
+	@RequestMapping("beach/beach_spot.do")
+	@ResponseBody
+	public String beach_spot(int no){
+		String html = "";
+		StringBuilder sb = new StringBuilder("");
+		List<BeachSpotVO> sList = dao.beachSpotData(no);
+		
+		if(no==1 || no==6 || no==4){
+			sb.append("<h4 class='text-secondary' style='margin-bottom: 20px; margin-top: 30px;'><b>가볼만한 곳</b></h4>");
+			sb.append("<div class='row' style='margin-top:20px;'>");
+			for(BeachSpotVO svo:sList){
+				sb.append("<div class='col-md-6 col-lg-3'>");
+				sb.append("<div class='card'>");
+				sb.append("<div class='card-body'>");
+				sb.append("<img src='" + svo.getImage() + "' style='margin-bottom:15px'>");
+				sb.append("<h6 class='card-title'>" + svo.getTitle() + "</h6>");
+				sb.append("<p class='card-text'>" + svo.getInfo() + "</p>");
+				sb.append("</div>");
+				sb.append("</div>");
+				sb.append("</div>");
+			}
+			sb.append("</div>");
+			html = sb.toString();
+		}
 		return html;
 	}
 }
