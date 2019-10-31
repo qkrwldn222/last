@@ -1,8 +1,12 @@
 package com.sist.wang;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
+
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -61,7 +65,10 @@ public class ScheduleRestController {
 				JSONObject obj = new JSONObject();
 				obj.put("mainimgthumb", vo.getMainimgthumb());
 				obj.put("dataTitle", vo.getDataTitle());
-				obj.put("addr", vo.getAddr());
+				obj.put("tel", vo.getTel());
+		        obj.put("addr", vo.getAddr());
+		        obj.put("price", vo.getPrice());
+		        obj.put("dataContent", vo.getDataContent());
 				arr.add(obj);
 			}
 			break;
@@ -71,7 +78,10 @@ public class ScheduleRestController {
 				JSONObject obj = new JSONObject();
 				obj.put("mainimgthumb", vo.getMainimgthumb());
 				obj.put("dataTitle", vo.getDataTitle());
-				obj.put("addr", vo.getAddr());
+				obj.put("tel", vo.getTel());
+		        obj.put("addr", vo.getAddr());
+		        obj.put("price", "");
+		        obj.put("dataContent", vo.getDataContent());
 				arr.add(obj);
 			}
 			break;
@@ -81,7 +91,10 @@ public class ScheduleRestController {
 				JSONObject obj = new JSONObject();
 				obj.put("mainimgthumb", vo.getMainimgthumb());
 				obj.put("dataTitle", vo.getDataTitle());
-				obj.put("addr", vo.getAddr());
+				obj.put("tel", vo.getTel());
+		        obj.put("addr", vo.getAddr());
+		        obj.put("price", vo.getPrice());
+		        obj.put("dataContent", vo.getDataContent());
 				arr.add(obj);
 			}
 			break;
@@ -91,10 +104,9 @@ public class ScheduleRestController {
 		return json;
 	}
 	@RequestMapping(value="schedule/sch_insert.do",produces = "application/json; charset=utf8")
-	public String sch_insert(String insertdata,String daydata,String schtitle){
-		
+	public String sch_insert(String insertdata,String daydata,String schtitle,HttpSession session){
 		ScheduleVO svo = new ScheduleVO();
-		String id = "ran";
+		String id = (String) session.getAttribute("id");
 		svo.setId(id);
 		svo.setStartday(daydata.substring(3));
 		svo.setTitle(schtitle);
@@ -105,20 +117,48 @@ public class ScheduleRestController {
 		while (st.hasMoreTokens()) {
 			String allst = st.nextToken();
 			String time = allst.substring(0,allst.indexOf(":"));
-			String cosname = allst.substring(allst.indexOf(":")+1);		
-			System.out.println(time);
-			System.out.println(cosname);
+			String cosname = allst.substring(allst.indexOf(":")+1,allst.indexOf("*"));
+			String cosimg =  allst.substring(allst.indexOf("*")+1);
 			TimeVO tvo = new TimeVO();
 			
 			tvo.setSno(sdao.scheduleno(svo));
 			tvo.setTime(Integer.parseInt(time));
 			tvo.setDatasid(cosname);
+			tvo.setCosimg(cosimg);
 			sdao.timeInsert(tvo);
 		}
 		System.out.println(daydata.substring(3));
-		
-		
-		
+				
 		return "¼º°ø";
+	}
+	
+	@RequestMapping(value="schedule/schedule_data.do",produces = "application/json; charset=utf8")
+	public String schedule_data(String page,HttpSession session){
+		JSONArray arr = new JSONArray();
+		String json = "";
+		String id = (String) session.getAttribute("id");
+		 if(page==null) page="1";
+		 
+		 int curpage=Integer.parseInt(page);
+		   HashMap map=new HashMap();
+		   int rowSize=8;
+		   int start=(curpage*rowSize)-(rowSize-1);
+		   int end=(curpage*rowSize);
+		   
+		   map.put("id", id);
+		   map.put("start", start);
+		   map.put("end", end);
+		   
+		   List<ScheduleVO> list = sdao.scheduleData(map);
+		   
+		   for(ScheduleVO vo:list){
+				JSONObject obj = new JSONObject();
+				obj.put("schTitle", vo.getTitle());
+				obj.put("startDay", vo.getStartday());
+				obj.put("cosimg", vo.getCosimg());
+				arr.add(obj);
+			}
+		   json = arr.toJSONString();
+		   return json;
 	}
 }

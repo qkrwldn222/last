@@ -1,12 +1,17 @@
 package com.sist.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.ScheduleMapper;
+import com.sist.vo.LeisureVO;
 import com.sist.vo.ScheduleVO;
 import com.sist.vo.TimeVO;
 
@@ -30,5 +35,9 @@ public class ScheduleDAO {
 	 public void timeInsert(TimeVO vo){
 		 List<TimeVO> list = new ArrayList<TimeVO>();
 		 mapper.timeInsert(vo);				
+	 }
+	 
+	 public List<ScheduleVO> scheduleData(HashMap map){
+		 return mapper.scheduleData(map);
 	 }
 }

@@ -18,7 +18,5 @@ public class ScheduleVO {
 	private String id;
 	private String title;
 	private String startday;
-	private String inwon;
-	private String together;
-	private String open;
+	private String cosimg;
 }

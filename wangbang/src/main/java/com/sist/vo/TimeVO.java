@@ -15,4 +15,5 @@ public class TimeVO {
 	private int sno;
 	private int time;
 	private String datasid;
+	private String cosimg;
 }
