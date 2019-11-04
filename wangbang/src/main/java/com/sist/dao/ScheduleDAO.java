@@ -27,7 +27,7 @@ public class ScheduleDAO {
 		mapper.scheduleInsert(vo);				
 	 }
 	 
-	 public int scheduleno(ScheduleVO vo){
+	 public int scheduleGetNo(ScheduleVO vo){
 		 List<ScheduleVO> list = new ArrayList<ScheduleVO>();
 		 return mapper.scheduleGetNo(vo);				
 	 }
@@ -39,5 +39,21 @@ public class ScheduleDAO {
 	 
 	 public List<ScheduleVO> scheduleData(HashMap map){
 		 return mapper.scheduleData(map);
+	 }
+	 
+	 public ScheduleVO scheduleDetail(int sno){
+		 return mapper.scheduleDetail(sno);
+	 }
+	 
+	 public List<TimeVO> sTimeDetail(int sno){
+		 return mapper.sTimeDetail(sno);
+	 }
+	 
+	 public void scheduleUpdate(ScheduleVO vo){
+		 mapper.scheduleUpdate(vo);
+	 }
+	 
+	 public void timeDelete(int sno){
+		 mapper.timeDelete(sno);
 	 }
 }

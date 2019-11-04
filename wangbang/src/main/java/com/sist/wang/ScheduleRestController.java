@@ -53,7 +53,6 @@ public class ScheduleRestController {
 	
 	@RequestMapping(value="schedule/stay_data.do",produces = "application/json; charset=utf8")
 	public String stay_data(String page,int no){
-		System.out.println("no="+no);
 		String json = "";
 		JSONArray arr = new JSONArray();
 		
@@ -118,16 +117,17 @@ public class ScheduleRestController {
 			String allst = st.nextToken();
 			String time = allst.substring(0,allst.indexOf(":"));
 			String cosname = allst.substring(allst.indexOf(":")+1,allst.indexOf("*"));
-			String cosimg =  allst.substring(allst.indexOf("*")+1);
+			String cosimg =  allst.substring(allst.indexOf("*")+1,allst.indexOf("^"));
+			String cosaddr =  allst.substring(allst.indexOf("^")+1);
 			TimeVO tvo = new TimeVO();
 			
-			tvo.setSno(sdao.scheduleno(svo));
+			tvo.setSno(sdao.scheduleGetNo(svo));
 			tvo.setTime(Integer.parseInt(time));
-			tvo.setDatasid(cosname);
+			tvo.setCostitle(cosname);
 			tvo.setCosimg(cosimg);
+			tvo.setCosaddr(cosaddr);
 			sdao.timeInsert(tvo);
 		}
-		System.out.println(daydata.substring(3));
 				
 		return "¼º°ø";
 	}
@@ -153,12 +153,40 @@ public class ScheduleRestController {
 		   
 		   for(ScheduleVO vo:list){
 				JSONObject obj = new JSONObject();
+				obj.put("no", vo.getNo());
 				obj.put("schTitle", vo.getTitle());
 				obj.put("startDay", vo.getStartday());
 				obj.put("cosimg", vo.getCosimg());
 				arr.add(obj);
 			}
 		   json = arr.toJSONString();
+		   return json;
+	}
+	
+	@RequestMapping(value="schedule/schedule_layerdetail.do",produces = "application/json; charset=utf8")
+	public String schedule_layerdetail(String no){
+		JSONArray arr = new JSONArray();
+		String json = "";
+		   
+		   ScheduleVO svo = sdao.scheduleDetail(Integer.parseInt(no));
+		   List<TimeVO> tlist = sdao.sTimeDetail(Integer.parseInt(no));
+		   
+		   for(TimeVO vo:tlist){
+				JSONObject obj = new JSONObject();
+				obj.put("time", vo.getTime());
+				obj.put("cosTitle", vo.getCostitle());
+				obj.put("cosImg", vo.getCosimg());
+				obj.put("cosAddr", vo.getCosaddr());
+				arr.add(obj);
+			}
+		   JSONObject obj = new JSONObject();
+		   obj.put("schNo", svo.getNo());
+		   obj.put("schTitle", svo.getTitle());
+		   obj.put("startDay", svo.getStartday());
+		   obj.put("timeData", arr);
+		   
+		   json = obj.toJSONString();
+		   System.out.println(json);
 		   return json;
 	}
 }

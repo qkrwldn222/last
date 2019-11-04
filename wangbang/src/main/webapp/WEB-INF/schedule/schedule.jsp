@@ -60,6 +60,8 @@ function wrapWindowByMask(){
 $(function(){
 	  $("#layerPopup").hide();
 	  $("#contents > a").click(function(){
+		  $("#insertbtn").show();
+		  $("#updatebtn").hide();		 
 		  wrapWindowByMask();
 	    $("#contents > a").blur();
 	    $("#layerPopup").show();
@@ -67,7 +69,7 @@ $(function(){
 	    return false;
 	  });
 	  $("#layerPopup a").keydown(function(e){
-	    if(e.shiftKey && e.keyCode == 9){ // Shift + Tab 키를 의미합니다.
+	    if(e.shiftKey && e.keyCode == 9){
 	      $("#contents > a").focus();
 	      $("#layerPopup").hide();
 	      return false;
@@ -78,13 +80,16 @@ $(function(){
 		  $('#mask').hide();
 	    $("#contents > a").focus();
 	    $("#layerPopup").hide();
+	    for(var i=0;i<17;i++){
+			document.getElementById("time"+(i+8)).innerHTML = "";			
+		}
 	  });
 	});
 
 </script>
 </head>
 <body>   
-						<div id="mask"></div> 
+	<div id="mask"></div> 
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
@@ -109,8 +114,7 @@ $(function(){
 					data_json:[],
 					page : 1,
 					no:1,
-					listData:[],
-					coordsData:[]
+					listData:[]
 				  }
 				this.prevHandler=this.prevHandler.bind(this);
 				this.nextHandler=this.nextHandler.bind(this);
@@ -163,7 +167,7 @@ $(function(){
 			for(var i=0;i<17;i++){
 				timedata[i] = document.getElementById("time"+(i+8));
 				if(timedata[i].innerHTML != "" && timedata[i].innerHTML != null){
-					insertdata = insertdata+","+(String(i+8)+":"+timedata[i].innerHTML+"*"+timedata[i].getAttribute('data-img'));				
+					insertdata = insertdata+","+(String(i+8)+":"+timedata[i].innerHTML+"*"+timedata[i].getAttribute('data-img')+"^"+timedata[i].getAttribute('data-addr'));				
 				}
 			}
 
@@ -178,6 +182,45 @@ $(function(){
 			location.href="../schedule/schedule.do";
         	})
     	}
+
+		update(){
+			var timedata = new Array();
+			var insertdata = "";
+			var schtitle = document.getElementById("schtitle");
+			var daydata = document.getElementById("strdate");
+			for(var i=0;i<17;i++){
+				timedata[i] = document.getElementById("time"+(i+8));
+				if(timedata[i].innerHTML != "" && timedata[i].innerHTML != null){
+					insertdata = insertdata+","+(String(i+8)+":"+timedata[i].innerHTML+"*"+timedata[i].getAttribute('data-img')+"^"+timedata[i].getAttribute('data-addr'));				
+				}
+			}
+
+			var form = document.createElement("form");      
+    		form.setAttribute("method","post");            
+    		form.setAttribute("action","../schedule/sch_update.do");     
+    		document.body.appendChild(form);            
+  
+    		var titleupdate = document.createElement("input");  
+    		titleupdate.setAttribute("type","hidden");          
+    		titleupdate.setAttribute("name","schtitle");          
+    		titleupdate.setAttribute("value",schtitle.value);             
+    		form.appendChild(titleupdate);
+
+			var dayupdate = document.createElement("input");  
+    		dayupdate.setAttribute("type","hidden");          
+    		dayupdate.setAttribute("name","daydata");          
+    		dayupdate.setAttribute("value",daydata.value);             
+    		form.appendChild(dayupdate); 
+
+			var dataupdate = document.createElement("input");  
+    		dataupdate.setAttribute("type","hidden");          
+    		dataupdate.setAttribute("name","insertdata");          
+    		dataupdate.setAttribute("value",insertdata);             
+    		form.appendChild(dataupdate);                 
+ 
+    		form.submit();
+
+		}
 
 		drag(ev) {
     		this.dragged = ev.currentTarget;
@@ -201,19 +244,24 @@ $(function(){
 			var title = optionElement.id;
     		ev.target.append(title);
 			ev.target.setAttribute('data-img',img);
+			ev.target.setAttribute('data-addr',addr);
 
+			var addrData = this.state.listData;			
+            addrData.push(addr)
+            this.setState({listData:addrData});	
+			this.map(addrData);
+
+		}
+
+		map(addrData){
 			var geocoder = new kakao.maps.services.Geocoder();
-			
+
 			let el = document.getElementById('map');
       		let map = new daum.maps.Map(el, {
        		center: new daum.maps.LatLng(33.450701,126.570667),
 			level: 8	
       		});
-
-			var addrData = this.state.listData;			
-            addrData.push(addr)
-            this.setState({listData:addrData});	
-
+		
 			var coordsArray = []; // 좌표담을 배열
 			var distanceArray = [];
 			var distance;
@@ -237,7 +285,7 @@ $(function(){
 				var polyline = new daum.maps.Polyline({
     			path: linePath, // 선을 구성하는 좌표배열 입니다
     			strokeWeight: 5, // 선의 두께 입니다
-    			strokeColor: '#FFAE00', // 선의 색깔입니다
+    			strokeColor: '#7571f9', // 선의 색깔입니다
     			strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
     			strokeStyle: 'solid' // 선의 스타일입니다
 				});
@@ -258,7 +306,6 @@ $(function(){
     			} 
 			});
 		});
-
 		}
 
 		listChange(no){
@@ -287,7 +334,8 @@ $(function(){
 			document.getElementById("detail_addr").innerHTML = addr;
 			document.getElementById("detail_tel").innerHTML = tel;
 			document.getElementById("detail_price").innerHTML = price;
-			document.getElementById("detail_content").innerHTML = content;
+			document.getElementById("detail_content").innerHTML = "<p>"+content+"</p>";
+			
 		}
 
 		date(){
@@ -375,7 +423,7 @@ $(function(){
 								  			<c:forEach var="i" begin="8" end="24" step="1">								  			
 								  				<tr data-time="${i}:00">
 								  					<td>${i }:00</td>
-								  					<td><div id="time${i}" onDragOver={this.allowDrop.bind(this)} onDrop={this.drop.bind(this)} style={{"border":"1px solid #e3e3e3","width":"300px","height":"30px"}} data-img=""></div></td>		
+								  					<td><div id="time${i}" onDragOver={this.allowDrop.bind(this)} onDrop={this.drop.bind(this)} style={{"border":"1px solid #e3e3e3","width":"300px","height":"30px"}} data-img="" data-addr=""></div></td>		
 								  				</tr>
 								  			</c:forEach>								  			
 								  		</table>
@@ -392,8 +440,9 @@ $(function(){
                                 			</div>
                             			</div>										
 								  	</div>
-<div style={{"clear":"both","text-align":"center"}}> 
-<input type={"button"} value={"저장"} className={"btn mb-1 btn-rounded btn-outline-primary btn-lg"} onClick={this.insert} style={{"margin":"auto"}}/>
+<div style={{"clear":"both","text-align":"center"}} id="insertdiv"> 
+<input type={"button"} value={"저장"} className={"btn mb-1 btn-rounded btn-outline-primary btn-lg"} onClick={this.insert} style={{"margin":"auto"}} id="insertbtn"/>
+<input type={"button"} value={"수정"} className={"btn mb-1 btn-rounded btn-outline-primary btn-lg"} onClick={this.update} style={{"margin":"auto"}} id="updatebtn"/>
 </div>
 </div>
 				  )
@@ -412,8 +461,7 @@ $(function(){
 				  super(props);
 				  this.state={
 					data_json:[],
-					page : 1,
-					id:'ran'		
+					page : 1		
 				  }
 				this.prevHandler=this.prevHandler.bind(this);
 				this.nextHandler=this.nextHandler.bind(this);
@@ -454,16 +502,115 @@ $(function(){
             _this.setState({data_json:response.data});
         	})
     	}
+
+		layerDetail(no){
+		wrapWindowByMask();
+	    $("#contents > a").blur();
+	    $("#layerPopup").show();
+	    $("#layerPopup a").focus();
+
+		$("#insertbtn").hide();
+		$("#updatebtn").show();
+
+		axios.get('http://localhost:8080/wang/schedule/schedule_layerdetail.do',{
+            params:{
+                no:no
+            }
+			}).then(function (response) {
+			var data = response.data;
+			var timeData = data.timeData;
+			var schTitle = data.schTitle;
+			var startDay = data.startDay;
+			var addrData = [];
+			document.getElementById("schtitle").value = schTitle;
+			document.getElementById("strdate").value = "201"+startDay;
+				
+			$.each(timeData,function(key,value) {								
+	  			var timeno = value.time;
+				var timeid = document.getElementById("time"+timeno);
+				timeid.innerHTML = value.cosTitle;
+				timeid.setAttribute('data-img',value.cosImg);
+				timeid.setAttribute('data-addr',value.cosAddr);
+				addrData.push("부산 "+value.cosTitle);
+	 		});
+
+			var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+
+var mapContainer = document.getElementById('map'),
+    mapOption = {
+        center: new kakao.maps.LatLng(35.195409, 129.088274), 
+        level: 10
+    };  
+   
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+var ps = new kakao.maps.services.Places(); 
+
+var linePath = [];
+var distanceArray = [];
+var distance;
+
+addrData.forEach(function(addr, index) {
+ps.keywordSearch(addr, placesSearchCB);
+
+}); 
+
+function placesSearchCB (data, status, pagination) {
+    if (status === kakao.maps.services.Status.OK) {
+        var bounds = new kakao.maps.LatLngBounds();
+
+        for (var i=0; i<1; i++) {
+            displayMarker(data[i]);    
+            line(data[i]);    
+            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        }       		
+    } 
+}
+function line(place){
+	
+	linePath.push(new kakao.maps.LatLng(place.y, place.x));			
+    		
+	var polyline = new daum.maps.Polyline({
+    path: linePath, // 선을 구성하는 좌표배열 입니다
+    strokeWeight: 5, // 선의 두께 입니다
+    strokeColor: '#7571f9', // 선의 색깔입니다
+    strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+    strokeStyle: 'solid' // 선의 스타일입니다
+	});
+				
+	polyline.setMap(map);
+
+	distanceArray.push(Math.round(polyline.getLength()));
+	distance = Math.round(polyline.getLength());
+				
+	document.getElementById("day").innerHTML = "총거리 : "+distance+"m"
+}
+function displayMarker(place) {
+    
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: new kakao.maps.LatLng(place.y, place.x) 
+    });
+
+    kakao.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+        infowindow.open(map, marker);
+    });
+}
+		
+        	})
+		}
+		
 			  render(){
                   const html=this.state.data_json.map((m)=>
                      <div className="col-md-6 col-lg-3">
-                                <div className="card">                          
+                                <a href='javascript:void(0)' onClick={this.layerDetail.bind(this,m.no)}><div className="card">                          
                                     <div className="card-body">
 										<img className="img" src={m.cosimg} alt="" style={{"width":"100%","height":"230"}}/>
                                         <h5 className="card-title">{m.schTitle }</h5>
                                         <p className="card-text">201{m.startDay }</p>
                                     </div>
-                                </div>
+                                </div></a>
                             </div>
                   );
 				  return (
