@@ -60,7 +60,8 @@ public class APIWeather {
 		for(int i=0; i<nx.length; i++) {
 
         StringBuilder urlBuilder = new StringBuilder("http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData"); /*URL*/
-        urlBuilder.append("?serviceKey=Fl4k7N7JREC0WiI0T8%2FbgAhcBalmz0wkIuvy7qnFXTpEER2SydIjOXYI%2F7wrf2s6TYHXG8zC35YYPITT9nmK%2Bg%3D%3D");
+        urlBuilder.append("?serviceKey=UZY3s0p%2FOXcwMPHgYmVUhch70jVj19wX5XiUNd10VR689ETQ9uwC6clThszEn%2FEVlUWD0FNU15gDoQiKRvySTw%3D%3D");
+        //Fl4k7N7JREC0WiI0T8%2FbgAhcBalmz0wkIuvy7qnFXTpEER2SydIjOXYI%2F7wrf2s6TYHXG8zC35YYPITT9nmK%2Bg%3D%3D
         // urlBuilder.append("&base_date=20191012&base_time=0500&nx=60&ny=127&_type=xml"); 
         urlBuilder.append("&base_date="+dresult );
         urlBuilder.append("&base_time="+realtime); 
