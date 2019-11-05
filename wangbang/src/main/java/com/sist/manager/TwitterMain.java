@@ -42,7 +42,7 @@ public class TwitterMain {
 				
 				FileWriter file;
 				try {
-					file = new FileWriter("c:\\jsonfile\\test9.json",false);
+					file = new FileWriter("c:\\jsonfile\\twitter.json",false);
 					file.write(jarr.toString());
 					file.flush();
 					file.close();
@@ -53,7 +53,7 @@ public class TwitterMain {
 			}
 		});
 		
-		String[] data = {"부산 관광","부산 숙박","부산 맛집","부산 문화"};
+		String[] data = {"부산"};
 		FilterQuery fq = new FilterQuery();
 		fq.track(data);
 		ts.filter(fq);

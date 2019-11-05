@@ -51,7 +51,7 @@ public class ScheduleRestController {
 	@Autowired
 	private ScheduleDAO sdao;
 	
-	@RequestMapping(value="schedule/stay_data.do",produces = "application/json; charset=utf8")
+	@RequestMapping(value="schedule/laysch_data.do",produces = "application/json; charset=utf8")
 	public String stay_data(String page,int no){
 		String json = "";
 		JSONArray arr = new JSONArray();
@@ -101,35 +101,6 @@ public class ScheduleRestController {
 		}
 		json = arr.toJSONString();
 		return json;
-	}
-	@RequestMapping(value="schedule/sch_insert.do",produces = "application/json; charset=utf8")
-	public String sch_insert(String insertdata,String daydata,String schtitle,HttpSession session){
-		ScheduleVO svo = new ScheduleVO();
-		String id = (String) session.getAttribute("id");
-		svo.setId(id);
-		svo.setStartday(daydata.substring(3));
-		svo.setTitle(schtitle);
-		sdao.scheduleInsert(svo);
-		
-		StringTokenizer st = new StringTokenizer(insertdata,",");
-		
-		while (st.hasMoreTokens()) {
-			String allst = st.nextToken();
-			String time = allst.substring(0,allst.indexOf(":"));
-			String cosname = allst.substring(allst.indexOf(":")+1,allst.indexOf("*"));
-			String cosimg =  allst.substring(allst.indexOf("*")+1,allst.indexOf("^"));
-			String cosaddr =  allst.substring(allst.indexOf("^")+1);
-			TimeVO tvo = new TimeVO();
-			
-			tvo.setSno(sdao.scheduleGetNo(svo));
-			tvo.setTime(Integer.parseInt(time));
-			tvo.setCostitle(cosname);
-			tvo.setCosimg(cosimg);
-			tvo.setCosaddr(cosaddr);
-			sdao.timeInsert(tvo);
-		}
-				
-		return "¼º°ø";
 	}
 	
 	@RequestMapping(value="schedule/schedule_data.do",produces = "application/json; charset=utf8")

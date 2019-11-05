@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>어서오이소</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script> 
@@ -104,10 +104,10 @@ $(function(){
 							    <label>작성자 : ${name }</label>
 							  </div>
 						  	  <div class="sch_div" style="overflow: auto;">																  													 												        										
-	   <div class="root" id="root">  </div>               
+	   							<div class="root" id="root">  </div>               
           <script type="text/babel">
 
-		  class Stay extends React.Component{
+		  class LaySchedule extends React.Component{
 			  constructor(props){
 				  super(props);
 				  this.state={
@@ -122,7 +122,7 @@ $(function(){
 			  }
 			  componentWillMount(){
 				  var _this=this;				  
-				  axios.get('http://localhost:8080/wang/schedule/stay_data.do',{
+				  axios.get('http://localhost:8080/wang/schedule/laysch_data.do',{
 					  params:{
 						  no:1,
 						  page:1
@@ -137,7 +137,7 @@ $(function(){
        		this.setState({page:this.state.page>1?this.state.page-1:this.state.page});
       		var _this=this;
 			
-       			axios.get('http://localhost:8080/wang/schedule/stay_data.do',{
+       			axios.get('http://localhost:8080/wang/schedule/laysch_data.do',{
          	  	 params:{
          	     	  page:_this.state.page-1,
 					  no:this.state.no
@@ -149,7 +149,7 @@ $(function(){
 		nextHandler(){
         	this.setState({page:this.state.page<${walkTotalPage}?this.state.page+1:this.state.page});
         	var _this=this;
-        	axios.get('http://localhost:8080/wang/schedule/stay_data.do',{
+        	axios.get('http://localhost:8080/wang/schedule/laysch_data.do',{
             	params:{
                 	page:_this.state.page+1,
 					no:this.state.no
@@ -171,16 +171,31 @@ $(function(){
 				}
 			}
 
-        	axios.get('http://localhost:8080/wang/schedule/sch_insert.do',{
-            	params:{
-                	insertdata:insertdata,
-					daydata:daydata.value,
-					schtitle:schtitle.value
-            	}
-        	}).then(function (response) {
-           alert("저장되었습니다.");
-			location.href="../schedule/schedule.do";
-        	})
+        	var form = document.createElement("form");      
+    		form.setAttribute("method","post");            
+    		form.setAttribute("action","../schedule/sch_insert.do");     
+    		document.body.appendChild(form);            
+  
+    		var titleupdate = document.createElement("input");  
+    		titleupdate.setAttribute("type","hidden");          
+    		titleupdate.setAttribute("name","schtitle");          
+    		titleupdate.setAttribute("value",schtitle.value);             
+    		form.appendChild(titleupdate);
+
+			var dayupdate = document.createElement("input");  
+    		dayupdate.setAttribute("type","hidden");          
+    		dayupdate.setAttribute("name","daydata");          
+    		dayupdate.setAttribute("value",daydata.value);             
+    		form.appendChild(dayupdate); 
+
+			var dataupdate = document.createElement("input");  
+    		dataupdate.setAttribute("type","hidden");          
+    		dataupdate.setAttribute("name","insertdata");          
+    		dataupdate.setAttribute("value",insertdata);             
+    		form.appendChild(dataupdate);                 
+ 
+    		form.submit();
+			alert('저장되었습니다.');
     	}
 
 		update(){
@@ -312,7 +327,7 @@ $(function(){
 		
 			this.setState({no:no});
         	var _this=this;
-        	axios.get('http://localhost:8080/wang/schedule/stay_data.do',{
+        	axios.get('http://localhost:8080/wang/schedule/laysch_data.do',{
             	params:{
                 	no:no,
 					page:1
@@ -412,7 +427,7 @@ $(function(){
       					</div> 						
 							  		</div>
   								</div>	
-                    </div>			
+                      </div>			
 								<input type="hidden" id="totalday" className="totalday" value="3"/>
 									<div className="sch_right_bottom">								 						
 								  		<table className="timetable" style={{"float":"left"}}>
@@ -436,22 +451,20 @@ $(function(){
                                         			<p className="card-text icon-phone menu-icon" id="detail_tel"> - 상세보기를 눌러 조회해보세요!!</p>
                                         			<p className="card-text fa fa-won" id="detail_price"> - 상세보기를 눌러 조회해보세요!!</p>
                                         			<p className="card-text icon-list menu-icon" id="detail_content" style={{"width":"100%","height":"140","overflow":"auto"}}> - 상세보기를 통해 조회해보세요!!</p>
-                                    			</div>
-                                			</div>
-                            			</div>										
-								  	</div>
-<div style={{"clear":"both","text-align":"center"}} id="insertdiv"> 
-<input type={"button"} value={"저장"} className={"btn mb-1 btn-rounded btn-outline-primary btn-lg"} onClick={this.insert} style={{"margin":"auto"}} id="insertbtn"/>
-<input type={"button"} value={"수정"} className={"btn mb-1 btn-rounded btn-outline-primary btn-lg"} onClick={this.update} style={{"margin":"auto"}} id="updatebtn"/>
-</div>
-</div>
+                                    			  </div>
+                                			  </div>
+                            			 </div>										
+								  	   </div>
+									   <div style={{"clear":"both","text-align":"center"}} id="insertdiv"> 
+                                       <input type={"button"} value={"저장"} className={"btn mb-1 btn-rounded btn-outline-primary btn-lg"} onClick={this.insert} style={{"margin":"auto"}} id="insertbtn"/>
+									   <input type={"button"} value={"수정"} className={"btn mb-1 btn-rounded btn-outline-primary btn-lg"} onClick={this.update} style={{"margin":"auto"}} id="updatebtn"/>
+									</div>
+								</div>
 				  )
 			  }
 		  }
-         ReactDOM.render(<Stay />,document.getElementById('root'));
-		</script>                
-       																						 
-															 																	  
+         ReactDOM.render(<LaySchedule />,document.getElementById('root'));
+		</script>                      																						 														 																	  
 							  </div>
 						  </div>
 						   <div class="col-12 m-b-30" id="root2">                 
@@ -535,71 +548,69 @@ $(function(){
 	 		});
 
 			var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-
-var mapContainer = document.getElementById('map'),
-    mapOption = {
-        center: new kakao.maps.LatLng(35.195409, 129.088274), 
-        level: 10
-    };  
+			var mapContainer = document.getElementById('map'),
+    		mapOption = {
+       		  center: new kakao.maps.LatLng(35.195409, 129.088274), 
+        	  level: 10
+    		};  
    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
+			var map = new kakao.maps.Map(mapContainer, mapOption); 
 
-var ps = new kakao.maps.services.Places(); 
+			var ps = new kakao.maps.services.Places(); 
 
-var linePath = [];
-var distanceArray = [];
-var distance;
+			var linePath = [];
+			var distanceArray = [];
+			var distance;
 
-addrData.forEach(function(addr, index) {
-ps.keywordSearch(addr, placesSearchCB);
+			addrData.forEach(function(addr, index) {
+				ps.keywordSearch(addr, placesSearchCB);
+			}); 
 
-}); 
+			function placesSearchCB (data, status, pagination) {
+    			if (status === kakao.maps.services.Status.OK) {
+        			var bounds = new kakao.maps.LatLngBounds();
 
-function placesSearchCB (data, status, pagination) {
-    if (status === kakao.maps.services.Status.OK) {
-        var bounds = new kakao.maps.LatLngBounds();
-
-        for (var i=0; i<1; i++) {
-            displayMarker(data[i]);    
-            line(data[i]);    
-            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-        }       		
-    } 
-}
-function line(place){
+        			for (var i=0; i<1; i++) {
+            			displayMarker(data[i]);    
+            			line(data[i]);    
+            			bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        			}       		
+    			} 
+			}
+			function line(place){
 	
-	linePath.push(new kakao.maps.LatLng(place.y, place.x));			
+				linePath.push(new kakao.maps.LatLng(place.y, place.x));			
     		
-	var polyline = new daum.maps.Polyline({
-    path: linePath, // 선을 구성하는 좌표배열 입니다
-    strokeWeight: 5, // 선의 두께 입니다
-    strokeColor: '#7571f9', // 선의 색깔입니다
-    strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-    strokeStyle: 'solid' // 선의 스타일입니다
-	});
+				var polyline = new daum.maps.Polyline({
+    				path: linePath, // 선을 구성하는 좌표배열 입니다
+    				strokeWeight: 5, // 선의 두께 입니다
+    				strokeColor: '#7571f9', // 선의 색깔입니다
+    				strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+    				strokeStyle: 'solid' // 선의 스타일입니다
+				});
 				
-	polyline.setMap(map);
+				polyline.setMap(map);
 
-	distanceArray.push(Math.round(polyline.getLength()));
-	distance = Math.round(polyline.getLength());
+				distanceArray.push(Math.round(polyline.getLength()));
+				distance = Math.round(polyline.getLength());
 				
-	document.getElementById("day").innerHTML = "총거리 : "+distance+"m"
-}
-function displayMarker(place) {
+				document.getElementById("day").innerHTML = "총거리 : "+distance+"m"
+			}
+			function displayMarker(place) {
     
-    var marker = new kakao.maps.Marker({
-        map: map,
-        position: new kakao.maps.LatLng(place.y, place.x) 
-    });
+    			var marker = new kakao.maps.Marker({
+        			map: map,
+        			position: new kakao.maps.LatLng(place.y, place.x) 
+    			});
 
-    kakao.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-        infowindow.open(map, marker);
-    });
-}
+    			kakao.maps.event.addListener(marker, 'click', function() {
+        			infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+        			infowindow.open(map, marker);
+    			});
+			}
 		
-        	})
-		}
+        		})
+			}
 		
 			  render(){
                   const html=this.state.data_json.map((m)=>
@@ -628,9 +639,8 @@ function displayMarker(place) {
 		  }
          ReactDOM.render(<Schdule />,document.getElementById('root2'));
 		</script>                
-       </div>
-						</div>
-
+       					</div>
+					  </div>
 					</div>
 				</div>
 			</div>

@@ -26,7 +26,7 @@ public class TwitterRestController {
 		JSONArray jarr = new JSONArray();
 		
 		try { 
-		Object obj = parser.parse(new FileReader("c:\\jsonfile\\test9.json"));
+		Object obj = parser.parse(new FileReader("c:\\jsonfile\\twitter.json"));
 		jarr = (JSONArray) obj;
 			 
 		} catch (FileNotFoundException e) {
